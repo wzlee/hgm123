@@ -39,6 +39,7 @@ import com.wzlee.hgm123.domain.Advertise;
 import com.wzlee.hgm123.domain.Passport;
 import com.wzlee.hgm123.repositories.AdvertiseRepository;
 import com.wzlee.hgm123.repositories.PassportRepository;
+import com.wzlee.hgm123.repositories.YoukuerRepository;
 import com.wzlee.hgm123.utils.DateHelper;
 
 @RunWith(SpringJUnit4ClassRunner.class) 
@@ -54,6 +55,8 @@ public class MongoDBTest {
 	AdvertiseRepository advertiseRepository;
 	@Autowired 
 	PassportRepository passportRepository;
+	@Autowired 
+	YoukuerRepository youkuerRepository;
 	
 	@Test
 	public void test() {
@@ -96,5 +99,9 @@ public class MongoDBTest {
 		for(int i=0;i<=theAds.getLength();i++){
 			logger.info(theAds.get(i, theAds).toString());
 		}
+	}
+	
+	public void youkuerTest(){
+		System.out.println(youkuerRepository.findYoukuerByName("yk_hgm123"));
 	}
 }

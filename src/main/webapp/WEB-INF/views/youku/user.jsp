@@ -116,13 +116,10 @@
     <div class="container">
 		<div class="fade in signup-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
-				<h5 id="myModalLabel"><i class="icon-credit-card"></i> 注册通行证</h5>
+				<h5 id="myModalLabel"><i class="icon-credit-card"></i> 我的优酷</h5>
 			</div>
 			<div class="modal-body">
-				<div class="hgm-logo pull-left">
-				  	<img src="${youkuer.avatar }" alt="${youkuer.name }" onerror="this.src='resources/images/hgm123_logo_s.png;this.onerror=null'">
-				</div>
-				<form class="signup-form pull-left">
+				<%-- <form class="signup-form pull-left">
 					<input type="hidden" name="id" value="${youkuer.id }">
 					<div class="control-group">
 							<div class="input-prepend">
@@ -233,16 +230,74 @@
 						</div>
 						<span class="help-inline qq-info" data-label="QQ"></span>
 					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<span class="reg-tip pull-left"><i class="icon-tag"></i> 以上信息来源youku,本站不保证此信息的准确性!</span>
-				<button type="button" class="btn reg_btn" data-loading-text="<i class='icon-spinner icon-spin'></i>提交中..."><i class="icon-ok-circle"></i> 提交</button>
+				</form> --%>
+				<div class="YK_USER">
+					<ul class="unstyled">
+						<li class="avatar">
+							<div>
+								<a href="/u/UNDkzNDUyNDgw" _hz="r_pic">
+									<img class="img-polaroid" title="${youkuer.name }" src="${youkuer.avatar_large }">
+								</a>
+								<ul class="unstyled">
+									<li>
+										<a href="/u/UNDkzNDUyNDgw" title="yk_hgm123" _hz="r_user">${youkuer.name }</a>
+									</li>
+									<li>
+										<a onclick="hz.postHz(4004208, 1000503)" href="/u/UNDkzNDUyNDgw/followers">
+											<strong class="number">${youkuer.followers_count }</strong>
+										</a>
+										<span>粉丝数</span>
+									</li>
+									<li onclick="hz.postHz(4008580, 1000503)" class="noborder">
+										<strong class="number">${youkuer.vv_count }</strong> 
+										<span>视频播放数</span>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li id="YK_badges" class="usercredit"></li>
+					</ul>
+					<!-- moyk detail begin-->
+					<div style="display:none"></div>
+					<!-- moyk detail end-->
+					<div class="clear"></div>		
+				</div>
+			
+				<div class="YK_VIDEO">
+					<div class="YK_cert_con">
+						<div class="state">
+							
+							<div class="clear"></div>
+						</div>
+						<div class="spacer" role="separator"></div>	
+						<dl class="dl-horizontal">
+							<dt>视频:</dt>
+							<dd><a href="/u/UNDkzNDUyNDgw/videos" _hz="r_videos">${youkuer.videos_count }</a></dd>
+							<dt>专辑:</dt>
+							<dd><a href="/u/UNDkzNDUyNDgw/playlists" _hz="r_playlist">${youkuer.playlists_count }</a></dd>
+							<dt>订阅:</dt>
+							<dd><a href="/u/UNDkzNDUyNDgw/followings" _hz="r_followings">${youkuer.following_count }</a></dd>
+							<dt>访问:</dt>
+							<dd>0</dd>	
+						</dl>	
+					</div>
+				</div>
+			
+				<div class="YK_profile">
+					<div class="spacer" role="separator"></div>
+					<div _fr="item" class="summary">
+						<span class="label">简介: </span>要不要简单介绍一下自己？ <!-- a href="http://u.youku.com/my_info/">点此修改</a -->
+            		</div>
+				</div>
+				<div role="separator" class="spacer"></div>
+			
 			</div>
 		</div>
-		
+		<div class="modal-footer">
+			<span class="reg-tip pull-left"><i class="icon-tag"></i> 以上信息来源youku,本站不保证此信息的准确性!</span>
+		</div>
 	</div>
-	
+		
   	<div class="footer">
   		&copy;2013 Hgm123&nbsp;&nbsp;&nbsp;|<a href="http://www.hgm123.com/duty/index.html" target="_blank">投诉建议</a>&nbsp;&nbsp;&nbsp;|<a href="http://www.hgm123.com/duty/index.html" target="_blank">商务洽谈</a>&nbsp;&nbsp;&nbsp;|<a href="./help">广告合作</a>&nbsp;&nbsp;&nbsp;|<a href="mailto:214508914@qq.com"><i class="icon-envelope"></i> 联系站长</a>&nbsp;&nbsp;&nbsp;
   		<div><script src="http://s17.cnzz.com/stat.php?id=4945862&amp;web_id=4945862&amp;show=pic" type="text/javascript"></script></div>

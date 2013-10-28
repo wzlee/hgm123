@@ -28,7 +28,7 @@
 	<link rel="stylesheet" type="text/css" href="myLib/bootstrap/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="myLib/jquery/plugins/datetimepicker/css/datetimepicker.css">
 	<link rel="stylesheet" type="text/css" href="myLib/jquery/plugins/showLoading/css/showLoading.css">
-	<link rel="stylesheet" type="text/css" href="myLib/jquery/plugins/artDialog-5.0.3/skins/default.css">
+	<link rel="stylesheet" type="text/css" href="myLib/jquery/plugins/artDialog-5.0.4/skins/default.css">
 	<link rel="stylesheet" type="text/css" href="myLib/messenger/css/messenger.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/index.css?v=20130501">
   </head>
@@ -191,7 +191,7 @@
 		<div class="modal-footer">
 			<div class="third-label pull-left">使用合作帐号登录：</div>
 			<div class="btn-group pull-left" data-toggle="buttons-radio">
-				<a class="btn third-qq" href="yklogin"><img alt="youku账号登录" src="resources/images/youku.JPG"></a>
+				<a class="btn third-qq" href="yklogin"><img alt="youku账号登录" src="resources/images/youku.png"></a>
 			    <a class="btn third-qq" href="qqlogin"><img alt="QQ账号登录" src="resources/images/qq.png"></a>
 			    <a class="btn" href="twlogin"><img alt="腾讯微博登录" src="resources/images/tencent-weibo.png"></a>
 			    <a class="btn" href="swlogin"><img alt="新浪微博登录" src="resources/images/sina-weibo.png"></a>
@@ -887,7 +887,7 @@
     <script src="myLib/jquery/plugins/jrumble/jquery.jrumble.1.3.js"></script>
     <script src="myLib/jquery/plugins/scrolltb/scroll-startstop.events.jquery.js"></script>
     <script src="myLib/jquery/plugins/showLoading/js/jquery.showLoading.js"></script>
-    <script src="myLib/jquery/plugins/artDialog-5.0.3/artDialog.min.js"></script>
+    <script src="myLib/jquery/plugins/artDialog-5.0.4/artDialog.min.js"></script>
     <script src="myLib/messenger/js/messenger.min.js"></script>
     <script src="myLib/messenger/js/messenger-theme-future.js"></script>
     <%-- <script src="myLib/jquery/plugins/tableFilter/table.filter.min.js"></script> --%>

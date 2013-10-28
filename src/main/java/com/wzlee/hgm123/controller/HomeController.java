@@ -16,15 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.Part;
-import org.apache.commons.httpclient.methods.multipart.StringPart;
-import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +39,7 @@ import weibo4j.model.User;
 import weibo4j.model.WeiboException;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 //import com.alibaba.fastjson.JSONObject;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
@@ -71,6 +68,7 @@ import com.wzlee.hgm123.utils.DateHelper;
 import com.wzlee.hgm123.utils.InputStreamUtil;
 import com.wzlee.hgm123.view.MessageResult;
 import com.wzlee.hgm123.view.ThirdBean;
+import com.wzlee.hgm123.view.YoukuToken;
 
 
 /**
@@ -323,35 +321,46 @@ public class HomeController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/yk", method = RequestMethod.GET)
-	public void youku(@RequestParam(required=false)String code,HttpServletRequest request,HttpServletResponse response) throws Exception {
-    	HttpClient httpClient = new HttpClient();
-    	String uri = "https://openapi.youku.com/v2/oauth2/token";
-    	PostMethod postMethod = new PostMethod(uri);
-    	postMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
-    	postMethod.getParams().setContentCharset("UTF-8");
-    	Part[] parts = {
-    			new StringPart("client_id", "bf928cbbd9d41aeb"), 
-    			new StringPart("client_secret", "4345289e536292a6dba7e4ed540eb7f5"),
-    			new StringPart("grant_type", "authorization_code"),
-    			new StringPart("code", code),
-    			new StringPart("redirect_uri", "http://localhost/yk/oauth")
-    	};
-    	postMethod.setRequestEntity(new MultipartRequestEntity(parts, postMethod.getParams()));
+	public String youku(@RequestParam(required=false)String code,HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
+
+		HttpClient httpClient = new HttpClient();
+		PostMethod postMethod = new PostMethod("https://openapi.youku.com/v2/oauth2/token");
+        NameValuePair[] params = {
+          new NameValuePair("client_id", "bf928cbbd9d41aeb"),
+          new NameValuePair("client_secret", "4345289e536292a6dba7e4ed540eb7f5"),
+          new NameValuePair("grant_type", "authorization_code"),
+          new NameValuePair("code", code),
+          new NameValuePair("redirect_uri", "http://localhost/yk/oauth")
+        };
+        postMethod.setRequestBody(params);
     	try {
-    		int _statusCode = httpClient.executeMethod(postMethod);
-    		if (_statusCode != HttpStatus.SC_OK) {
+    		int statusCode = httpClient.executeMethod(postMethod);
+    		if (statusCode != HttpStatus.SC_OK) {
     			logger.info("请求失败,错误信息:"+postMethod.getStatusLine());
+    			model.addAttribute("message", postMethod.getStatusLine());
+    			return "error/500";
     		}else{
     			InputStream responseBody = postMethod.getResponseBodyAsStream();
     			String responseString = InputStreamUtil.InputStreamTOString(responseBody, "UTF-8");
-    			AccessToken accessToken = JSON.parseObject(responseString, AccessToken.class);
-    			request.getSession().setAttribute("YOUKU_TOKEN", accessToken);
-    			logger.info("获取优酷TOKEN["+accessToken.getAccessToken()+"]成功!");
+    			JSONObject jo = JSON.parseObject(responseString);
+    			if(jo.containsKey("access_token")){
+    				YoukuToken accessToken = JSON.parseObject(responseString, YoukuToken.class);
+    				request.getSession().setAttribute("YOUKU_TOKEN", accessToken);
+    				logger.info("获取优酷TOKEN:"+accessToken.toString()+"成功!");
+    				return "redirect:yk/oauth";
+    			}else{
+    				model.addAttribute("message", jo.getString("description"));
+        			return "error/500";
+    			}
     		}
     	} catch (HttpException e) {
     		logger.info("捕获HTTP异常,错误信息:"+e.getLocalizedMessage());
+    		model.addAttribute("message", e.getLocalizedMessage());
+			return "error/500";
     	} catch (IOException e) {
     		logger.info("捕获IO异常,错误信息:"+e.getLocalizedMessage());
+    		model.addAttribute("message", e.getLocalizedMessage());
+			return "error/500";
     	} finally {
     		postMethod.releaseConnection();
     	}
@@ -359,24 +368,21 @@ public class HomeController extends BaseController {
 	
 	@RequestMapping(value = "/yk/oauth", method = RequestMethod.GET)
 	public String youkuOauth(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
-		HttpClient httpClient = new HttpClient();
-		String uri = "https://openapi.youku.com/v2/users/myinfo.json";
-		PostMethod postMethod = new PostMethod(uri);
-		postMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
-		postMethod.getParams().setContentCharset("UTF-8");
-		AccessToken accessToken = (AccessToken) request.getSession().getAttribute("YOUKU_TOKEN");
-		if(accessToken == null){
-			model.addAttribute("message", "YOUKU_TOKEN未创建或已过期!");
+		YoukuToken youkuToken = (YoukuToken) request.getSession().getAttribute("YOUKU_TOKEN");
+		if(youkuToken == null){
+			model.addAttribute("message","AccessToken未创建或已失效!");
 			return "error/500";
 		}else{
-			Part[] parts = {
-					new StringPart("client_id", "bf928cbbd9d41aeb"), 
-					new StringPart("access_token", accessToken.getAccessToken())
+			HttpClient httpClient = new HttpClient();
+			PostMethod postMethod = new PostMethod("https://openapi.youku.com/v2/users/myinfo.json");
+			NameValuePair[] params = {
+					new NameValuePair("client_id", "bf928cbbd9d41aeb"),
+					new NameValuePair("access_token", youkuToken.getAccess_token()),
 			};
-			postMethod.setRequestEntity(new MultipartRequestEntity(parts, postMethod.getParams()));
+			postMethod.setRequestBody(params);
 			try {
-				int _statusCode = httpClient.executeMethod(postMethod);
-				if (_statusCode != HttpStatus.SC_OK) {
+				int statusCode = httpClient.executeMethod(postMethod);
+				if (statusCode != HttpStatus.SC_OK) {
 					model.addAttribute("message",postMethod.getStatusLine());
 					return "error/500";
 				}else{
@@ -390,6 +396,7 @@ public class HomeController extends BaseController {
 					}else{
 						model.addAttribute("youkuer",_youkuer);
 					}
+					return "youku/user";
 				}
 			} catch (HttpException e) {
 				model.addAttribute("message", e.getLocalizedMessage());
@@ -400,7 +407,6 @@ public class HomeController extends BaseController {
 			} finally {
 				postMethod.releaseConnection();
 			}
-			return "youku/user";
 		}
 	}
 	

@@ -20,41 +20,26 @@ function addFavorites(setUrl){
 		}
 	}
 }
-function artDialogShow(content,time){
-	var artDialog = art.dialog.get('artDialog');
-	if(artDialog == undefined){
-		art.dialog({
-			id:'artDialog',
-			title:false,
-			content:content,
-			time:time
-		});
-	}else{
-		artDialog.content(content);
-		artDialog.time(time);
-	}
-}
+//function artDialogShow(content,time){
+//	var artDialog = art.dialog.get('artDialog');
+//	if(artDialog == undefined){
+//		art.dialog({
+//			id:'artDialog',
+//			title:false,
+//			content:content,
+//			time:time
+//		});
+//	}else{
+//		artDialog.content(content);
+//		artDialog.time(time);
+//	}
+//}
 var msg;
 $._messengerDefaults = {
 	extraClasses: 'messenger-fixed messenger-theme-future messenger-on-bottom messenger-on-right'
 }
 
 $(function(){
-	$.ajax({
-		url:'https://openapi.youku.com/v2/oauth2/token',
-		type:'POST',
-		dataType:'json',
-		data:{
-			client_id:'bf928cbbd9d41aeb',
-			client_secret:'4345289e536292a6dba7e4ed540eb7f5',
-			grant_type:'authorization_code',
-			code:'e5d0813932b0192f6d136146c7633d72',
-			redirect_uri:'http://localhost/yk/oauth'
-		},
-		success:function(data){
-			console.log(data);
-		}
-	});
 	var userAgent = navigator.userAgent.toLowerCase();
 	var core,name,version,src,html,dwz="";
 	jQuery.browser = {
@@ -511,7 +496,7 @@ $(function(){
  							$('.publish-form')[0].reset();
  							$('.publish-form help-inline').html('');
  							$('.publish-modal').modal('hide');
- 							artDialogShow(data.message,1000);
+// 							artDialogShow(data.message,1000);
  						}else{
  							$('.'+data.errorfiled).focus().select();
  							$('.'+data.errorfiled+'-info').removeClass('text-success').addClass('text-error').html('<i class="icon-hand-left"></i> '+data.message);
@@ -587,7 +572,7 @@ $(function(){
     				if(data.success){
     					$('.use-template-btn').button('reset');
     				}
-					artDialogShow(data.message,1000);
+//					artDialogShow(data.message,1000);
     			},
     			error:function(){}
     		});
@@ -683,7 +668,7 @@ $(function(){
 					if(data.success){
 						$('.feedback-form')[0].reset();
 						$('.feedback-modal').modal('hide');
-						artDialogShow(data.message,2000);
+//						artDialogShow(data.message,2000);
 						
 					}else{
 						$('.feedback-info').addClass('text-error').html('<i class="icon-warning-sign"></i> '+data.message);
