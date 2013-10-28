@@ -191,7 +191,7 @@
 		<div class="modal-footer">
 			<div class="third-label pull-left">使用合作帐号登录：</div>
 			<div class="btn-group pull-left" data-toggle="buttons-radio">
-				<a class="btn third-qq" href="yklogin"><img alt="youku账号登录" src="resources/images/youku.png"></a>
+				<a class="btn third-qq" href="yklogin"><img alt="youku账号登录" src="resources/images/youku.JPG"></a>
 			    <a class="btn third-qq" href="qqlogin"><img alt="QQ账号登录" src="resources/images/qq.png"></a>
 			    <a class="btn" href="twlogin"><img alt="腾讯微博登录" src="resources/images/tencent-weibo.png"></a>
 			    <a class="btn" href="swlogin"><img alt="新浪微博登录" src="resources/images/sina-weibo.png"></a>
@@ -708,13 +708,13 @@
 					    <div class="carousel-inner">
 					    	<div class="active item">
 					    		<a target="_blank" href="./about">
-					    			<img src="resources/images/banner/jd.jpg" alt="" />
+					    			<!-- <img src="resources/images/banner/jd.jpg" alt="" /> -->
 				    			</a>
 			    			</div>
 					    	<div class="item">
 					    		<a target="_blank" href="./about">
-			  						<img src="resources/images/banner/taobao.png" alt="" />
-			 						</a>
+			  						<!-- <img src="resources/images/banner/taobao.png" alt="" /> -->
+		 						</a>
 							</div>
 					    </div>
 			  		</div>

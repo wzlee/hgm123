@@ -40,7 +40,21 @@ $._messengerDefaults = {
 }
 
 $(function(){
-	
+	$.ajax({
+		url:'https://openapi.youku.com/v2/oauth2/token',
+		type:'POST',
+		dataType:'json',
+		data:{
+			client_id:'bf928cbbd9d41aeb',
+			client_secret:'4345289e536292a6dba7e4ed540eb7f5',
+			grant_type:'authorization_code',
+			code:'e5d0813932b0192f6d136146c7633d72',
+			redirect_uri:'http://localhost/yk/oauth'
+		},
+		success:function(data){
+			console.log(data);
+		}
+	});
 	var userAgent = navigator.userAgent.toLowerCase();
 	var core,name,version,src,html,dwz="";
 	jQuery.browser = {

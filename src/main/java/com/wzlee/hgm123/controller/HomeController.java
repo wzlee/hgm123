@@ -157,7 +157,7 @@ public class HomeController extends BaseController {
 	
 	@RequestMapping(value = "/yklogin", method = RequestMethod.GET)
 	public void youkuLogin(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		String uri = "https://openapi.youku.com/v2/oauth2/authorize?client_id=bf928cbbd9d41aeb&response_type=code&redirect_uri=http://www.hgm123.com/yk";
+		String uri = "https://openapi.youku.com/v2/oauth2/authorize?client_id=bf928cbbd9d41aeb&response_type=code&redirect_uri=http://localhost/yk";
 		response.sendRedirect(uri);
 	}
 	
@@ -324,44 +324,37 @@ public class HomeController extends BaseController {
 	
 	@RequestMapping(value = "/yk", method = RequestMethod.GET)
 	public void youku(@RequestParam(required=false)String code,HttpServletRequest request,HttpServletResponse response) throws Exception {
-        if(code == null || code.isEmpty()){
-        	HttpClient httpClient = new HttpClient();
-        	String uri = "https://openapi.youku.com/v2/oauth2/token";
-        	PostMethod postMethod = new PostMethod(uri);
-        	postMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
-        	postMethod.getParams().setContentCharset("UTF-8");
-        	Part[] parts = {
-        			new StringPart("client_id", "bf928cbbd9d41aeb"), 
-        			new StringPart("client_secret", "4345289e536292a6dba7e4ed540eb7f5"),
-        			new StringPart("grant_type", "authorization_code"),
-        			new StringPart("code", code),
-        			new StringPart("redirect_uri", "http://hgm123.com/yk")
-        	};
-        	postMethod.setRequestEntity(new MultipartRequestEntity(parts, postMethod.getParams()));
-        	try {
-        		int _statusCode = httpClient.executeMethod(postMethod);
-        		if (_statusCode != HttpStatus.SC_OK) {
-        			logger.info("请求失败,错误信息:"+postMethod.getStatusLine());
-        		}else{
-        			InputStream responseBody = postMethod.getResponseBodyAsStream();
-        			String responseString = InputStreamUtil.InputStreamTOString(responseBody, "UTF-8");
-        			AccessToken accessToken = JSON.parseObject(responseString, AccessToken.class);
-        			request.getSession().setAttribute("YOUKU_TOKEN", accessToken);
-        			logger.info("获取优酷TOKEN:"+accessToken.toString()+"成功!");
-        		}
-        	} catch (HttpException e) {
-        		logger.info("捕获HTTP异常,错误信息:"+e.getLocalizedMessage());
-        	} catch (IOException e) {
-        		logger.info("捕获IO异常,错误信息:"+e.getLocalizedMessage());
-        	} finally {
-        		postMethod.releaseConnection();
-        	}
-        }else{
-        	AccessToken accessToken = new AccessToken();
-        	BeanUtils.populate(accessToken, request.getParameterMap());
-        	request.getSession().setAttribute("YOUKU_TOKEN", accessToken);
-			logger.info("获取优酷TOKEN:"+accessToken.toString()+"成功!");
-        }
+    	HttpClient httpClient = new HttpClient();
+    	String uri = "https://openapi.youku.com/v2/oauth2/token";
+    	PostMethod postMethod = new PostMethod(uri);
+    	postMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
+    	postMethod.getParams().setContentCharset("UTF-8");
+    	Part[] parts = {
+    			new StringPart("client_id", "bf928cbbd9d41aeb"), 
+    			new StringPart("client_secret", "4345289e536292a6dba7e4ed540eb7f5"),
+    			new StringPart("grant_type", "authorization_code"),
+    			new StringPart("code", code),
+    			new StringPart("redirect_uri", "http://localhost/yk/oauth")
+    	};
+    	postMethod.setRequestEntity(new MultipartRequestEntity(parts, postMethod.getParams()));
+    	try {
+    		int _statusCode = httpClient.executeMethod(postMethod);
+    		if (_statusCode != HttpStatus.SC_OK) {
+    			logger.info("请求失败,错误信息:"+postMethod.getStatusLine());
+    		}else{
+    			InputStream responseBody = postMethod.getResponseBodyAsStream();
+    			String responseString = InputStreamUtil.InputStreamTOString(responseBody, "UTF-8");
+    			AccessToken accessToken = JSON.parseObject(responseString, AccessToken.class);
+    			request.getSession().setAttribute("YOUKU_TOKEN", accessToken);
+    			logger.info("获取优酷TOKEN["+accessToken.getAccessToken()+"]成功!");
+    		}
+    	} catch (HttpException e) {
+    		logger.info("捕获HTTP异常,错误信息:"+e.getLocalizedMessage());
+    	} catch (IOException e) {
+    		logger.info("捕获IO异常,错误信息:"+e.getLocalizedMessage());
+    	} finally {
+    		postMethod.releaseConnection();
+    	}
 	}
 	
 	@RequestMapping(value = "/yk/oauth", method = RequestMethod.GET)
