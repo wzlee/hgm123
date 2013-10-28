@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>设置和获取频道模式</h1>
+
+
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function init() {
+        yy.channel.micList.addEventListener(IYYChannelMicList.MODE_CHANGED, onModeChange);
+    }
+
+    function onGetModeClick() {
+        var result = yy.channel.micList.getMicListMode();
+        if (result.ret == 0) {
+            document.getElementById("txtGetLog").innerHTML = "获取频道模式成功。mode=" + modeToString(result.mode);
+        }
+        else {
+            document.getElementById("txtGetLog").innerHTML = "获取频道模式失败 ret=" + result.ret;
+        }
+    }
+    function modeToString(mode) {
+        switch (mode) {
+            case 0:
+                return "自由模式";
+                break;
+            case 1:
+                return "主席模式";
+                break;
+            case 2:
+                return "麦序模式";
+                break;
+            default:
+
+        }
+        return "位置";
+    }
+    function onSetModeClick() {
+
+
+        //获取选择的马甲信息
+        var selMode = document.getElementById("selMode");
+        var mode = parseInt(selMode.options[selMode.selectedIndex].value);
+
+        //设置马甲
+        var result = yy.channel.micList.setMicListMode(mode);
+        
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = " 设置频道模式成功";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "设置频道模式失败。错误码=" + result.ret;
+        }
+    }
+    function onModeChange(eventData) {
+        document.getElementById("txtModeChange").innerHTML = "频道模式变化: mode=" + eventData.mode;
+    }
+ </script>
+
+<input type="button"  value="设置频道模式" onclick="onSetModeClick()"/>选择模式
+<select id="selMode" style="width:200px" >
+
+<option value="0">自由模式 0</option>
+<option value="1">主席模式 1</option>
+<option value="2">麦序模式 2</option>
+
+
+
+</select>
+<div id="txtLog">设置结果：</div>
+    <br>
+   
+     <input type="button" style="width:146px" value="获取频道模式" onclick="onGetModeClick()"/><div id="txtGetLog">获取结果:</div>
+   
+<br>
+<!--显示结果-->
+     <br>
+    <br><div id="txtModeChange">模式变化:</div><br>
+<textarea id="txtConsole" cols=78 rows=6 name="S1"></textarea>
+</body>
+</html>

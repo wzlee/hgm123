@@ -1,0 +1,2039 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" class="">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <script type="text/javascript">
+            document.domain = 'qq.com';
+            var g_isd = [new Date() - 0];
+            var g_V = {
+                qz: '_2.1.1.4',
+                ci: '_915b'
+            },
+            g_V = {
+                qz: '_2.1.34',
+                ci: '_v6_20121217',
+                se: '',
+                gp: ''
+            },
+            g_iLoginUin = 0,
+            siDomain = 'qzonestyle.gtimg.cn',
+            imgcacheDomain = 'qzs.qq.com',
+            g_UserBitmap = "0",
+            g_LoginBitmap = "0",
+            g_StyleID = "v6/16",
+            g_hasCustomStyle = 0,
+            g_diyTitle = "",
+            g_diySkin = 0,
+            g_SceneID = 9,
+            g_StyleID = "v6/16",
+            g_fullMode = 6,
+            g_Mode = "ofp",
+            g_frameStyle = 1,
+            g_version = 6,
+            g_isFriend = 0,
+            g_NowTime = 1325145132,
+            g_timestamp = 0,
+            g_Dressup = {
+                items: [],
+                windows: []
+            },
+            iv = {},
+            g_StaticFlag = "0",
+            g_TransparentLevel = 0,
+            g_isDirectApp = 0,
+            g_isBGScroll = 0,
+            ownermode = true,
+            ownerProfileSummary = [],
+            g_fl = 0,
+            g_ReadOnly = 0,
+            g_Errno = 0,
+            g_isOFP = "1",
+            g_isHideTitle = "0",
+            g_icLayout = "0",
+            g_Data = {},
+            g_isFromPengYou = "",
+            g_isBrandQzone = "",
+            g_isFamousQzone = "",
+            g_xwMode = "",
+            g_needDec = 1,
+            g_isFastPav = "1",
+            _s_ = new Date();
+            window.onerror = function(msg, url, line) {
+                var info = [msg, url, line, window.navigator.userAgent].join('|_|');
+                new Image().src = 'http://badjs.qq.com/cgi-bin/js_report?level=4&bid=155&mid=275014&old=1&msg=' + encodeURIComponent(info) + '&' + new Date().getTime();
+                return false;
+            };
+            window.imweb = {
+                report: (function() {
+                    var mIds = ["*", 277425, 277427, 277429, 277431, 277433, 277435, 289259, 289260, 289261, 289262, 289263, 289264, 289265, 289266, 289267, 289268, 289269, 289270, 289271, 289272, 289273, 290175, 290176, 295753, 295754, 295755, 295756, 299214, 299215, 299216, 299231];
+                    var caches = {};
+                    var img = new Image();
+                    var timer;
+                    var reportData = function() {
+                        var arr = [];
+                        for (var o in caches) {
+                            arr.push(o + '-' + caches[o].v + '-' + mIds[o] + '_' + caches[o].v);
+                        }
+                        img.src = 'http://jsreport.qq.com/cgi-bin/report?id=155&rs=' + arr.join('|_|') + '&r=' + Math.random();
+                        caches = {};
+                    };
+                    return function(key, num) {
+                        if (!mIds[key]) {
+                            return;
+                        }
+                        num = parseInt(num) || 1;
+                        if (!caches[key]) {
+                            caches[key] = {
+                                v: num
+                            }
+                        } else {
+                            caches[key].v += num;
+                        }
+                        clearTimeout(timer);
+                        timer = setTimeout(reportData, 500);
+                    };
+                })()
+            };
+            void
+            function() {
+                setTimeout(function() {
+                    var b = document.cookie.match(/(^| )nohost_guid=([^;]*)(;|$)/);
+                    if (!b ? 0 : decodeURIComponent(b[2])) {
+                        var b = "http://" + window.location.hostname + "/nohost_htdocs/js/SwitchHost.js?random=" + Math.random(),
+                        c = function(a) {
+                            try {
+                                eval(a)
+                            } catch(b) {}
+                            window.SwitchHost && window.SwitchHost.init && window.SwitchHost.init()
+                        },
+                        a = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest;
+                        a.open("GET", b);
+                        a.onreadystatechange = function() {
+                            4 == a.readyState && ((200 <= a.status && 300 > a.status || 304 === a.status || 1223 === a.status || 0 === a.status) && c(a.responseText), a = null)
+                        };
+                        a.send(null)
+                    }
+                },
+                2000)
+            } (); (function() {
+                var base = "http://1.url.cn/qun/zone/feeds/js/6/";
+                var jsNames = ["BaseClass", "Constant", "catractModuelView", "click_stat", "config", "feed_detail", "frontPage", "groupGuide", "groupHeader", "groupHome", "groupLikeComponent", "groupMember", "groupMoodPoster", "groupNotice", "groupPhoto", "groupPortal", "groupPortalFeeds", "groupPortalSidebar", "groupSearch", "groupShare", "groupShareUploader", "groupZone", "history", "moduleCallMonitor", "music", "pageTitleManager", "placeholder", "portalUi", "qunPortal", "request", "requestCenter", "router", "scrollLoader", "tool", "toolBar"];
+                window.g_js = {};
+                for (var i = 0; i < jsNames.length; i++) {
+                    window.g_js[jsNames[i]] = base + jsNames[i] + ".js";
+                }
+                window.g_js['groupShare'] = base + "groupShare.js?v=3";
+            })();
+        </script>
+        <script type="text/javascript">
+            var siDomain = 'ctc.qzonestyle.gtimg.cn';
+            var imgcacheDomain = 'ctc.qzs.qq.com';
+            var csVar = 'user_platform: imgcache_prefix:ctc. imgcache:qzs.qq.com qzonestyle:qzonestyle.gtimg.cn loginuin:214508914 uin:214508914';
+            var g_iLoginUin = 214508914;
+            var g_iUin = 214508914;
+            var g_UserBitmap = '1851dda00100d101';
+            var g_LoginBitmap = '1851dda00100d101';
+            var ownerProfileSummary = ['214508914'];
+            if (g_iLoginUin == 0) {
+                window.location.href = "http://qun.qzone.qq.com#tourl=" + encodeURIComponent(window.location.href);
+            }
+
+            (function() {
+                if (typeof window.userInfo != 'undefined') {
+                    return;
+                }
+                window.userInfo = {
+                    'loginUin': 0,
+                    'loginNick': '',
+                    'isMember': false,
+                    'isManager': false,
+                    'isCreator': false,
+                    'groupId': '',
+                    'entryModule': ''
+                };
+                window.userInfo.set = function(obj) {
+                    for (var o in obj) {
+                        if (obj.hasOwnProperty(o) && userInfo.hasOwnProperty(o)) {
+                            userInfo[o] = obj[o];
+                        }
+                    }
+                }
+                var hash = location.hash;
+                hash = hash.replace(/^#/, '').replace(/^(!\/)|(!)|(\/)/, '');
+                var fragments = hash.split('\/');
+                var groupId = parseInt(fragments[0], 10);
+                var entryModule = isNaN(groupId) ? (fragments[0] || 'portal') : (fragments[1] || 'home');
+                userInfo['groupId'] = groupId;
+                userInfo['entryModule'] = entryModule;
+                window.uinmap = {};
+                window.facemap = {};
+                window.setmap = function(obj) {
+                    for (var o in obj) {
+                        if (obj.hasOwnProperty(o)) {
+                            uinmap[o] = obj[o].n;
+                            facemap[o] = obj[o].f;
+                        }
+                    }
+                }
+            })();
+
+            window.refine = {};
+            refine.adapter = {
+                quickInit: function() {
+                    new Image().src = 'http://3.url.cn/qun/zone/feeds/img/8/f_screen_56.png';
+                },
+                getGroupId: function() {
+                    return userInfo['groupId'];
+                },
+                getUin: function() {
+                    var cookie = document.cookie;
+                    var uin;
+                    if (cookie) {
+                        var arr = cookie.match(/(^| )uin=([^;]*)/);
+                        if (arr && (uin = arr[2])) {
+                            uin = parseInt(uin.substring(1, uin.length), 10);
+                        }
+                    }
+                    return uin;
+                },
+                isGroupManager: function() {
+                    return userInfo['isManager'] || userInfo['isCreator'];
+                },
+                getPhotoSize: function(type) {
+                    return 628;
+                },
+                quickReport: function(oid) {
+                    var params = {
+                        '102': 240451,
+                        '103': 240452,
+                        '104': 240472,
+                        '142': 265680,
+                        '155': 271870
+                    };
+                    return function() {
+                        new Image().src = 'http://jsreport.qq.com/cgi-bin/report?_=' + Math.random() + '&id=95&rs=' + oid + '-1-' + params[oid] + '_1-' + refine.adapter.getGroupId();
+                    }
+                } (),
+                showpv: function(pv) {
+                    pv && $$('#f_vst').html((pv < 999999 ? pv: 999999) + '次访问');
+                },
+                extend: function(ext) {
+                    for (var o in ext) {
+                        refine.adapter[o] = ext[o];
+                    }
+                }
+            }; (function(window, undefined) {
+                var $ = window.$$ = function(selector) {
+                    if (! (this instanceof $)) {
+                        return new $(selector);
+                    }
+                    return this.add(selector);
+                };
+                var indexOf = Array.prototype.indexOf,
+                toString = Object.prototype.toString;
+                var now = $.now = function() {
+                    return new Date().getTime();
+                };
+                var noop = $.noop = function() {};
+                $.isArray = function(obj) {
+                    return toString.call(obj) == '[object Array]';
+                };
+                $.inArray = function(elem, arr, i) {
+                    if ($.isArray(arr)) {
+                        if (indexOf) {
+                            return indexOf.call(arr, elem, i);
+                        }
+                        var len = arr.length;
+                        i = i ? i < 0 ? Math.max(0, len + i) : i: 0;
+                        for (; i < len; i++) {
+                            if (i in arr && arr[i] === elem) {
+                                return i;
+                            }
+                        }
+                    }
+                    return - 1;
+                };
+                var parseJSON = $.parseJSON = function(data) {
+                    try {
+                        if (window.JSON && window.JSON.parse) {
+                            return window.JSON.parse(data) || false;
+                        }
+                        return eval('(' + data + ')') || false;
+                    } catch(e) {
+                        return false;
+                    }
+                };
+                function createStandardXHR() {
+                    try {
+                        return new window.XMLHttpRequest();
+                    } catch(e) {}
+                }
+                function createActiveXHR() {
+                    try {
+                        return new window.ActiveXObject('Microsoft.XMLHTTP');
+                    } catch(e) {}
+                }
+                var getXHR = $.getXHR = window.ActiveXObject ?
+                function() {
+                    return createStandardXHR() || createActiveXHR();
+                }: createStandardXHR;
+                $.get = function(url, callback, cache) {
+                    var xhr = getXHR(),
+                    _callback = function() {
+                        if (xhr.readyState != 4) {
+                            return;
+                        }
+                        xhr.onreadystatechange = noop;
+                        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304 || xhr.status === 1223) {
+                            var data = xhr.responseText;
+                            callback($.parseJSON(data), data, xhr);
+                            return;
+                        }
+                        callback(false, '', xhr);
+                    };
+                    xhr.open('GET', url + (cache ? '': ('&_=' + now())), true);
+                    xhr.onreadystatechange = _callback;
+                    xhr.send(null);
+                };
+                var preventAbort = window.preventAbort = function(e) {
+                    e = e || window.event;
+                    var target = e.target || e.srcElement;
+                    while (target && target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    if (target && /^javascript:/.test(target.href)) {
+                        if (e.preventDefault) {
+                            e.preventDefault();
+                        } else {
+                            e.returnValue = false;
+                        }
+                    }
+                };
+                document.onclick = preventAbort;
+            })(window);
+            function initHomeData() {
+                $$.get('http://qun.qzone.qq.com/cgi-bin/feeds/get_list?qid=' + refine.adapter.getGroupId() + '&i=1&s=-1&n=5',
+                function(data, dataText) {
+                    g_isd[2] = $$.now();
+                    window.initData = data;
+                    window.initText = dataText;
+                    if (window.initCallback) {
+                        window.initCallback(data, dataText);
+                        window.initCallback = null;
+                    }
+                },
+                true);
+                refine.adapter.quickInit && refine.adapter.quickInit();
+            }
+            if (userInfo['entryModule'] == 'home') {
+                initHomeData();
+                g_isd[1] = $$.now();
+            }
+        </script>
+        <title>
+            群空间
+        </title>
+        <link href="http://ctc.qzonestyle.gtimg.cn/qzone_v6/gb_toolbar.css?max_age=31536000&amp;d=20130108"
+        rel="stylesheet" />
+        <link href="http://ctc.qzs.qq.com/qzone_v6/app_group.css?max_age=31536000&amp;d=20130108"
+        rel="stylesheet" />
+        <link href="http://2.url.cn/qun/zone/feeds/css/6/group_home.css" rel="stylesheet"
+        />
+        <!--[if IE]>
+            <base href="http://ctc.qzs.qq.com/">
+            </base>
+        <![endif]-->
+        <!--[if !(IE)]>
+            <!-->
+            <base href="http://ctc.qzs.qq.com/" />
+        <!--<![endif]-->
+        <link rel="Shortcut Icon" href="http://3.url.cn/qun/zone/feeds/img/favicon.ico"
+        type="image/x-icon" />
+    </head>
+    
+    <body>
+        <script>
+            (function() {
+                if (location.host != 'qun.qzone.qq.com') {
+                    location.href = 'http://qun.qzone.qq.com/group';
+                }
+            })();
+        </script>
+        <script>
+            (function() {
+                var cache = {};
+                this.tmpl = function tmpl(str, data) {
+                    var fn = !/\W/.test(str) ? cache[str] = cache[str] || tmpl(document.getElementById(str).innerHTML) : new Function("obj", "var p=[],print=function(){p.push.apply(p,arguments);};" + "with(obj){p.push('" + str.replace(/[\r\t\n]/g, " ").replace(/'(?=[^%]*%>)/g, "\t").split("'").join("\\'").split("\t").join("'").replace(/<%=(.+?)%>/g, "',$1,'").split("<%").join("');").split("%>").join("p.push('") + "');}return p.join('');");
+                    return data ? fn(data) : fn;
+                };
+            })(); (function() {
+                window.console = window.console || {
+                    log: function() {},
+                    info: function() {},
+                    error: function() {}
+                };
+                window.QWT = {
+                    data: {},
+                    restHTML: function(str) {
+                        return (str + '').replace(/&#92;/g, "\\").replace(/&quot;/g, '\x22').replace(/&#039;/g, '\x27').replace(/&#39;/g, '\x27').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ');
+                    },
+                    escHTML: function(str) {
+                        return (str + '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\x27/g, '&#039;').replace(/\x22/g, '&quot;');
+                    },
+                    getCookie: function(name) {
+                        var r = new RegExp("(?:^|;+|\\s+)" + name + "=([^;]*)"),
+                        m = document.cookie.match(r);
+                        return (!m ? "": m[1]);
+                    },
+                    DJB: function(str) {
+                        var hash = 5381;
+                        for (var i = 0,
+                        len = str.length; i < len; ++i) {
+                            hash += (hash << 5) + str.charCodeAt(i);
+                        }
+                        return hash & 0x7fffffff;
+                    },
+                    getACSRFToken: function() {
+                        return QWT.DJB(QWT.getCookie('skey'));
+                    },
+                    getParameter: function(url, name) {
+                        var r = new RegExp("(\\?|#|&)" + name + "=([^&#]*)(&|#|$)"),
+                        m = url.match(r);
+                        return (!m ? "": m[2]);
+                    },
+                    reduceImage: function(trueSrc, ew, eh, options) {
+                        var img = new Image();
+                        img.onload = function() {
+                            if (!options.img) {
+                                window.console && console.log('未指定img');
+                                return;
+                            }
+                            if (this.width > ew || this.height > eh) {
+                                this.width > this.height ? (this.width = ew) : (this.height = eh);
+                            }
+                            options.img.onload = null;
+                            options.img.src = this.src;
+                            options && options.callback && options.callback(this);
+                        };
+                        img.src = trueSrc;
+                    },
+                    load: function(params) {
+                        params || (params = {});
+                        var jsList = params.jsList || [];
+                        var cgiList = params.cgiList || [];
+                        var jsMaxAge = params.jsMaxAge || 0;
+                        var jsConcat = !!params.jsConcat || false;
+                        var jsString;
+                        if (jsConcat) {
+                            jsString = "<script ";
+                            jsString += 'src="http://' + (siDomain || 'qzonestyle.gtimg.cn') + '/c/=' + jsList.join(',') + (jsMaxAge ? '?max_age=' + jsMaxAge: '') + '" ><';
+                            jsString += "\/script>";
+                        } else {
+                            jsString = '';
+                            for (var i = 0; i < jsList.length; i++) {
+                                jsString = jsString + '<script charset="utf-8" src="http://' + (window.siDomain || 'qzonestyle.gtimg.cn') + jsList[i] + '" ><\/script>';
+                            }
+                        }
+                        var cgiString = '';
+                        for (var j = 0; j < cgiList.length; j++) {
+                            cgiString = cgiString + '<script charset="utf-8" src="http://' + cgiList[j] + '" ><\/script>';
+                        }
+                        document.write(jsString + cgiString);
+                    },
+                    scaleImageByShort: function(trueSrc, ew, eh, options) {
+                        var img = new Image();
+                        img.onload = function() {
+                            if (!options.img) {
+                                return;
+                            }
+                            var imgWHRatio = this.width / this.height;
+                            var expectWHRatio = ew / eh;
+                            if (this.width > ew && this.height > eh) {
+                                if (imgWHRatio <= expectWHRatio) {
+                                    options.img.width = ew;
+                                } else {
+                                    options.img.height = eh;
+                                }
+                            }
+                            options.img.onload = null;
+                            options.img.src = this.src;
+                            options && options.callback && options.callback(this);
+                        };
+                        img.src = trueSrc;
+                    },
+                    cut: function(str, bitLen, tails) {
+                        str = String(str);
+                        bitLen -= 0;
+                        tails = tails || '';
+                        if (isNaN(bitLen)) {
+                            return str;
+                        }
+                        var len = str.length,
+                        i = Math.min(Math.floor(bitLen / 2), len),
+                        cnt = QWT.getRealLen(str.slice(0, i));
+                        for (; i < len && cnt < bitLen; i++) {
+                            cnt += 1 + (str.charCodeAt(i) > 255);
+                        }
+                        return str.slice(0, cnt > bitLen ? i - 1 : i) + (i < len ? tails: '');
+                    },
+                    getRealLen: function(s, isUTF8) {
+                        if (typeof(s) != 'string') {
+                            return 0;
+                        }
+                        if (!isUTF8) {
+                            return s.replace(QWT.RegExps.getRealLen.r0, "**").length;
+                        } else {
+                            var cc = s.replace(QWT.RegExps.getRealLen.r1, "");
+                            return (s.length - cc.length) + (encodeURI(cc).length / 3);
+                        }
+                    },
+                    RegExps: {
+                        getRealLen: {
+                            r0: /[^\x00-\xFF]/g,
+                            r1: /[\x00-\xFF]/g
+                        }
+                    }
+                };
+                var clearQWTData = function() {
+                    QWT.data = {};
+                };
+                if (window.addEventListener) {
+                    window.addEventListener('load',
+                    function() {
+                        clearQWTData();
+                    });
+                } else if (window.attachEvent) {
+                    window.attachEvent('onload',
+                    function() {
+                        clearQWTData();
+                    });
+                } else {
+                    window.onload = function() {
+                        clearQWTData();
+                    };
+                }
+                window.QZONE = window.QZONE || {};
+                QZONE.FP = {
+                    removeUBB: function(s) {
+                        var p = QZONE.FP.removeUBB;
+                        p.regexTmp.lastIndex = p.regexEm.lastIndex = p.regexQS.lastIndex = 0;
+                        var _s = s.replace(p.regexTmp, "");
+                        _s = _s.replace(p.regexEm,
+                        function(a, b) {
+                            var emId = b,
+                            prefix = (b >= 2000) ? 'v': '';
+                            return '<img src="http://' + siDomain + '/qzone/em/' + prefix + 'e' + emId + '.gif">';
+                        });
+                        _s = _s.replace(p.regexQS, '【QQ秀泡泡】$2');
+                        return _s
+                    }
+                };
+                QZONE.FP.removeUBB.regexTmp = /\[(img|flash|video|audio)\].*?\[\/\1\]|\[\/?(?:b|url|img|flash|video|audio|ftc|ffg|fts|ft|email|center|u|i|marque|m|r|quote)[^\]]*\]/ig;
+                QZONE.FP.removeUBB.regexEm = /\[em\]e(\d{1,6})\[\/em\]/ig;
+                QZONE.FP.removeUBB.regexQS = /\[qqshow(,\d*){4},?([^\]]*)\][^\[]*\[\/qqshow\]/ig;
+            })(); (function(window, undefined) {
+                var $ = window.$$;
+                $.fn = $.prototype;
+                var document = window.document,
+                push = Array.prototype.push,
+                slice = Array.prototype.slice,
+                hasOwnProperty = Object.prototype.hasOwnProperty,
+                _trim = String.prototype.trim;
+                var noop = $$.noop;
+                var UUID_PREFIX = '__imweb_';
+                var uuid = $.uuid = function() {
+                    return UUID_PREFIX + $$.now();
+                };
+                var expando = uuid();
+                var isFunction = $.isFunction = function(obj) {
+                    return typeof obj == 'function';
+                };
+                function arrayCopy(dest, src) {
+                    for (var i = 0,
+                    len = src.length; i < len; i++) {
+                        dest[i] = src[i];
+                    }
+                }
+                var rtrim = /^\s+|\s+$/g;
+                trim = _trim ?
+                function(text) {
+                    return text == null ? '': _trim.call(text);
+                }: function(text) {
+                    return text == null ? '': text.toString().replace(rtrim, '');
+                };
+                $.trim = trim;
+                var inArray = $.inArray = $$.inArray;
+                var toArray = $.toArray = function(obj) {
+                    if ($.isArray(obj)) {
+                        return obj;
+                    }
+                    var arr = [];
+                    if (obj && obj.length > 0) {
+                        for (var i = 0,
+                        len = obj.length; i < len; i++) {
+                            arr[i] = obj[i];
+                        }
+                    }
+                    return arr;
+                };
+                $.task = function() {
+                    var tasks = [];
+                    var taskId;
+                    var INTERVAL_TIME = 100;
+                    function execTasks() {
+                        var len = tasks.length;
+                        var i = 0;
+                        while (i < len) {
+                            var task = tasks[i];
+                            if (!task) {
+                                break;
+                            }
+                            if (task() === false) {
+                                len--;
+                                tasks.splice(i, 1);
+                                continue;
+                            }
+                            i++;
+                        }
+                        stop();
+                    }
+                    function stop() {
+                        if (!tasks.length) {
+                            clearInterval(taskId);
+                            taskId = null;
+                        }
+                    }
+                    return {
+                        add: function(task) {
+                            if (!$.isFunction(task) || $.inArray(task, tasks) != -1) {
+                                return;
+                            }
+                            tasks.push(task);
+                            if (!taskId) {
+                                taskId = setInterval(execTasks, INTERVAL_TIME);
+                            }
+                        },
+                        remove: function(task) {
+                            if (!$.isFunction(task) || (task = $.inArray(task, tasks)) == -1) {
+                                return;
+                            }
+                            tasks.splice(task, 1);
+                            stop();
+                        }
+                    };
+                } ();
+                $.loadImage = function() {
+                    var callbacks = {};
+                    function execCallbacks(img, succ, url) {
+                        var cbList = callbacks[url];
+                        delete callbacks[url];
+                        var len = cbList && cbList.length;
+                        if (!len) {
+                            return;
+                        }
+                        cbList[0].call(img, succ);
+                        for (var i = 1; i < len; i++) {
+                            img = new Image();
+                            img.src = url;
+                            cbList[i].call(img, succ);
+                        }
+                    }
+                    return function(url, defaultUrl, callback) {
+                        if ($.isFunction(defaultUrl)) {
+                            callback = defaultUrl;
+                        }
+                        var cbList = callbacks[url];
+                        if (cbList) {
+                            $.isFunction(callback) && cbList.push(callback);
+                            return;
+                        }
+                        callbacks[url] = $.isFunction(callback) ? [callback] : []; (typeof defaultUrl != 'string') && (defaultUrl = false);
+                        var img = new Image();
+                        img.oriSrc = url;
+                        var destory = function(succ) {
+                            execCallbacks(img, succ, url);
+                            img = img.onerror = img.onload = null;
+                            $.task.remove(ready);
+                        };
+                        var ready = function() {
+                            if (!img) {
+                                return false;
+                            }
+                            if (img.width > 30 || img.height > 30) {
+                                destory(true);
+                            }
+                        };
+                        var reloadCount = 0;
+                        img.onerror = function() {
+                            switch (++reloadCount) {
+                            case 1:
+                                img.src = url;
+                                break;
+                            case 2:
+                                defaultUrl ? (img.src = defaultUrl) : destory(false);
+                                break;
+                            default:
+                                destory(false);
+                            }
+                        };
+                        img.onload = function() {
+                            destory(true);
+                        };
+                        img.src = url;
+                        $.task.add(ready);
+                    };
+                } ();
+                $.shrinkImage = function(img, width, height) {
+                    function setImg(img, width, height) {
+                        img.width = width;
+                        img.style.width = width + 'px';
+                        img.height = height;
+                        img.style.height = height + 'px';
+                        return img;
+                    }
+                    return function(img, width, height, full) {
+                        var imgHeight = img.height || 1;
+                        var imgWidth = img.width || 1;
+                        if (width >= imgWidth && height >= imgHeight) {
+                            return;
+                        }
+                        var rate = imgWidth / imgHeight > width / height;
+                        if (full) {
+                            rate = !rate;
+                            width > imgWidth && (width = imgWidth);
+                            height > imgHeight && (height = imgHeight);
+                        }
+                        return setImg(img, rate ? width: Math.floor(imgWidth * height / imgHeight), rate ? Math.floor(imgHeight * width / imgWidth) : height);
+                    };
+                } ();
+                $.centerImage = function(img, width, height) {
+                    img.style.left = (width - img.width) / 2 + 'px';
+                    img.style.top = (height - img.height) / 2 + 'px'
+                };
+                $.getScript = function(url, cb) {
+                    var copyUrl = [];
+                    if (!$.isArray(url)) {
+                        url = [url];
+                    }
+                    arrayCopy(copyUrl, url); ! isFunction(cb) && (cb = noop);
+                    var loadScript = function(_url) {
+                        var script = document.createElement('script');
+                        script.onload = script.onreadystatechange = script.onerror = function() {
+                            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+                                var index = inArray(_url, copyUrl);
+                                if (index != -1) {
+                                    script.onload = script.onreadystatechange = script.onerror = null;
+                                    copyUrl.splice(index, 1); ! copyUrl.length && cb();
+                                }
+                            }
+                        };
+                        script.type = 'text/javascript';
+                        script.src = _url;
+                        document.getElementsByTagName('head')[0].appendChild(script);
+                    };
+                    for (var i = 0,
+                    len = copyUrl.length; i < len; i++) {
+                        loadScript(url[i], cb);
+                    }
+                };
+                var rclass = /\.([^#.:\s]+)/;
+                var rid = /#([^#.:\s]+)/;
+                var rtag = /^[^#.:\s]+/;
+                $.fn.add = function(selector) {
+                    this.length = parseInt(this.length) || 0;
+                    if (typeof selector == 'string') {
+                        return appendToObj(query(selector), this);
+                    }
+                    if (selector) {
+                        if (selector.nodeType) {
+                            return appendNode(selector, this);
+                        }
+                        for (var i = 0,
+                        len = selector.length; i < len; i++) {
+                            var elem = selector[i];
+                            if (typeof elem == 'string') {
+                                appendToObj(query(elem), this);
+                            } else if (elem instanceof $) {
+                                appendToObj(elem, this);
+                            } else if (elem && elem.nodeType) {
+                                appendNode(elem, this);
+                            }
+                        }
+                    }
+                    return this;
+                };
+                function appendToObj(list, obj) {
+                    for (var i = 0,
+                    len = list.length; i < len; i++) {
+                        appendNode(list[i], obj);
+                    }
+                    return obj;
+                }
+                function appendNode(elem, obj) {
+                    obj[obj.length] = elem;
+                    obj.length++;
+                }
+                $.fn.find = function(selector) {
+                    if (!this.length) {
+                        return new $();
+                    }
+                    var elems = query(selector, this[0]);
+                    for (var i = 1,
+                    len = this.length; i < len; i++) {
+                        push.apply(elems, query(selector, this[i]));
+                    }
+                    return appendToObj(elems, new $());
+                };
+                $.fn.children = function(selector) {
+                    var obj = new $(),
+                    elem;
+                    if (!selector || typeof selector != 'string') {
+                        for (var i = 0,
+                        len = this.length; i < len; i++) {
+                            elem = this[i];
+                            elem.nodeType === 1 && obj.add(elem.childNodes);
+                        }
+                        return obj;
+                    }
+                    for (var i = 0,
+                    len = this.length; i < len; i++) {
+                        elem = this[i];
+                        elem.nodeType === 1 && obj.add(queryChildren(elem, selector));
+                    }
+                    return obj;
+                };
+                function queryChildren(elem, selector) {
+                    var elems = [];
+                    if (! (selector = trim(selector))) {
+                        return elems;
+                    }
+                    var className = selector.match(rclass);
+                    var tag = selector.match(rtag);
+                    if (className || tag) {
+                        className && (className = className[1]);
+                        tag && (tag = tag[0].toUpperCase());
+                        elem = elem.firstChild;
+                        while (elem) {
+                            if (elem.nodeType === 1 && hasSelector(elem, tag, className)) {
+                                elems.push(elem);
+                            }
+                            elem = elem.nextSibling;
+                        }
+                    }
+                    return elems;
+                }
+                $.fn.closest = function(selector) {
+                    var elem, obj = new $();
+                    if (! (selector = trim(selector))) {
+                        return obj;
+                    }
+                    var className = selector.match(rclass);
+                    var tag = selector.match(rtag);
+                    className && (className = className[1]);
+                    tag && (tag = tag[0].toUpperCase());
+                    if (className || tag) {
+                        for (var i = 0,
+                        len = this.length; i < len; i++) {
+                            elem = this[i];
+                            while (elem && !hasSelector(elem, tag, className)) {
+                                elem = elem.parentNode;
+                            }
+                            obj.add(elem);
+                        }
+                    }
+                    return obj;
+                };
+                $.fn.append = function(selector) {
+                    if (!selector) {
+                        return this;
+                    }
+                    if (typeof selector == 'string') {
+                        selector = $(selector);
+                    }
+                    for (var i = 0,
+                    len = this.length; i < len; i++) {
+                        appendChildren(this[i], selector);
+                    }
+                    return this;
+                };
+                function appendChildren(elem, child) {
+                    if (child.nodeType) {
+                        elem.appendChild(child);
+                        return;
+                    }
+                    if (child instanceof $) {
+                        for (var i = 0,
+                        len = child.length; i < len; i++) {
+                            elem.appendChild(child[i]);
+                        }
+                    }
+                }
+                $.fn.show = function() {
+                    return setVisible(this, true);
+                };
+                $.fn.hide = function() {
+                    return setVisible(this);
+                };
+                function setVisible(elem, v) {
+                    for (var i = 0,
+                    len = elem.length; i < len; i++) {
+                        elem[i].style.display = v ? '': 'none';
+                    }
+                    return elem;
+                }
+                function hasSelector(elem, tag, className) {
+                    return (!tag || elem.nodeName == tag) && (!className || hasClass(elem, className));
+                }
+                $.fn.html = function() {
+                    if (arguments.length < 1) {
+                        return this[0] && this[0].innerHTML;
+                    }
+                    for (var i = 0,
+                    len = this.length; i < len; i++) {
+                        this[i].innerHTML = arguments[0];
+                    }
+                    return this;
+                };
+                $.fn.attr = function(name, value) {
+                    if (arguments.length < 2) {
+                        return this[0] && this[0].getAttribute(name);
+                    }
+                    for (var i = 0,
+                    len = this.length; i < len; i++) {
+                        this[i].setAttribute(name, value);
+                    }
+                    return this;
+                };
+                $.fn.css = function(name, value) {
+                    if (!name) {
+                        return this;
+                    }
+                    if (arguments.length > 1) {
+                        setStyle(this, name, value);
+                        return this;
+                    }
+                    if (typeof name == 'object') {
+                        for (var i in name) {
+                            setStyle(this, i, name[i]);
+                        }
+                    }
+                    return this;
+                };
+                $.fn.width = function() {
+                    return this[0] && this[0].offsetWidth;
+                };
+                $.fn.height = function() {
+                    return this[0] && this[0].offsetHeight;
+                };
+                function setStyle(elems, name, value) {
+                    for (var i = 0,
+                    len = elems.length; i < len; i++) {
+                        elems[i].style[name] = value;
+                    }
+                }
+                $.fn.extend = $.extend = function(obj) {
+                    for (var i in obj) {
+                        this[i] = obj[i];
+                    }
+                    return this;
+                };
+                function query(selector, parent) {
+                    if (typeof selector != 'string' || !(selector = trim(selector))) {
+                        return [];
+                    }
+                    var id = selector.match(rid);
+                    if (id) {
+                        id = document.getElementById(id[1]);
+                        return id ? [id] : [];
+                    }
+                    var tag = selector.match(rtag);
+                    var className = selector.match(rclass);
+                    if (tag) {
+                        tag = tag[0];
+                    }
+                    if (className) {
+                        className = className[1];
+                    }
+                    parent = parent || document;
+                    if (parent.querySelectorAll) {
+                        tag = tag || '';
+                        if (className) {
+                            tag += '.' + className;
+                        }
+                        return toArray(parent.querySelectorAll(tag));
+                    }
+                    var elems = parent.getElementsByTagName(tag || '*');
+                    var selectedElems;
+                    if (className) {
+                        selectedElems = [];
+                        for (var i = 0,
+                        len = elems.length; i < len; i++) {
+                            if (hasClass(tag = elems[i], className)) {
+                                selectedElems.push(tag);
+                            }
+                        }
+                    }
+                    return selectedElems || elems;
+                }
+                $.fn.hasClass = function(name) {
+                    return hasClass(this[0], name);
+                };
+                function hasClass(elem, name) {
+                    if (!elem || elem.nodeType !== 1 || !elem.className || !name) {
+                        return false;
+                    }
+                    var allClasses = elem.className.split(/\s/g);
+                    return inArray(name, allClasses) != -1;
+                }
+                $.fn.addClass = function(name) {
+                    for (var i = 0,
+                    len = this.length; i < len; i++) {
+                        addClass(this[i], name);
+                    }
+                    return this;
+                };
+                function addClass(elem, name) {
+                    if (!elem || elem.nodeType !== 1 || !name) {
+                        return;
+                    }
+                    if (!elem.className) {
+                        elem.className = name;
+                        return;
+                    }
+                    name = name.split(/\s/g),
+                    allClasses = elem.className.split(/\s/g);
+                    for (var i = name.length - 1; i >= 0; i--) {
+                        inArray(name[i], allClasses) != -1 && name.splice(i, 1);
+                    }
+                    name.length && (elem.className += ' ' + name.join(' '));
+                }
+                $.fn.removeClass = function(name) {
+                    for (var i = 0,
+                    len = this.length; i < len; i++) {
+                        removeClass(this[i], name);
+                    }
+                    return this;
+                };
+                function removeClass(elem, name) {
+                    if (!elem || elem.nodeType !== 1 || !elem.className) {
+                        return;
+                    }
+                    if (!name || typeof name != 'string') {
+                        elem.className = '';
+                        return;
+                    }
+                    name = name.split(/\s/g);
+                    var hasClass, allClasses = elem.className.split(/\s/g),
+                    index;
+                    for (var i = name.length - 1; i >= 0; i--) {
+                        if ((index = inArray(name[i], allClasses)) != -1) {
+                            allClasses.splice(index, 1);
+                            hasClass = true;
+                        }
+                    }
+                    hasClass && (elem.className = allClasses.join(' '));
+                }
+                $$.extend({
+                    html: function() {
+                        var rdecodeEntity = /&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g;
+                        var rencodeEntity = /['<> "&]/g;
+                        var decodeEntities = {
+                            '&quot;': '"',
+                            '&lt;': '<',
+                            '&gt;': '>',
+                            '&amp;': '&',
+                            '&nbsp;': ' '
+                        };
+                        var rhtmlSpace = /\u00a0/g;
+                        var rbr = /<br\s*\/?>/ig;
+                        var rlf = /\r?\n/g;
+                        var rspace = /\s/g;
+                        var encodeEntities = {};
+                        for (var i in decodeEntities) {
+                            encodeEntities[decodeEntities[i]] = i;
+                        }
+                        decodeEntities['&apos;'] = '\'';
+                        encodeEntities['\''] = '&#39;';
+                        function fdecodeEntity(matched, charCode, lastCharCode) {
+                            if (!charCode && !lastCharCode) {
+                                return decodeEntities[matched] || matched;
+                            }
+                            return String.fromCharCode(charCode || lastCharCode);
+                        }
+                        function fencodeEntity(matched) {
+                            return encodeEntities[matched];
+                        }
+                        return {
+                            encode: function(text) {
+                                return text ? ('' + text).replace(rencodeEntity, fencodeEntity).replace(rlf, '<br/>').replace(rspace, '&nbsp;') : '';
+                            },
+                            decode: function(text) {
+                                return text ? ('' + text).replace(rbr, '\n').replace(rdecodeEntity, fdecodeEntity).replace(rhtmlSpace, ' ') : '';
+                            }
+                        };
+                    } (),
+                    toDateString: function(publishTimestamp, curTimestamp, type) {
+                        var interval = curTimestamp - publishTimestamp;
+                        if (interval <= 5) {
+                            return '刚刚';
+                        }
+                        if (interval < 60) {
+                            return interval + '秒前';
+                        }
+                        if (interval < 3600) {
+                            return Math.floor(interval / 60) + '分钟前';
+                        }
+                        var isComment = type === 'comment';
+                        var publishTime = new Date(publishTimestamp * 1000);
+                        var publishDay = publishTime.getDay();
+                        var curTime = new Date(curTimestamp * 1000);
+                        var curDay = curTime.getDay();
+                        var publishHours = publishTime.getHours();
+                        var publishMinutes = publishTime.getMinutes();
+                        var curYear = curTime.getFullYear();
+                        var publishYear = publishTime.getFullYear();
+                        var ostDay = curDay - publishDay;
+                        if (interval < 3600 * 48 && (ostDay == 0 || ostDay == 1 || ostDay == -6)) {
+                            return (ostDay == 0 ? '今天': '昨天') + ' ' + (publishHours < 10 ? '0' + publishHours: publishHours) + ':' + (publishMinutes < 10 ? '0' + publishMinutes: publishMinutes);
+                        }
+                        var publishMonth = publishTime.getMonth() + 1;
+                        var publishDate = publishTime.getDate();
+                        var curMonth = curTime.getMonth() + 1;
+                        if (curYear == publishYear) {
+                            return (publishMonth < 10 ? '0' + publishMonth: publishMonth) + '-' + (publishDate < 10 ? '0' + publishDate: publishDate) + '&nbsp;' + (publishHours < 10 ? '0' + publishHours: publishHours) + ':' + (publishMinutes < 10 ? '0' + publishMinutes: publishMinutes);
+                        } else {
+                            return publishYear + '-' + (publishMonth < 10 ? '0' + publishMonth: publishMonth) + '-' + (publishDate < 10 ? '0' + publishDate: publishDate) + (isComment ? '&nbsp;' + (publishHours < 10 ? '0' + publishHours: publishHours) + ':' + (publishMinutes < 10 ? '0' + publishMinutes: publishMinutes) : '');
+                        }
+                    },
+                    getFileSuffix: function(fileName) {
+                        var index = fileName ? fileName.lastIndexOf('.') : -1;
+                        return index == -1 ? '': fileName.substr(index + 1);
+                    },
+                    string: function() {
+                        var rhalfWidth = /[ a-ln-z\d<>,.\/?'";:\|{}\[\]=+\-_()~`!#$^*EFIJLPSTYZ]/;
+                        var grhalfWidth = /[ a-ln-z\d<>,.\/?'";:\|{}\[\]=+\-_()~`!#$^*EFIJLPSTYZ]/g;
+                        var lineWidth = 44;
+                        function ellipsis(str, maxLen, suffix) {
+                            var letterLen = 0,
+                            ret = '',
+                            DEFAUT_SUFFIX = '...';
+                            var idx = str.lastIndexOf(suffix);
+                            str = idx == -1 ? str: str.substring(0, idx);
+                            for (var i = 0,
+                            len = str.length; i < len; i++) {
+                                var word = str.charAt(i);
+                                letterLen++;
+                                if (/[^\x00-\xff]/g.test(word)) {
+                                    letterLen++;
+                                }
+                                if (letterLen > maxLen) {
+                                    suffix = suffix ? str.substr(len - 1) + suffix: '';
+                                    return len - 1 != i ? [ret, DEFAUT_SUFFIX, suffix] : [ret + suffix];
+                                }
+                                ret = ret.concat(word);
+                            }
+                            return [str + suffix];
+                        }
+                        function removeLastUrl(array) {
+                            var urls = $.extractUrl($.isArray(array) ? array.join('') : array);
+                            var urlLen = urls.length;
+                            if (urlLen > 1 && urls[urlLen - 1] == '...' && urls[urlLen - 2].url) {
+                                urls[urlLen - 2] = urls[urlLen - 2].url;
+                            }
+                            return urls;
+                        }
+                        function removeLastFace(array) {
+                            var len = array.length;
+                            if (len > 1) {
+                                array[0] = array[0].replace(/\[.{0,4}$/, '');
+                            }
+                            for (var i = 0; i < len; i++) {
+                                array[i] = $.html.encode(array[i]);
+                            }
+                            return array;
+                        }
+                        return {
+                            ellipsis: function(str, maxLen, suffix, postProcess) {
+                                str = str ? $.html.decode(str) : '';
+                                suffix = suffix ? $.html.decode(suffix) : '';
+                                var array = ellipsis(str, maxLen, suffix);
+                                switch (postProcess) {
+                                case 0:
+                                    array = removeLastFace(array);
+                                case 1:
+                                    array = removeLastUrl(array);
+                                    break;
+                                case 2:
+                                    array = removeLastFace(array);
+                                    break;
+                                default:
+                                    break;
+                                }
+                                return array;
+                            },
+                            cut: function(str, maxLen, normal) {
+                                var origStr = str;
+                                if (str && (str = normal ? str: $.html.decode(str)) && str.length > maxLen) {
+                                    var substr = str.substring(0, maxLen - 1);
+                                    var halfWidth = substr.match(grhalfWidth);
+                                    if (halfWidth && (halfWidth = halfWidth.length) > 1) {
+                                        for (var i = maxLen - 1,
+                                        len = str.length; halfWidth > 1 && i < len; i++) {
+                                            var ch = str.charAt(i);
+                                            substr += ch;
+                                            halfWidth -= rhalfWidth.test(ch) ? 1 : 2;
+                                        }
+                                    }
+                                    return substr === str ? origStr: (normal ? substr: $.html.encode(substr)) + '...';
+                                }
+                                return normal ? str: $.html.encode(str);
+                            },
+                            setMaxLine: function(text, maxLine) {
+                                if (!text || !(maxLine = parseInt(maxLine))) {
+                                    return '';
+                                }
+                                var _text = text;
+                                text = $.html.decode(text).split('\n');
+                                var over = false,
+                                str, strLen, lastIndex, line, halfWidth;
+                                for (var i = 0,
+                                len = text.length; i < len; i++) {
+                                    if (! (str = text[i]) || (strLen = str.length) <= lineWidth) {
+                                        if (--maxLine <= 0) {
+                                            if (over = (lastIndex = i + 1) < len) {
+                                                text.splice(lastIndex, len - lastIndex);
+                                                text[i] = str + '...';
+                                            }
+                                            break;
+                                        }
+                                        continue;
+                                    }
+                                    halfWidth = (halfWidth = str.match(grhalfWidth)) ? halfWidth.length: 0;
+                                    line = maxLine - (Math.ceil((strLen - halfWidth * 0.5) / lineWidth) || 1);
+                                    if (line == 0) {
+                                        if (over = (lastIndex = i + 1) < len) {
+                                            text.splice(lastIndex, len - lastIndex);
+                                            text[i] = str + '...';
+                                        }
+                                        break;
+                                    }
+                                    if (line < 0) {
+                                        over = true;
+                                        text[i] = $.string.cut(str, maxLine * lineWidth - 2, true);
+                                        text.splice(++i, len - i);
+                                        break;
+                                    }
+                                    maxLine = line;
+                                }
+                                return {
+                                    text: _text,
+                                    over: over
+                                };
+                            }
+                        }
+                    } (),
+                    tmpl: function() {
+                        var cache = {},
+                        rNotAlpha = /\W/,
+                        rwhitespace = /[\r\t\n]/g,
+                        rquot = /((^|%>)[^\t]*)'/g;
+                        var rsquot = /'/g,
+                        rvalue = /\t=(.*?)%>/g,
+                        SPACE = " ",
+                        START = "<%",
+                        END = "%>";
+                        var TAB = "\t",
+                        VALUE = "',$1,'",
+                        PUSH_END = "');",
+                        PUSH_START = "p.push('",
+                        CR = "\r",
+                        QUOT = "\\'";
+                        function fquot($0) {
+                            return $0.replace(rsquot, '\r');
+                        }
+                        return function(str, data) {
+                            var fn = !rNotAlpha.test(str) ? cache[str] = cache[str] || $$.tmpl(document.getElementById(str).innerHTML) : new Function("obj", "var p=[],print=function(){p.push.apply(p,arguments);};" + "with(obj){p.push('" + str.replace(rwhitespace, SPACE).split(START).join(TAB).replace(rquot, fquot).replace(rvalue, VALUE).split(TAB).join(PUSH_END).split(END).join(PUSH_START).split(CR).join(QUOT) + "');}return p.join('');");
+                            return data ? fn(data) : fn;
+                        };
+                    } (),
+                    decodeFace: function() {
+                        var FACE_URL = 'http://3.url.cn/qun/zone/common/img/face/';
+                        var rfaceSymbol = /\[\\(.{1,3})\]/g;
+                        var FACE_START_INDEX = 0;
+                        var FACE_END_INDEX = 118;
+                        function fdecode($0, $1) {
+                            var index = parseInt($1, 10);
+                            if (isNaN(index) || index < FACE_START_INDEX) {
+                                return $0;
+                            }
+                            return index <= FACE_END_INDEX ? '<img src="' + FACE_URL + index + '.gif" />': '';
+                        }
+                        return function(text) {
+                            return typeof text != 'string' || !text ? text: text.replace(rfaceSymbol, fdecode);
+                        }
+                    } (),
+                    initSetFace: function(info) {
+                        var UIN_ATTR = 'uin';
+                        var MIN_UIN = 10000;
+                        var DEFAULT_FACE = 'http://3.url.cn/qun/zone/feeds/img/static/default.png';
+                        var cache = {
+                            '10000': 'http://3.url.cn/qun/zone/feeds/img/static/official-26.png'
+                        };
+                        for (var i in info) {
+                            cache[i] = $$.html.decode(info[i].f);
+                        }
+                        function setFace(mergedList, defaultUrl, showDefault) {
+                            for (var uin in mergedList) {
+                                var url = cache[uin] || (showDefault && defaultUrl);
+                                if (url) {
+                                    showFace(mergedList[uin], url, defaultUrl);
+                                    delete mergedList[uin];
+                                }
+                            }
+                        }
+                        function showFace(elems, url, defaultUrl) {
+                            $$.loadImage(url, defaultUrl,
+                            function() {
+                                for (var i = 0,
+                                len = elems.length; i < len; i++) {
+                                    var elem = elems[i];
+                                    elem.src = this.src;
+                                    elem.style.visibility = 'visible';
+                                }
+                            });
+                        }
+                        function mergeImgByUin(node) {
+                            var mergedList = {};
+                            var uinList = [];
+                            var bitSet = {};
+                            for (var i = 0,
+                            len = node.length; i < len; i++) {
+                                var elem = node[i];
+                                var uin = parseInt(elem.getAttribute(UIN_ATTR), 10) || 0;
+                                if (uin < MIN_UIN) {
+                                    continue;
+                                }
+                                if (!bitSet[uin]) { ! cache[uin] && uinList.push(uin);
+                                    bitSet[uin] = 1;
+                                }
+                                var list = mergedList[uin];
+                                if (!list) {
+                                    mergedList[uin] = list = [];
+                                }
+                                list.push(elem);
+                            }
+                            return {
+                                mergedList: mergedList,
+                                uinList: uinList
+                            };
+                        }
+                        $$.fn.setFace = function(defaultUrl) {
+                            defaultUrl = defaultUrl || DEFAULT_FACE;
+                            var ret = mergeImgByUin(this);
+                            var mergedList = ret.mergedList;
+                            var uinList = ret.uinList;
+                            if (uinList.length > 0) {
+                                $$.get('http://qun.qzone.qq.com/cgi-bin/feeds/faces?_=' + $$.now() + '&u=' + uinList.join('-') + '&s=40',
+                                function(data) {
+                                    if (data.ec === 0) {
+                                        for (var i = data.ls.length - 1; i >= 0; i--) {
+                                            var item = data.ls[i];
+                                            cache[item.u] = item.f;
+                                        }
+                                    }
+                                    setFace(mergedList, defaultUrl, true);
+                                    return false;
+                                });
+                            }
+                            setFace(mergedList, defaultUrl);
+                            return this;
+                        };
+                    },
+                    getFlashVersion: function() {
+                        var version;
+                        return function() {
+                            if (version !== undefined) {
+                                return version;
+                            }
+                            version = 0;
+                            var plugin = navigator.plugins && navigator.plugins['Shockwave Flash'];
+                            if (plugin && plugin.description) {
+                                plugin = plugin.description.match(/Shockwave Flash (\d+)/);
+                                plugin && (version = plugin[1]);
+                            }
+                            return version;
+                        };
+                    } (),
+                    supportsPreview: function() {
+                        var supportType = 'txt,pdf,doc,docx,ppt,pptx,xls,xlsx';
+                        var zipType = 'zip,rar,7z';
+                        var MAX_SIZE = 1024 * 1024 * 20;
+                        return function(data) {
+                            if ($.getFlashVersion() < 10 || !data || !data.msg || !data.msg.size || data.msg.del) {
+                                return 0;
+                            }
+                            if (data.msg.size <= MAX_SIZE) {
+                                var suffix = $.getFileSuffix(data.msg.name).toLowerCase();
+                                if (supportType.indexOf(suffix) != -1) {
+                                    return 1;
+                                }
+                                if (zipType.indexOf(suffix) != -1) {
+                                    return 2;
+                                }
+                            }
+                            refine.adapter.quickReport(155);
+                            return 0;
+                        };
+                    } ()
+                });
+                $$.extend(function() {
+                    var rurl = /(?:(?:(?:ftp|https?):\/\/|www\.)(?:[a-z0-9](?:[-_a-z0-9]*[-_a-z0-9])?\.)+(?:com|mobi|mil|arpa|pro|name|coop|asia|tel|int|xxx|museum|aero|travel|ltd|plc|me|net|edu|biz|gov|org|in(?:t|fo)|[a-z][a-z])(?:\.[a-z][a-z])?|(?:(?:ftp|https?):\/\/((?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.(?:2[0-4]\d|25[0-5]|[01]?\d{1,2}))))(?:\:(?:\d{1,5}))?(?:[\/?#](?:[\w-.'!~@(*)%=&#?;,|+:$\^\[\]{}])*)*/ig;
+                    var rendWidth = /[^\w-~@)%=&#?$\^\]}\/]+$/;
+                    var rhttp = /^http:\/\//i;
+                    var rurlChar = /[\w-]/;
+                    return {
+                        extractUrl: function(ctn) {
+                            if (typeof ctn != 'string' || !ctn) {
+                                return ctn;
+                            }
+                            ctn = $.html.decode(ctn);
+                            var indexList = [];
+                            var urlList = [];
+                            ctn.replace(rurl,
+                            function() {
+                                var url = arguments[0];
+                                if (!rurlChar.test(ctn.charAt(arguments[2] + url.length))) {
+                                    indexList.push(arguments[2]);
+                                    var suffix = url.match(rendWidth);
+                                    if (suffix) {
+                                        url = url.substring(0, url.length - suffix[0].length);
+                                    }
+                                    urlList.push(url);
+                                }
+                                return url;
+                            });
+                            var result = [];
+                            var len = indexList.length;
+                            if (!len) {
+                                result.push($.html.encode(ctn));
+                                return result;
+                            }
+                            var start = 0;
+                            for (var j = 0; j < len; j++) {
+                                var index = indexList[j];
+                                var url = urlList[j];
+                                var str = ctn.substring(start, index);
+                                str && result.push($.html.encode(str));
+                                start = index + url.length;
+                                result.push({
+                                    url: $.html.encode(url)
+                                });
+                            } (start = ctn.substr(start)) && result.push($.html.encode(start));
+                            return result;
+                        },
+                        convertUrl: function(ctn) {
+                            if (typeof ctn == 'string' && ctn) {
+                                ctn = $.extractUrl(ctn);
+                            } else if (!$.isArray(ctn)) {
+                                return ctn;
+                            }
+                            for (var i = ctn.length - 1; i >= 0; i--) {
+                                var url = ctn[i];
+                                if (typeof url == 'string') {
+                                    continue;
+                                }
+                                url = url.url;
+                                var http = '';
+                                if (!rhttp.test(url)) {
+                                    http = "http://";
+                                }
+                                ctn[i] = '<a class="linker" href="' + http + url + '" target="_blank" title="打开' + url + '">' + url + '</a>';
+                            }
+                            return ctn.join('');
+                        }
+                    };
+                } ()) $$.fn.extend({
+                    setAlbumFace: function() {
+                        var PIC_ID_ATTR = 'picid';
+                        var DEFAULT_FACE = 'http://3.url.cn/qun/zone/feeds/img/static/group.png';
+                        var MULTI_DEFAULT_FACE = 'http://3.url.cn/qun/zone/feeds/img/static/err.png';
+                        var ALBUM_URL = 'http://gdynamic$i$.qpic.cn/gdynamic/$id$/$size$';
+                        var ralbumUrlId = /\$i\$/;
+                        var count = 3;
+                        function getAlbumUrl() {
+                            count++;
+                            count = count % 5;
+                            if (count > 3) {
+                                return ALBUM_URL.replace(ralbumUrlId, '');
+                            }
+                            return ALBUM_URL.replace(ralbumUrlId, count);
+                        }
+                        function setAlbumFace(elem, type, size) {
+                            var picId = elem.getAttribute(PIC_ID_ATTR);
+                            var defaultFace = MULTI_DEFAULT_FACE;
+                            var area;
+                            if (type === 1) {
+                                defaultFace = DEFAULT_FACE;
+                            }
+                            picId && $$.loadImage(getAlbumUrl().replace(/\$id\$/, picId).replace(/\$size\$/, size), defaultFace,
+                            function(succ) {
+                                if (!succ) {
+                                    return;
+                                }
+                                elem.appendChild(this);
+                                if (this.src == defaultFace) {
+                                    this.style.left = (elem.offsetWidth - this.width) / 2 + 'px';
+                                    this.style.top = (elem.offsetHeight - this.height) / 2 + 'px';
+                                    this.parentNode.style.background = '#e0eaf9';
+                                    return;
+                                }
+                                var ew, eh;
+                                if (type == 1) {
+                                    ew = 530;
+                                    eh = this.height / this.width * ew;
+                                } else if (type == 2 || type == 4) {
+                                    ew = 262;
+                                    eh = 256;
+                                } else {
+                                    ew = eh = 174;
+                                }
+                                $$.shrinkImage(this, ew, eh, type != 1);
+                                $$.centerImage(this, elem.offsetWidth, elem.offsetHeight);
+                            });
+                        }
+                        return function() {
+                            for (var i = 0,
+                            len = this.length; i < len; i++) {
+                                var that = $(this[i]);
+                                var photos = that.children('a.home_nmf_pic_item');
+                                var type = photos.length;
+                                var size = refine.adapter.getPhotoSize(type, parseInt(that.attr('t'), 10));
+                                count = 3;
+                                for (var j = 0; j < type; j++) {
+                                    setAlbumFace(photos[j], type, size);
+                                }
+                            }
+                        };
+                    } (),
+                    setVideoFace: function() {
+                        return function() {
+                            for (var i = 0,
+                            len = this.length; i < len; i++) {
+                                var that = $(this[i]);
+                                var url = that.attr("url"); (function(that, url) {
+                                    $.loadImage(url, "http://3.url.cn/qun/zone/feeds/img/static/v_err.jpg",
+                                    function(succ) {
+                                        if (!succ) {
+                                            return;
+                                        }
+                                        that.append(this);
+                                        var width = this.width;
+                                        var height = this.height;
+                                        var adjustSize = 220;
+                                        var adjustHeight = adjustSize * height / width;
+                                        if (adjustHeight > adjustSize) {
+                                            height = adjustSize;
+                                            width = adjustSize / height * width;
+                                        } else {
+                                            height = adjustHeight;
+                                            width = adjustSize;
+                                        }
+                                        that.css("width", width + "px");
+                                        that.css("height", height + "px");
+                                        this.style.width = width + 'px';
+                                        this.width = width;
+                                        this.style.height = height + 'px';
+                                        this.height = height;
+                                    });
+                                })(that, url);
+                            }
+                        };
+                    } (),
+                    setVoteFace: function() {
+                        return function() {
+                            for (var i = 0,
+                            len = this.length; i < len; i++) {
+                                var that = $(this[i]);
+                                var url = 'http://gdynamic.qpic.cn/gdynamic/' + that.attr("pid") + '/220'; (function(that, url) {
+                                    $$.loadImage(url, "http://3.url.cn/qun/zone/feeds/img/static/err.png",
+                                    function(succ) {
+                                        if (!succ) {
+                                            return;
+                                        }
+                                        that.append(this);
+                                        var width = 170,
+                                        height = 340;
+                                        $$.shrinkImage(this, width, height);
+                                        $$.centerImage(this, width, this.height);
+                                        var voteCon = that.closest('.home_nmf_vote_cnt'),
+                                        voteConHeight = voteCon.height();
+                                        if (this.height + 5 > voteConHeight) {
+                                            voteCon.css('height', this.height + 5 + 'px');
+                                        }
+                                    });
+                                })(that, url);
+                            }
+                        };
+                    } ()
+                });
+            })(window); (function() {
+                window.GroupZone = window.GroupZone || {};
+                window.g_group_groupId = 0;
+                window.g_group_groupName = '';
+                window.g_group_isMember = false;
+                window.g_group_isManager = false;
+                window.g_group_isCreator = false;
+                window.g_group_member = [];
+                window.g_group_firstfeedtime = 0;
+                window.g_group_lastfeedtime = 0;
+                window.g_group_hasmorefeeds = 0;
+                window.g_group_dup_keys = '';
+                window.g_group_creator = null;
+                window.g_group_groupMemo = '';
+                window.g_group_fingerMemo = '';
+                window.g_group_createtime = '';
+                window.g_group_picCount = 0;
+                window.g_group_shareCount = 0;
+                window.g_group_memberCount = 0;
+                window.g_group_commentModuleHash = {};
+                window.g_group_is_fake_qun = 0;
+                var baseLink = '';
+                var loginNick = '';
+                var loginUin = '';
+                var bbsCount = 0;
+                var moreGroups = [];
+                GroupZone.setConfig = function(key, value) {
+                    switch (key + '') {
+                    case 'loginNick':
+                        loginNick = value;
+                        break;
+                    case 'loginUin':
+                        loginUin = value;
+                        break;
+                    case 'groupId':
+                        g_group_groupId = value;
+                        break;
+                    case 'groupName':
+                        g_group_groupName = value;
+                        break;
+                    case 'members':
+                        g_group_member = value;
+                        break;
+                    case 'creator':
+                        g_group_creator = value;
+                        break;
+                    case 'isMember':
+                        g_group_isMember = value;
+                        break;
+                    case 'isManager':
+                        g_group_isManager = value;
+                        break;
+                    case 'isCreator':
+                        g_group_isCreator = value;
+                        break;
+                    case 'groupMemo':
+                        g_group_groupMemo = value;
+                        break;
+                    case 'fingerMemo':
+                        g_group_fingerMemo = value;
+                        break;
+                    case 'shareCount':
+                        g_group_shareCount = value;
+                        break;
+                    case 'memberCount':
+                        g_group_memberCount = value;
+                        break;
+                    case 'bbsCount':
+                        bbsCount = value;
+                        break;
+                    case 'createtime':
+                        g_group_createtime = value;
+                        break;
+                    case 'totalPhotoCount':
+                        g_group_picCount = value;
+                        break;
+                    case 'firstScreenFirstFeedTime':
+                        g_group_firstfeedtime = value;
+                        break;
+                    case 'firstScreenLastFeedTime':
+                        g_group_lastfeedtime = value;
+                        break;
+                    case 'firstScreenHasMoreFeeds':
+                        g_group_hasmorefeeds = value;
+                        break;
+                    case 'firstScreenDupKeys':
+                        g_group_dup_keys = value;
+                        break;
+                    case 'isFakeQun':
+                        g_group_is_fake_qun = value;
+                        break;
+                    case 'baseLink':
+                        baseLink = value;
+                        break;
+                    case 'firstScreenMoreGroups':
+                        moreGroups = value;
+                        break;
+                    }
+                };
+                GroupZone.getConfig = function(key) {
+                    var data = {
+                        'groupId': g_group_groupId,
+                        'groupName': g_group_groupName,
+                        'isMember': g_group_isMember,
+                        'isManager': g_group_isManager,
+                        'isCreator': g_group_isCreator,
+                        'members': g_group_member,
+                        'creator': g_group_creator,
+                        'groupMemo': g_group_groupMemo,
+                        'fingerMemo': g_group_fingerMemo,
+                        'firstScreenFirstFeedTime': g_group_firstfeedtime,
+                        'firstScreenLastFeedTime': g_group_lastfeedtime,
+                        'firstScreenHasMoreFeeds': g_group_hasmorefeeds,
+                        'firstScreenDupKeys': g_group_dup_keys,
+                        'createtime': g_group_createtime,
+                        'totalPhotoCount': g_group_picCount,
+                        'shareCount': g_group_shareCount,
+                        'loginUin': loginUin,
+                        'commentModuleHash': g_group_commentModuleHash,
+                        'isFakeQun': g_group_is_fake_qun,
+                        'loginNick': loginNick,
+                        'bbsCount': bbsCount,
+                        'baseLink': baseLink,
+                        'firstScreenMoreGroups': moreGroups
+                    };
+                    var val = key ? data[key] : data;
+                    return val;
+                };
+            })(); (function() {
+                QWT.data['loginUin'] = '214508914';
+                GroupZone.setConfig('baseLink', 'http://qun.qzone.qq.com/group');
+            })();
+        </script>
+        <script>
+            (function() {
+                var hash = location.hash;
+                var DEFAULT_GROUP_COUNT = 4;
+                var DEFAULT_COUNT = 4;
+                if (!hash || !hash.length) {
+                    hash = '#!/portal';
+                }
+                hash = hash.replace(/^#/, '').replace(/^(!\/)|(!)|(\/)/, '');
+                var fragments = hash.split('\/');
+                var groupId = parseInt(fragments[0], 10);
+                if (isNaN(groupId)) {
+                    GroupZone.setConfig('groupId', 0);
+                    GroupZone.setConfig('groupName', '');
+                    QWT.data['entryModule'] = fragments[0] || 'portal';
+                } else {
+                    GroupZone.setConfig('groupId', groupId);
+                    GroupZone.setConfig('groupName', groupId);
+                    QWT.data['entryModule'] = fragments[1] || 'home';
+                }
+                var cgiList = [];
+                var jsList = [];
+                cgiList.push('1.url.cn/qun/zone/feeds/js/6/all.js');
+                cgiList.push('qun.qzone.qq.com/cgi-bin/get_group_member?callbackFun=_GroupMember&uin=' + QWT.escHTML(QWT.data['loginUin']) + '&groupid=' + QWT.escHTML(GroupZone.getConfig('groupId')) + ' &neednum=1&r=' + Math.random() + '&g_tk=' + QWT.getACSRFToken() + '&ua=' + encodeURIComponent(navigator.userAgent));
+                if (QWT.data['entryModule'] === 'portal') {
+                    imweb.portalData = {};
+                    cgiList.push('qun.qzone.qq.com/cgi-bin/get_group_list?groupcount=' + DEFAULT_GROUP_COUNT + '&count=' + DEFAULT_COUNT + '&callbackFun=_GetGroupPortal&uin=' + QWT.data['loginUin'] + '&g_tk=' + QWT.getACSRFToken() + '&ua=' + encodeURIComponent(navigator.userAgent));
+                } else {
+                    cgiList.push('u.photo.qq.com/cgi-bin/upp/qun_list_album_v2?getTotalPhoto=1&inCharset=utf-8&outCharset=utf-8&callbackFun=_GroupAlbumList&qunId=' + QWT.escHTML(GroupZone.getConfig('groupId')) + '&uin=' + QWT.escHTML(QWT.data['loginUin']) + '&start=0&num=1000&userinfo=1&t=' + Math.random() + '&output_type=json&refer=jsapi&g_tk=' + QWT.getACSRFToken());
+                }
+                QWT.load({
+                    jsList: jsList,
+                    cgiList: cgiList,
+                    jsMaxAge: 600,
+                    jsConcat: false
+                });
+            })();
+        </script>
+        <style>
+            .scroll_load{visibility:hidden;}
+        </style>
+        <script>
+            document.write(GroupZone.ui.toolbar({
+                loginUin: GroupZone.getConfig('loginUin'),
+                nickname: GroupZone.getConfig('loginNick'),
+                groupId: GroupZone.getConfig('groupId')
+            }));
+        </script>
+        <div class="container">
+            <div class="app_group">
+                <script>
+                    (function() {
+                        if (QWT.data['entryModule'] != 'search' && QWT.data['entryModule'] != 'portal') {
+                            document.write(GroupZone.ui.homeHeader({
+                                groupId: GroupZone.getConfig('groupId'),
+                                groupName: GroupZone.getConfig('groupName'),
+                                memberCount: GroupZone.getConfig('members').length || 0,
+                                picCount: GroupZone.getConfig('totalPhotoCount') || 0,
+                                shareCount: GroupZone.getConfig('shareCount') || 0,
+                                bbsCount: GroupZone.getConfig('bbsCount') || 0
+                            }));
+                        } else if (QWT.data['entryModule'] === 'search') {
+                            document.write(GroupZone.ui.searchHeader({}));
+                        }
+                    })();
+                </script>
+                <div class="app_group_inner app_group_w_content" id="content_main_container">
+                    <script>
+                        (function() {
+                            if (QWT.data['entryModule'] == 'home' && QWT.data['loginUin'] > 10000) {
+                                document.write(GroupZone.ui.homeBody({
+                                    loginUin: window.QWT.data['loginUin'],
+                                    groupId: window.GroupZone.getConfig('groupId'),
+                                    moodPosterHtml: GroupZone.ui.moodPoster({}),
+                                    feedsContent: '',
+                                    members: GroupZone.getConfig('members'),
+                                    creator: GroupZone.getConfig('creator') || {
+                                        nick: ''
+                                    },
+                                    groupMemo: GroupZone.getConfig('groupMemo'),
+                                    fingerMemo: GroupZone.getConfig('fingerMemo'),
+                                    createtime: GroupZone.getConfig('createtime'),
+                                    isAdmin: GroupZone.getConfig('isManager') || GroupZone.getConfig('isCreator')
+                                }));
+                            } else if (QWT.data['entryModule'] == 'portal') {
+                                document.write(GroupZone.ui.portalBody({
+                                    code: typeof imweb.portalData['code'] == 'undefined' ? -3000 : imweb.portalData['code'],
+                                    loginUin: QWT.data['loginUin'],
+                                    groupId: window.GroupZone.getConfig('groupId'),
+                                    myGroups: imweb.portalData['myGroups'],
+                                    groupFeedsCount: 4,
+                                    isNewPortal: true
+                                }));
+                                imweb.showGroupFeeds();
+                            }
+                        })();
+                    </script>
+                </div>
+                <script>
+                    window.initHomeFeeds = function() {
+                        function init() {
+                            g_isd[3] = $$.now();
+                            var loadImgFeedsCount = 0;
+                            var loadVideoFeedsCount = 0;
+                            var loadVoteImgFeedsCount = 0;
+                            var ffsInfo = window.ffsInfo = {},
+                            done;
+                            function loadVisiblePhotos() {
+                                var feedsList = $$('#group_feeds_container').children('.home_nmf'),
+                                imgCount = 0;
+                                for (var i = 0,
+                                len = Math.min(feedsList.length, 3); i < len; i++) {
+                                    var album = $$(feedsList[i]).find('div.home_nmf_pic');
+                                    var video = $$(feedsList[i]).find('div.home_nmf_video_face');
+                                    var vote = $$(feedsList[i]).find('div.home_nmf_vote_pic');
+                                    if (album.length && loadImgFeedsCount + loadVideoFeedsCount + loadVoteImgFeedsCount < 3 && imgCount + loadVideoFeedsCount + loadVoteImgFeedsCount < 9) {
+                                        album.setAlbumFace();
+                                        loadImgFeedsCount++;
+                                        imgCount += album.children('a.home_nmf_pic_item').length;
+                                    }
+                                    if (video.length && loadImgFeedsCount + loadVideoFeedsCount + loadVoteImgFeedsCount < 3 && imgCount + loadVideoFeedsCount + loadVoteImgFeedsCount < 9) {
+                                        video && video.setVideoFace();
+                                        loadVideoFeedsCount++;
+                                    }
+                                    if (vote.length && loadImgFeedsCount + loadVideoFeedsCount + loadVoteImgFeedsCount < 3 && imgCount + loadVideoFeedsCount + loadVoteImgFeedsCount < 9) {
+                                        vote.setVoteFace();
+                                        loadVoteImgFeedsCount++;
+                                    }
+                                }
+                                $$('#home_pub_avatar').attr('uin', refine.adapter.getUin()).add($$('img.avatar')).setFace();
+                            }
+                            function delayInit() {
+                                fs.init();
+                                if (!window.ip) {
+                                    return;
+                                }
+                                delayInit = $$.noop;
+                                setTimeout(function() {
+                                    ip.init();
+                                },
+                                0);
+                            }
+                            function loadScripts() {
+                                if (done) {
+                                    return;
+                                }
+                                done = true;
+                                g_isd[6] = $$.now();
+                                var albumList = $$('div.home_nmf_pic');
+                                var videoList = $$('div.home_nmf_video_face');
+                                var voteImgList = $$('div.home_nmf_vote_pic');
+                                var JQUERY = 'http://1.url.cn/qun/zone/common/js/1/jquery.js';
+                                var COMMON = 'http://1.url.cn/qun/zone/common/js/6/common.js';
+                                var urls = [JQUERY, COMMON];
+                                var jsLoaded = function() {
+                                    g_isd[7] = $$.now();
+                                    jsLoaded = $$.noop;
+                                    jQuery.fsIsd && jQuery.fsIsd();
+                                };
+                                $$.getScript(urls,
+                                function() {
+                                    function initCommon() {
+                                        if (!window.jQuery || !window.common) {
+                                            refine.adapter.quickReport(102);
+                                            return;
+                                        }
+                                        if (!window.initCallback) {
+                                            delayInit();
+                                        }
+                                        jsLoaded();
+                                        jQuery(document).unbind('click', preventAbort);
+                                        preventAbort = null;
+                                    }
+                                    if (!window.jQuery || !window.common) {
+                                        $$.getScript(urls,
+                                        function() {
+                                            if (!window.jQuery || !window.common) {
+                                                var serverJsUrls = []; ! window.jQuery && serverJsUrls.push('http://qun.qzone.qq.com/ht/common/js/1/jquery.js'); ! window.common && serverJsUrls.push('http://qun.qzone.qq.com/ht/common/js/6/common.js');
+                                                $$.getScript(serverJsUrls, initCommon);
+                                                return;
+                                            }
+                                            initCommon();
+                                        });
+                                        return;
+                                    }
+                                    initCommon();
+                                });
+                                setTimeout(function() {
+                                    for (var i = loadImgFeedsCount,
+                                    len = albumList.length; i < len; i++) {
+                                        $$(albumList[i]).setAlbumFace();
+                                    }
+                                    for (var i = loadVideoFeedsCount,
+                                    len = videoList.length; i < len; i++) {
+                                        $$(videoList[i]).setVideoFace();
+                                    }
+                                    for (var i = loadVoteImgFeedsCount,
+                                    len = voteImgList.length; i < len; i++) {
+                                        $$(voteImgList[i]).setVoteFace();
+                                    }
+                                    if (loadImgFeedsCount > 0) {
+                                        setTimeout(function() {
+                                            refine.adapter.quickReport(104);
+                                        },
+                                        2000);
+                                    }
+                                },
+                                0);
+                            }
+                            function showData(data) {
+                                setTimeout(function() {
+                                    if (!done) {
+                                        loadScripts();
+                                    } else if (window.jQuery && window.common) {
+                                        delayInit();
+                                    }
+                                },
+                                0);
+                                data._index = 1;
+                                data = feedAgent.process(data);
+                                $$.initSetFace(data.ui);
+                                setmap(data.ui);
+                                if (data && data.feeds && data.feeds.length) {
+                                    $$('#group_feeds_container').html(feedUi.html(data.feeds));
+                                }
+                                loadVisiblePhotos();
+                                g_isd[4] = $$.now();
+                            }
+                            window.initCallback = function(data, dataText) {
+                                showData(data);
+                                window.initCallback = null;
+                            };
+                            if (typeof window.initData != 'undefined') {
+                                initCallback(window.initData);
+                            } else {
+                                setTimeout(function() {
+                                    loadScripts();
+                                },
+                                500);
+                            }
+                            g_isd[5] = $$.now();
+                        }
+                        init();
+                    }
+                    if (userInfo['entryModule'] == 'home') {
+                        initHomeFeeds();
+                    } else {
+                        $$.initSetFace({});
+                        $$('img.avatar').setFace();
+                    }
+                </script>
+                <div id="tipsEngine_container">
+                </div>
+            </div>
+            <div class="lay_copyright">
+                <p class="copyright_link">
+                    <a href="http://vip.qzone.com/three" onclick="TCISD && TCISD.hotClick('threefromendofpage', 'guangxi.vip.qzone.com', 'main')"
+                    class="c_tx2" target="_blank">
+                        黄钻贵族
+                    </a>
+                    |
+                    <a href="http://user.qzone.qq.com/20050606" class="c_tx2" target="_blank">
+                        官方Qzone
+                    </a>
+                    |
+                    <a href="http://t.qq.com/qzone" class="c_tx2" target="_blank">
+                        官方微博
+                    </a>
+                    |
+                    <a href="http://connect.qq.com/" class="c_tx2" target="_blank">
+                        QQ互联
+                    </a>
+                    |
+                    <a href="http://page.opensns.qq.com/" class="c_tx2" target="_blank">
+                        认证服务
+                    </a>
+                    |
+                    <a href="http://blog.qq.com/" class="c_tx2" target="_blank">
+                        腾讯博客
+                    </a>
+                    |
+                    <a href="http://service.qq.com/special_auto/qzone.html" class="c_tx2"
+                    target="_blank">
+                        腾讯客服
+                    </a>
+                    |
+                    <a href="http://wiki.open.qq.com/wiki/Tencent_Open_Platform_Complaint_Guidelines"
+                    class="c_tx2" target="_blank">
+                        Complaint Guidelines
+                    </a>
+                    |
+                    <a href="http://www.qq.com/culture.shtml" class="c_tx2" target="_blank">
+                        粤网文[2011]0483-070号
+                    </a>
+                </p>
+                <p class="copyright_en">
+                    Copyright&copy;2005-Tencent.
+                    <a href="http://www.tencent.com/en-us/le/copyrightstatement.shtml" class="c_tx2"
+                    target="_blank">
+                        All Rights Reserved.
+                    </a>
+                </p>
+                <p class="copyright_cn">
+                    腾讯公司
+                    <a href="http://www.tencent.com/zh-cn/le/copyrightstatement.shtml" class="c_tx2"
+                    target="_blank">
+                        版权所有
+                    </a>
+                </p>
+            </div>
+        </div>
+        <script type="text/javascript">
+            (function(i, s, v) {
+                var b = '<script type="text/javascript" charset="utf-8" src="http://';
+                var e = '"><\/script>';
+                var arrJs = [];
+                arrJs.push(b, i, '/ac/qzone/qzfl/qzfl', v.qz, '.js', e);
+                arrJs.push(b, s, '/qzone/v6/interface/interface' + v.ci + '.js?max_age=2592000', e);
+                arrJs.push(b, '1.url.cn/qun/zone/common/js/6/sea', v.se, '.js', e);
+                arrJs.push(b, '1.url.cn/qun/zone/feeds/js/6/group', v.gp, '.js', e);
+                document.write(arrJs.join(''));
+            })(imgcacheDomain, siDomain, g_V);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+	<diskStore path="user.home" /> <!-- user.home:用户根目录,user.dir:用户当前工作目录,java.io.temdir:默认临时文件路径 -->
+	<defaultCache eternal="true" maxElementsInMemory="5000"
+		memoryStoreEvictionPolicy="LFU" />
+	<!-- 广告数据缓存 -->
+	<cache name="advertises" eternal="false"
+		timeToLiveSeconds="600" maxElementsInMemory="5000"
+		memoryStoreEvictionPolicy="LRU" statistics="true" overflowToDisk="true"
+		maxElementsOnDisk="100000" />
+	<!-- 预留区一 -->
+	<!--<cache name="otherCache" eternal="false"
+		timeToLiveSeconds="600" maxElementsInMemory="5000"
+		memoryStoreEvictionPolicy="LRU" statistics="true" overflowToDisk="true"
+		maxElementsOnDisk="100000" />-->
+	<!-- 预留区二 -->
+	<!--<cache name="anotherCache" eternal="false"
+		timeToLiveSeconds="600" maxElementsInMemory="5000"
+		memoryStoreEvictionPolicy="LRU" statistics="true" overflowToDisk="true"
+		maxElementsOnDisk="100000" />-->				
+</ehcache>

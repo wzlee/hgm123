@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<br><font style="font-size:9pt;color:Blue">请到open.yy.com的【下载中心】-->【开发示例下载】页面下载本示例源代码</font>
+<h1>麦序记录</h1><br>
+
+本例子会显示麦序中的用户并统计他们的在麦序上的时间。<br>
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    var micListTime = {};
+    function init() {
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_JOIN, onUserJoin);
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_LEAVE, onUserLeave);
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_MOVE, onUserMove);
+        yy.channel.micList.addEventListener(IYYChannelMicList.CLEAR, onUserClear);
+
+        yy.channel.micList.addEventListener(IYYChannelMicList.CONTROLLED, onControlled);
+        yy.channel.micList.addEventListener(IYYChannelMicList.RELEASED , onReleased);
+        yy.channel.micList.addEventListener(IYYChannelMicList.DISABLE_JOIN, onDisableJoin);
+        yy.channel.micList.addEventListener(IYYChannelMicList.ENABLE_JOIN, onEnableJoin);        
+        yy.channel.micList.addEventListener(IYYChannelMicList.TIME_CHANGED, onTimeChanged);
+        
+        yy.channel.micList.addEventListener(IYYChannelMicList.NOTIFICATION, onRecvNotification);
+
+
+        yy.channel.userListPopMenu.unSetPopMenu();
+        yy.channel.userListPopMenu.setPopMenu("拉此人上麦，先获取uid");
+        yy.channel.userListPopMenu.addEventListener(IYYChannelUserListPopMenu.CLICKED, onUserClick);
+        refreshMicList();
+    }
+    //收到麦序提醒事件
+    function onRecvNotification(eventData) {
+        document.getElementById("txtMicListLog").innerHTML += getTimeString() + "收到事件:准备上麦啦！！！adminUid= " + eventData.adminUid + "<br/>";
+
+    }
+    //发送麦序提醒
+    function sendMicNotification()
+    {
+        var result = yy.channel.micList.sendMicListNotification();
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "发送麦序提醒成功";
+        } else {
+            document.getElementById("txtLog").innerHTML = "发送麦序提醒失败 错误码ret="+result.ret;
+        }
+    }
+    //点击菜单是获取uid填入文本框
+    function onUserClick(eventData) {
+        document.getElementById("txtPullUid").value = eventData.uid;
+        document.getElementById("txtMoveUid").value = eventData.uid;
+    }    
+        function onUserJoin(eventData) {
+            //新用户加入
+
+            refreshMicList();
+            var u = yy.user.getUserInfo(eventData.uid);
+            var dt = new Date();
+            micListTime["UID" + eventData.uid] = dt.getTime();
+            document.getElementById("txtMicListLog").innerHTML = getTimeString() + ": <font color=green>" + u.name + "[" + u.uid + "]上麦了</font><br>" + document.getElementById("txtMicListLog").innerHTML;
+
+
+        }
+        function onUserLeave(eventData) {
+            //用户离开
+            refreshMicList();
+            var u = yy.user.getUserInfo(eventData.uid);
+            var dt = new Date();
+            if (micListTime["UID" + eventData.uid] !== null && micListTime["UID" + eventData.uid] !== undefined) {
+                //计算在线时长
+                var t = (new Date().getTime()) - micListTime["UID" + eventData.uid];
+                document.getElementById("txtMicListLog").innerHTML = getTimeString() + " <font color=red>" + u.name + "[" + u.uid + "]下麦了,在麦序中时间" + t + "毫秒</font><br>" + document.getElementById("txtMicListLog").innerHTML;
+            }
+            else {
+                document.getElementById("txtMicListLog").innerHTML = getTimeString() + " <font color=red>" + u.name + "[" + u.uid + "]下麦了</font><br>" + document.getElementById("txtMicListLog").innerHTML;
+            }
+
+        }
+        function onUserMove(eventData) {
+            //用户麦序移动
+
+            refreshMicList(); 
+            var u = yy.user.getUserInfo(eventData.moveId);
+            var u2 = yy.user.getUserInfo(eventData.toAfterId);
+            document.getElementById("txtMicListLog").innerHTML =getTimeString()+" <font color=blue>"+ u.name + " 移到了 "+u2.name+" 后面</font><br>" + document.getElementById("txtMicListLog").innerHTML; 
+        
+        }
+        function onUserClear(eventData) {
+            //用户清除
+            refreshMicList();
+            document.getElementById("txtMicListLog").innerHTML =getTimeString()+ " 所有用户被清除<br>";
+        
+        }
+        function onControlled(eventData) {
+            document.getElementById("txtMicListLog").innerHTML += getTimeString() + "收到事件:控麦啦！！！adminUid=" + eventData.adminUid + "<br/>";
+        }
+
+        function onReleased(eventData) {
+            document.getElementById("txtMicListLog").innerHTML += getTimeString() + "收到事件:放麦啦！！！adminUid=" + eventData.adminUid + "<br/>";
+        }
+        function onDisableJoin(eventData) {
+            document.getElementById("txtMicListLog").innerHTML += getTimeString() + "收到事件:禁麦啦！！！adminUid= " + eventData.adminUid + "<br/>";
+        }
+
+        function onEnableJoin(eventData) {
+            document.getElementById("txtMicListLog").innerHTML += getTimeString() + "收到事件:开麦啦！！！adminUid=" + eventData.adminUid + "<br/>";
+        }
+        function onTimeChanged(eventData) {
+            document.getElementById("txtMicListLog").innerHTML += getTimeString() + "收到事件:麦序时间变化啦！！！adminUid=" + eventData.adminUid + " 麦首uid=" + eventData.uid + " 时间seconds=" + eventData.seconds + "<br/>";
+        }
+        function refreshMicList() {
+
+            //获取麦序信息
+            var result = yy.channel.micList.getMicList();
+            if (result.ret != 0) {
+                document.getElementById("txtMicListLog").innerHTML = "获取麦序列表失败 错误码ret="+result.ret;
+                return;
+            }
+            
+
+            //清除原来列表
+            document.getElementById("listMicList").options.length = 0;
+        
+        
+
+            //添加出麦序中每个人的信息到列表中
+            for (var i = 0; i < result.micList.length; i++) {
+                var u = yy.user.getUserInfo(result.micList[i]);
+                var objOption = document.createElement("OPTION");
+                objOption.text = u.name;
+                objOption.value = u.uid;
+                document.getElementById("listMicList").options.add(objOption);
+            }
+
+        }
+
+        function onSelectUser() {
+            var selUser = document.getElementById("listMicList");
+            document.getElementById("txtKickUid").value = selUser.options[selUser.selectedIndex].value;
+            document.getElementById("txtMoveUid").value = selUser.options[selUser.selectedIndex].value;
+        }
+        function joinMicList() {
+            var result = yy.channel.micList.joinMicList();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功加入麦序" : "加入麦序失败,错误码=" + result.ret;
+        }
+        function leaveMicList() {
+            var result = yy.channel.micList.leaveMicList();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功离开麦序" : "离开麦序失败,错误码=" + result.ret;
+        }
+        function clearMicList() {
+            var result = yy.channel.micList.clearMicList();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功清除麦序" : "清除麦序失败,错误码=" + result.ret;
+        }
+        function kickMicListUser() {
+            var uid = parseInt(document.getElementById("txtKickUid").value);
+            var result = yy.channel.micList.kickMicListUser(uid);
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功踢人下麦" : "踢人下麦失败,错误码=" + result.ret;
+        }
+        function pullUserToMicList() {
+            var uid = parseInt(document.getElementById("txtPullUid").value);
+            var result = yy.channel.micList.pullUserToMicList(uid);
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功拉人上麦" : "拉人上麦失败,错误码=" + result.ret;
+        } 
+    
+        function moveUserToTop() {
+            var uid = parseInt(document.getElementById("txtMoveUid").value);
+            var result = yy.channel.micList.moveUserToTop(uid);
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功调整到2号麦序" : "调整到2号麦序失败,错误码=" + result.ret;
+        }        
+        function getTimeString() {
+            var dt = new Date();
+            var hour = dt.getHours() < 10 ? "0" + dt.getHours() : dt.getHours();
+            var minute = dt.getMinutes() < 10 ? "0" + dt.getMinutes() : dt.getMinutes();
+            var second = dt.getSeconds() < 10 ? "0" + dt.getSeconds() : dt.getSeconds();
+            return hour + ":" + minute + ":" + second;
+        }
+    
+        function moveUp()
+        {
+            var uid = parseInt(document.getElementById("txtMoveUid").value);
+            var result = yy.channel.micList.moveUpOnePosition(uid);
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功上移一位" : "上移失败,错误码=" + result.ret;
+        }
+        function moveDown()
+        {
+            var uid = parseInt(document.getElementById("txtMoveUid").value);
+            var result = yy.channel.micList.moveDownOnePosition(uid);
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功下移一位" : "下移失败,错误码=" + result.ret;
+        }
+        function  disableJoinMicList()
+        {
+            var result = yy.channel.micList.disableJoinMicList();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功禁麦" : "禁麦失败,错误码=" + result.ret;
+        }
+        function  enableJoinMicList ()
+        {
+
+            var result = yy.channel.micList.enableJoinMicList();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功开麦" : "开麦失败,错误码=" + result.ret;
+        }
+
+        function  controlMicList()
+        {
+            var result = yy.channel.micList.controlMicList();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功控麦" : "控麦失败,错误码=" + result.ret;
+        }
+        function  releaseMicList()
+        {
+            var result = yy.channel.micList.releaseMicList();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功放麦" : "放麦失败,错误码=" + result.ret;
+        }
+        function getFirstMicSeconds()
+        {
+            var result = yy.channel.micList.getFirstMicSeconds();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "麦首时间为"+result.seconds : "获取麦首时间错误 错误码=" + result.ret;
+        }
+        function  doubleFirstMicSeconds()
+        {
+            var result = yy.channel.micList.doubleFirstMicSeconds();
+            document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "成功加倍" : "加倍失败,错误码=" + result.ret;
+        }
+    
+        function checkJoinMicList() {
+            var result = yy.channel.micList.isJoinMicListEnabled();
+            if (result.ret == 0) {
+                document.getElementById("txtLog").innerHTML = (result.enabled == true) ? "当前状态：开麦" : "当前状态：禁麦";
+            } else {
+                document.getElementById("txtLog").innerHTML = "当前是否开麦查询失败 错误码=" + result.ret;
+            }
+        }
+    
+        function checkMicListControl() {
+            var result = yy.channel.micList.isMicListControlled();
+            if (result.ret == 0) {
+                document.getElementById("txtLog").innerHTML = (result.controlled == true) ? "当前状态:控麦" : "当前状态：放麦";
+            } else {
+                document.getElementById("txtLog").innerHTML = "当前是否控麦查询失败 错误码=" + result.ret;
+            }
+        }
+ </script>
+
+
+
+<input type="button" style="width:173px" value="获取麦序信息" onclick="refreshMicList()"/><br>
+<!--显示结果-->
+<table>
+<tr><td>
+<select id="listMicList" size=10  onchange="onSelectUser()"
+        style="width: 173px; height: 276px;top:194px; left: 11px;">
+</select>
+    </td><td>
+<div id="txtMicListLog" 
+        
+        style="border-width: 1px; width:459px; height:276px; overflow-y:scroll; top: 195px; left: 193px; background-color:#EEEEEE"></div>
+        
+
+    </td></tr> 
+</table>
+<div id="txtLog" >
+    <br />
+    结果输出:</div><br />麦序操作<br>
+<input type="button"  value="上麦" onclick="joinMicList()"/>
+<input type="button"  value="下麦" onclick="leaveMicList()"/>
+<input type="button"  value="清除麦序" onclick="clearMicList()"/><input type="button"  value="发送麦序提醒" onclick="sendMicNotification()"/><br>
+ 麦序时间控制<br>
+<input type="button"  value="获取麦首时间" onclick="getFirstMicSeconds()"/>
+<input type="button"  value="麦首时间加倍" onclick="doubleFirstMicSeconds()"/>  <br/><br/>
+ 麦序控制<br>
+<input type="button"  value="禁麦" onclick="disableJoinMicList()"/>
+<input type="button"  value="开麦" onclick="enableJoinMicList()"/>
+<input type="button"  value="当前是否开麦" onclick="checkJoinMicList()"/><br/>
+<input type="button"  value="控麦" onclick="controlMicList()"/>
+<input type="button"  value="放麦" onclick="releaseMicList()"/>
+<input type="button"  value="当前是否控麦" onclick="checkMicListControl()"/>                                                     
+<br><br>
+
+麦序移动<br>
+被移动的uid=<input id="txtMoveUid" type="text"  value=""/>
+<input type="button"  value="上移一位" onclick="moveUp()"/>
+<input type="button"  value="下移一位" onclick="moveDown()"/>   
+<input type="button"  value="移动到2号麦序" onclick="moveUserToTop()"/>  <br><br>
+
+     
+麦序修改<br>
+<input type="button"  value="踢人下麦" onclick="kickMicListUser()"/>uid=<input id="txtKickUid" type="text"  value=""/>
+<input type="button"  value="拉人上麦" onclick="pullUserToMicList()"/>uid=<input id="txtPullUid" type="text"  value=""/><br>
+
+<br>
+<textarea id="txtConsole" cols=78 rows=6 name="S1"></textarea>
+</div>
+
+
+
+
+</body>
+</html>

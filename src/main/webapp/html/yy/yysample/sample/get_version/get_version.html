@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body>
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>修改昵称</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function onGetApiVersionClick() {
+        //显示结果
+        if (yy.version.ret === 0) {
+            document.getElementById("txtLog").innerHTML = "YY API的版本为[" + yy.version.majorVersion + "." + yy.version.minorVersion + "]";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "YY API版本获取错误";
+        }
+    }
+    function onGetVersionClick() {
+
+        //获取版本
+        var result = yy.yyVersion;
+        //显示结果
+        document.getElementById("txtLog").innerHTML ="YY客户端的版本为["+result.version+"]";
+    }
+ </script>
+<input type="button" style="width:150" value="获取YY API版本" onclick="onGetApiVersionClick()"/>
+<input type="button" style="width:150" value="获取YY客户端版本" onclick="onGetVersionClick()"/><br>
+
+<!--显示结果-->
+<br>
+<div id="txtLog"></div>
+
+<br>
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>

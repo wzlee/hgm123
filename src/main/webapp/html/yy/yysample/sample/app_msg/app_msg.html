@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>应用消息</h1><br>
+此例子演示如何发送和接收应用消息。
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    var token;
+    function init() {
+        //打印消息点击事件，token标记是哪条消息被点击
+        yy.channel.appMsg.addEventListener(IYYChannelAppMsg.APP_LINK_CLICKED, onLinkClicked);
+        yy.channel.appMsg.addEventListener(IYYChannelAppMsg.APP_LINK_EX_CLICKED, onLinkExClicked);
+    }
+
+    function onLinkClicked(eventData) {
+        //应用消息被点击
+        document.getElementById("txtLog").innerHTML += "<br>token=" + eventData.token + "的应用消息被点击了:";
+    }
+
+    function onLinkExClicked(eventData) {
+        //应用消息被点击
+        document.getElementById("txtLog").innerHTML += "<br>token=" + eventData.token + "的应用消息被点击了 userData="+eventData.userData;
+    }
+    function onSendToSubChannelClick() {
+        //发送应用消息
+        var curChannelInfo = yy.channel.getCurrentSubChannelInfo();
+        var strMsg = document.getElementById("txtMessage").value;
+        var linkStart = parseInt(document.getElementById("txtLinkStart").value);
+        var linkEnd = parseInt(document.getElementById("txtLinkEnd").value);
+        var result = yy.channel.appMsg.sendMsgToSubChannel(curChannelInfo.longId, strMsg, linkStart, linkEnd, 8888);
+
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "发送给频道的应用消息成功（旧）";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "发送失败，错误码" + result.ret;
+        }
+    }
+    function onSendToUserClick() {
+        //发送应用消息给两个人
+        var myInfo = yy.user.getCurrentUserInfo();
+        var taUid = document.getElementById("txtUid").value;
+        var msg = document.getElementById("txtMessageToUser").value;
+        var result = yy.channel.appMsg.sendMsgToUsers([myInfo.uid, taUid], msg, 2, 3, 9999);
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "发送给指定用户应用消息成功（旧）";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "发送失败，错误码" + result.ret;
+        }
+    }
+    function onSendToChannelExClick() {
+        //发送应用消息
+        var curChannelInfo = yy.channel.getCurrentSubChannelInfo();
+        var key = "394cc166de89d5d5525457b27e2875f7fc22e560b84e4dbf46d632860a0e83f6d5a002ee";
+        var textData = [{ text: "嘎嘎鱼", type: 2, userData: 87639876 }, { text: "聚精会神的正在玩", type: 1 }, { text: "猜骰子", type: 2, userData: 105620}];
+        
+        var result = yy.channel.appMsg.sendMsgToSubChannelEx(curChannelInfo.longId, 8888, key,textData);
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "发送给频道应用消息成功（新）";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "发送失败，错误码" + result.ret;
+        }
+    }
+    function onSendToUserExClick() {
+        //发送应用消息给两个人
+        var myInfo = yy.user.getCurrentUserInfo();
+        var taUid = document.getElementById("txtTaEx").value;
+        var key = "394cc166dbd0d1810c5a50b02d2d22a4fd27b160be1c1cef1dd56185580ed6a0d7ae00ec";
+        var result = yy.channel.appMsg.sendMsgToUsersEx([myInfo.uid, taUid], 9999, key, [{ text: "嘎嘎鱼", type: 2, userData: 87639999 }, { text: "在小黑屋偷偷的玩", type: 1 }, { text: "猜骰子", type: 2, userData: 105666}]);
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "发送指定用户的应用消息成功（新）";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "发送失败，错误码" + result.ret;
+        }
+    }
+        
+    
+    
+ </script>
+ 这是例子使用旧Api发给当前频道的应用消息这是例子使用旧Api发给当前频道的应用消息这是例子使用旧Api发给当前频道的应用消息
+ 
+
+发送应用消息到当前频道<br />
+    <input id="txtMessage" type="text" value="这是例子使用旧Api发给当前频道的应用消息" 
+        style="width:312px" /><input type="button" style="width:80px" value="发送" onclick="onSendToSubChannelClick()"/><br />
+        lingstart=<input id="txtLinkStart" type="text" value="1" />&nbsp;&nbsp; linkend=<input id="txtLinkEnd" type="text" value="3" />
+    <br />
+    <br />
+    <br>
+发送应用消息给:我自己 和 TA &nbsp TA的uid=<input id="txtUid" type="text" value="427976189" style="width:80px" /> <br>
+    <input id="txtMessageToUser" type="text" value="这是Sample使用旧Api发给指定用户的应用消息" 
+        style="width:312px" /><input type="button" style="width:80px" value="发送" onclick="onSendToUserClick()"/><br><br>
+
+
+
+<font color="red">new</font>发送多链接的应用消息 "嘎嘎鱼聚精会神的正在玩猜骰子"  到当前频道<br />
+<input type="button" style="width:80px" value="发送" onclick="onSendToChannelExClick()"/><br />
+    <br />
+    
+    
+ <font color="red">new</font>发送多链接的应用消息 "嘎嘎鱼在小黑屋偷偷的玩猜骰子"  到指定的用户<br />
+ 发送应用消息给:我自己 和 TA &nbsp TA的uid=<input id="txtTaEx" type="text" value="427976189" style="width:80px" /> <br>
+<input type="button" style="width:80px" value="发送" onclick="onSendToUserExClick()"/><br />
+    <br />
+       
+ <br>
+应用消息只能在线用户才能接收。
+<br>
+<!--显示结果-->
+<br>
+<div id="txtLog" ></div>
+
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>

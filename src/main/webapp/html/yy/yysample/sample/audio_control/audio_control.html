@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+
+	<link rel="stylesheet" href="../../css/demo_page.css" />
+	<link rel="stylesheet" href="../../css/demo_table.css" />
+
+        
+</head>
+<body onload="init()" style="font-size:9pt">
+<img alt="点击返回" src="images/back.png"  onclick="javascript:history.back();" />
+<br><font style="font-size:9pt;color:Blue">请到open.yy.com的【下载中心】-->【开发示例下载】页面下载本示例源代码</font>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.dataTables.js" language="javascript"></script>
+<center>
+<h1><img  src="images/record.png" />录音机<img  src="images/record.png" /></h1>
+录音文件名(可以不指定)<input id="txtFileName" type="text" value="" />
+<img id="btnRecord" alt="开始录音" style="cursor:hand;" src="images/start_record.png" onclick="onRecordButtonClick()"/><br><br>
+<input id="chkKaraoke" type="checkbox" value="卡拉OK" onclick="setKaraoke()"/>卡拉OK(勾选输出背景音乐)
+<input id="chkMixing" type="checkbox" value="混音" onclick="setMixing()"/>混音
+</center>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    var giCount = 1;
+    function init() {
+        //侦听录音完成事件
+        yy.audio.addEventListener(IYYAudio.RECORD_FINISHED, onRecordFinished);
+    }
+
+    //点击录音按钮开始录音，控制按钮外观
+    function onRecordButtonClick() {
+        var btn = document.getElementById("btnRecord");
+        if (btn.src.indexOf("start_record.png") > 0) {
+            audioRecordStart();
+        }
+        else {
+            audioRecordStop();
+        }
+    }
+    //开始录音
+    function audioRecordStart() {
+        var fileName=document.getElementById("txtFileName").value.trim();
+        var result;
+        //根据文件名判断
+        if (fileName.length > 0) {
+            result = yy.audio.startRecord(fileName); //指定文件名
+        } else {
+            result = yy.audio.startRecord();//使用缺省文件名
+        }
+        //操作结果
+        if (result.ret == 0) {
+            //控制按钮外观
+            var btn = document.getElementById("btnRecord");
+            btn.src = "images/stop_record.png";
+            btn.alt = "停止录音";
+            document.getElementById("txtLog").innerHTML = "开始录音中......点击【停止录音】按钮停止录音";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "开始录音失败！错误码"+ret;
+        }
+    }
+    //停止录音
+    function audioRecordStop() {
+        var result = yy.audio.stopRecord();
+        //操作结果
+        if (result.ret == 0) {
+            //控制按钮外观
+            document.getElementById("txtLog").innerHTML = "录音已停止！";
+            var btn = document.getElementById("btnRecord");
+            btn.src = "images/start_record.png";
+            btn.alt = "开始录音";
+        } else {
+            document.getElementById("txtLog").innerHTML = "停止录音失败！错误码" + result.ret;
+        }
+    }
+    //录音完成事件的侦听函数，会返回录音结果和文件名字
+    function onRecordFinished(eventData) {
+        //录音结果和文件显示在到表格中。
+        if(eventData.result == 0)
+        {
+            $('#tableRecordList').dataTable().fnAddData([giCount,"录音成功",eventData.fileName]);
+        }
+        else
+        {
+            $('#tableRecordList').dataTable().fnAddData([giCount,"录音失败","错误码="+eventData.result]);
+        }
+        giCount++;        
+    }
+    //设置卡拉ok功能
+    function setKaraoke() {
+        var chk = document.getElementById("chkKaraoke");
+        if (chk.checked) {
+            //打开卡拉ok功能
+            var result = yy.audio.openKaraoke();
+            if (result.ret == 0) {
+                document.getElementById("txtLog").innerHTML = "成功打开卡拉OK功能！" ;
+            }
+            else {
+                document.getElementById("txtLog").innerHTML = "无法打开卡拉OK功能，确保您有打开权限！错误码" + result.ret;
+            }
+        }
+        else {
+            //关闭卡拉ok功能
+            var result2 = yy.audio.closeKaraoke();
+            if (result2.ret == 0) {
+                document.getElementById("txtLog").innerHTML = "成功关闭卡拉OK功能！";
+            }
+            else {
+                document.getElementById("txtLog").innerHTML = "无法关闭卡拉OK功能，确保您有关闭权限！错误码" + result2.ret;
+            }            
+        }
+    }
+	    //设置混音
+    function setMixing() {
+        var chk = document.getElementById("chkMixing");
+        if (chk.checked) {
+            //打开混音功能
+            var result = yy.audio.enableAudioMixing();
+            if (result.ret == 0) {
+                document.getElementById("txtLog").innerHTML = "成功打开混音功能！" ;
+            }
+            else {
+                document.getElementById("txtLog").innerHTML = "无法混音功能，确保您有打开权限！错误码" + result.ret;
+            }
+        }
+        else {
+            //关闭混音功能
+            var result2 = yy.audio.disableAudioMixing();
+            if (result2.ret == 0) {
+                document.getElementById("txtLog").innerHTML = "成功关闭混音功能！";
+            }
+            else {
+                document.getElementById("txtLog").innerHTML = "无法关闭混音能，确保您有关闭权限！错误码" + result2.ret;
+            }            
+        }
+    }
+    //录音文件表格初始化
+    $(document).ready(function() {
+        $('#tableRecordList').dataTable(
+		 {
+		     "bFilter": false,
+		     "bInfo": false,
+		     "oLanguage":
+		     {
+		         "oPaginate":
+		         {
+		             "sNext": "下一页",
+		             "sPrevious": "上一页"
+
+		         },
+		         "sLengthMenu": "每页显示 _MENU_ 数据",
+		         "sInfo": "显示第 _START_ 到第 _END_ 共 _TOTAL_ 条数据",
+		         "sEmptyTable": "暂无数据"
+
+		     }
+		 });
+    });
+    
+    String.prototype.trim = function() { return this.replace(/(^\s*)|(\s*$)/g, ""); } 	
+ </script>
+<div id="txtLog" ></div>
+<br>
+<br>
+<br>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableRecordList">
+	<thead>
+		<tr>
+			<th>编号</th>
+			<th>录音结果</th>
+			<th>录音文件路径</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+
+ 
+
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+ 
+</body>
+</html>

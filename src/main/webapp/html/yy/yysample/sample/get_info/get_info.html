@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>获取用户信息，获取频道信息</h1><br>
+本例子演示如何通过用户uid获取用户信息 和 频道长位id获取频道信息。id必须是number类型数据。在频道中的用户才能获取到信息。<br><br>
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode =true;
+    function init() {
+        //填入进入的用户的uid供使用
+        yy.channel.addEventListener(IYYChannel.USER_ENTER_CHANNEL, onEnterChannel);
+        //缺省填入自己的uid
+        var u = yy.user.getCurrentUserInfo();
+        document.getElementById("txtUid").value = u.uid;
+        document.getElementById("txtUidList").innerHTML += "<br>用户uid=" + u.uid + "进入";
+        //打印出所有频道长位id供使用
+        var result = yy.channel.getRootChannelId();
+        document.getElementById("txtCidList").innerHTML = "根频道:" + result.cid;
+        printSubChannelId(result.cid);
+    }
+    //其他用户登录时，自动填写uid
+    function onEnterChannel(eventData) {
+        document.getElementById("txtUidList").innerHTML += "<br>用户uid=" + eventData.uid + "进入";
+        document.getElementById("txtUid").value =  eventData.uid;
+    }
+    //输出所有的子频道id供测试
+    function printSubChannelId(parentId) {
+        var result = yy.channel.getSubChannelIds(parentId);
+        for (var i = 0; i < result.cids.length; i++) {//遍历所有子频道
+            var cinfo = yy.channel.getChannelInfo(result.cids[i]);
+            document.getElementById("txtCidList").innerHTML += "<br>" + cinfo.name + ": " + cinfo.longId;
+            printSubChannelId(cinfo.longId);
+        }
+    }
+
+    //获取用户信息
+    function onGetUserInfoClick() {
+        document.getElementById("txtUserInfo").innerHTML = "";
+        if (document.getElementById("txtUserInfo").value == "") {
+            document.getElementById("txtUserInfo").innerHTML = "请输入uid";
+            return;
+        }
+        //得到用户Id
+        var uid = parseInt(document.getElementById("txtUid").value);//必须转为number，否则返回null
+        var userInfo = yy.user.getUserInfo(uid);
+        //显示到网页中
+        if (userInfo.ret == 0) {
+            document.getElementById("txtUserInfo").innerHTML = "返回码 ret=" + userInfo.ret + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "uid=" + userInfo.uid + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "昵称 name=" + userInfo.name + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "性别 sex=" + userInfo.sex + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "签名 sign=" + userInfo.sign + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "马甲 role=" + roleToName(userInfo.role) + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "个人积分 points=" + userInfo.points + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "等级 level=" + userInfo.level + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "YY号 imId=" + userInfo.imId + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "是否是会员 vip=" + userInfo.vip + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "会员等级 vipLevel=" + userInfo.vipLevel + "<br/>";
+            document.getElementById("txtUserInfo").innerHTML += "对当前频道贡献 contribution=" + userInfo.contribution + "<br/>";
+
+        } else {
+
+            document.getElementById("txtUserInfo").innerHTML = "获取失败！请检查参数或者网路连接 错误码ret=" + userInfo.ret;
+        }
+
+    }
+    //获取频道信息
+    function onGetChannelInfoClick() {
+        document.getElementById("txtChannelInfo").innerHTML = "";
+        if (document.getElementById("txtCid").value == "") {
+            document.getElementById("txtCid").innerHTML = "请输入频道长位id";
+            return;
+        }
+        //得到频道长位Id
+        var cid = parseInt(document.getElementById("txtCid").value); //必须转为number，否则返回null
+        
+        var channelInfo = yy.channel.getChannelInfo(cid);
+        //显示到网页中
+        if (channelInfo.ret == 0) {
+            document.getElementById("txtChannelInfo").innerHTML ="返回码 ret="+channelInfo.ret+"</br>";
+            document.getElementById("txtChannelInfo").innerHTML +="长位Id longId="+channelInfo.longId+"</br>";
+            document.getElementById("txtChannelInfo").innerHTML +="短位Id shortId="+channelInfo.shortId +"</br>";
+            document.getElementById("txtChannelInfo").innerHTML +="频道名称 name="+channelInfo.name+"</br>";
+            document.getElementById("txtChannelInfo").innerHTML +="所在子频道用户数 userCount="+channelInfo.userCount+"</br>";
+            document.getElementById("txtChannelInfo").innerHTML +="大频道用户数 totalUserCount="+channelInfo.totalUserCount+"</br>";
+            document.getElementById("txtChannelInfo").innerHTML +="频道类型 channelType="+channelInfo.channelType+"</br>";
+            document.getElementById("txtChannelInfo").innerHTML +="频道积分 channelPoints="+channelInfo.channelPoints+"</br>";
+        }
+        else {
+            
+            document.getElementById("txtChannelInfo").innerHTML = "获取失败！请检查参数或者网路连接,错误码ret="+channelInfo.ret;
+        }
+    }
+    function roleToName(role)
+    {
+        var name="";
+        switch (role) {
+            case 0:
+                name="无效角色";
+                break;
+            case 20:
+                name="灰马";
+                break;
+            case 25:
+                name="白马";
+                break;
+            case 66:
+                name="浅绿色马甲";
+                break;
+            case 88:
+                name="绿马";
+                break;
+            case 100:
+                name="蓝马";
+                break;
+            case 150:
+                name="粉马";
+                break;
+            case 175:
+                name="红马";
+                break;
+            case 200:
+                name="黄马";
+                break;
+            case 230:
+                name="橙马";
+                break;
+            case 255:
+                name="紫马";
+                break;
+            case 300:
+                name="客服";
+                break;
+            case 1000:
+                name="黑马";
+                break;
+            default:
+                name=role;
+
+            }
+        return name;
+    }
+ </script>
+
+
+
+用户的uid=<input type="text" id="txtUid" style="width:200px" value="" /><input type="button" style="width:200px" value="获取用户信息" onclick="onGetUserInfoClick()"/><br>
+用户的信息：<div id="txtUserInfo"></div><br><br>
+
+频道的长位id=<input type="text" id="txtCid" style="width:200px" value="" /><input type="button" style="width:200px" value="获取频道信息" onclick="onGetChannelInfoClick()"/><br>
+频道的信息：<div id="txtChannelInfo"></div><br /><br />
+
+以下id供复制填入：
+<table border=1> 
+<tr><td>
+用户uid<br>
+<div id="txtUidList"></div>
+</td>
+<td>
+频道长位id<br>
+<div id="txtCidList"></div>
+</td></tr>
+</table>
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>

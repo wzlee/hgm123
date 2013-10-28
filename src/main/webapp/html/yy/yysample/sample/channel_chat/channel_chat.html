@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>公屏聊天和私聊</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function init() {
+        yy.channel.chat.addEventListener(IYYChannelChat.CHAT, onRecvChannelChat);
+        yy.channel.chat.addEventListener(IYYChannelChat.CHAT_FROM, onRecvChannelChatFrom);
+    }
+    //收到公屏聊天消息
+    function onRecvChannelChat(eventData) {
+        var userInfo = yy.user.getUserInfo(eventData.uid);
+        document.getElementById("txtChat").innerHTML += "<br/>[" + userInfo.name + "]:" + eventData.msg;
+    }
+    //收到私聊消息
+    function onRecvChannelChatFrom(eventData) {
+        var userInfo = yy.user.getUserInfo(eventData.uid);
+        document.getElementById("txtChatFrom").innerHTML += "<br/>[" + userInfo.name + "]:" + eventData.msg;
+    }
+
+    //事件的开关
+    function onEnableChatClick() {
+        var chk = document.getElementById("chkEnableChat");
+        if (chk.checked) {
+            yy.channel.chat.addEventListener(IYYChannelChat.CHAT, onRecvChannelChat);
+        }
+        else {
+            yy.channel.chat.removeEventListener(IYYChannelChat.CHAT, onRecvChannelChat);
+        }
+    }
+    //事件的开关
+    function onEnableChatFromClick() {
+        var chk = document.getElementById("chkEnableChatFrom");
+        if (chk.checked) {
+            yy.channel.chat.addEventListener(IYYChannelChat.CHAT_FROM, onRecvChannelChatFrom);
+        }
+        else {
+            yy.channel.chat.removeEventListener(IYYChannelChat.CHAT_FROM, onRecvChannelChatFrom);
+        }
+    }
+ </script>
+
+
+<br/>
+<input id="chkEnableChatFrom" type="checkbox" checked="checked"  onclick="onEnableChatFromClick()"/>接收私聊信息:<br/>
+<div id="txtChatFrom"></div><br/>
+
+
+<br/>
+    <br/>
+<input id="chkEnableChat" type="checkbox" checked="checked" onclick="onEnableChatClick()"/>接收公屏聊天信息:<br/>
+<div id="txtChat"></div><br/>
+<textarea id="txtConsole" cols=78 rows=6 name="S1"></textarea>
+</body>
+</html>

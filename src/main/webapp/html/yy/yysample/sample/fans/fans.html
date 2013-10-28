@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body>
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>关注和粉丝接口</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function onGetFansCountClick() {
+        var result = yy.interaction.getFansCount();
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "我的粉丝数为:" + result.count;
+        } else {
+            document.getElementById("txtLog").innerHTML = "获取我的粉丝数失败:ret=" + result.ret;
+        }
+    }
+    function onFllowClick() {
+        var uid = parseInt(document.getElementById("txtUid").value);
+        var result = yy.interaction.follow(uid);
+        document.getElementById("txtLog").innerHTML = (result.ret==0)?"关注成功 ":"关注失败ret="+result.ret;
+    }    
+    function onUnFllowClick() {
+        var uid = parseInt(document.getElementById("txtUid").value);
+        var result = yy.interaction.unfollow(uid);
+        document.getElementById("txtLog").innerHTML = (result.ret==0)?"取消关注成功 ":"取消关注失败ret="+result.ret;
+    }
+    function onIsFansClick() {
+        var uid = parseInt(document.getElementById("txtUid").value);
+        var result = yy.interaction.isFans(uid);
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = result.isFans ? "此人是我的粉丝" : "此人不是我的粉丝";
+        } else {
+            document.getElementById("txtLog").innerHTML = "查询是否是自己粉丝失败,ret=" + result.ret;
+        }
+
+    }    
+ </script>
+TA的uid=<input type="text" id="txtUid" style="width:200px" value="" />
+    <input type="button"  value="关注TA" onclick="onFllowClick()"/>
+    <input type="button"  value="取消关注TA" onclick="onUnFllowClick()"/>
+    <input type="button"  value="我是否是TA的粉丝" onclick="onIsFansClick()"/>  
+    <br/>
+<input type="button" style="width:200px" value="获取我的粉丝数" onclick="onGetFansCountClick()"/><br/>
+<!--显示结果-->
+<br/>
+<div id="txtLog">操作结果:</div><br/>
+
+<textarea id="txtConsole" cols="78" rows="6" name="txtConsole"></textarea>
+</body>
+</html>

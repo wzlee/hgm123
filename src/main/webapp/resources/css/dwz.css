@@ -1,0 +1,51 @@
+/* -- 全局样式 -- */
+body {
+    color: #4D4D4D;
+    font-family:"微软雅黑",Arial,"simsun";
+    font-size: 12px;
+}
+a {
+    color: #2464B2;
+    text-decoration: none;
+}
+header {
+	border-bottom:1px solid #E5E5E5;
+	line-height: 40px;
+}
+.logo a {
+	padding:0;
+	display:block;
+	width:94px;
+	height:39px;
+	text-indent:-999em;
+	overflow:hidden;
+	background:url(../images/hgm123_logo.png) no-repeat;
+}
+.main {
+	margin:0 auto;	
+	width:960px;
+}
+.dwz-info {
+	text-align: center;
+}
+.dwz-info img{
+	width:50px;
+	height:50px;
+	margin:10px 25px 0;
+}
+.dwz-info .name,.dwz-info .core,.dwz-info .version {
+	font-weight:bold;
+}
+.dwz-info .count {
+	color: green;
+	margin:0 5px;
+}
+footer {
+	border-top:1px solid #E5E5E5;
+	height:45px;
+	margin-bottom:0;
+}
+header p,.dwz-info p,footer p {
+	text-align:center;
+	margin:10px auto;
+}

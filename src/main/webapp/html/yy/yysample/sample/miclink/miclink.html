@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<br>&nbsp;<h1>连麦功能</h1><br>
+
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function init() {
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_LINKED, onUserLinked);
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_UNLINKED, onUserUnlinked);
+        //yy.channel.micList.addEventListener(IYYChannelMicList.USER_MOVE, onUserMove);
+        //yy.channel.micList.addEventListener(IYYChannelMicList.CLEAR, onUserClear);
+        
+        
+        yy.channel.userListPopMenu.unSetPopMenu();
+        yy.channel.userListPopMenu.setPopMenu("和此人连麦，先获取uid");
+        yy.channel.userListPopMenu.addEventListener(IYYChannelUserListPopMenu.CLICKED, onUserClick);
+
+    }
+    //点击菜单是获取uid填入文本框
+    //function onUserClick(eventData) {
+    //    document.getElementById("txtPullUid").value = eventData.uid;
+    //    document.getElementById("txtMoveUid").value = eventData.uid;
+    //}    
+    function onUserLinked(eventData) {
+        //新用户加入
+        var u = yy.user.getUserInfo(eventData.uid);
+        document.getElementById("txtMicListLog").innerHTML += u.name + "[" + u.uid + "]连麦成功！<br>";
+    }
+    function onUserUnlinked(eventData) {
+        //用户离开
+        var u = yy.user.getUserInfo(eventData.uid);
+        document.getElementById("txtMicListLog").innerHTML += u.name + "[" + u.uid + "]连麦断开！<br>";
+    }
+
+
+    
+    function refreshLinedMicList() {
+        //获取麦序信息
+        var result = yy.channel.micList.getLinkedMicList();
+        if (result.ret != 0) {
+            document.getElementById("txtLog").innerHTML = "获取连麦列表失败 ret=" + result.ret;
+            return;
+        }
+
+        //清除原来列表
+        document.getElementById("listMicList").options.length = 0;
+        
+        
+
+        //添加出麦序中每个人的信息到列表中
+        for (var i = 0; i < result.linkedMicList.length; i++) {
+            var u = yy.user.getUserInfo(result.linkedMicList[i]);
+            var objOption = document.createElement("OPTION");
+            objOption.text = u.name;
+            objOption.value = u.uid;
+            document.getElementById("listMicList").options.add(objOption);
+        }
+
+    }
+
+
+    function onUserClick(eventData) {
+        document.getElementById("txtLinkedUid").value = eventData.uid;
+        document.getElementById("txtUnlinkedUid").value = eventData.uid; 
+    }
+    function onLinkedClick()
+    {
+        var uid = parseInt(document.getElementById("txtLinkedUid").value);
+        yy.channel.micList.linkMicToTheQueueHead(uid);
+    }
+    function onUnlinkedClick()
+    {
+        var uid = parseInt(document.getElementById("txtUnlinkedUid").value);
+        yy.channel.micList.removeFromLinkedMicList(uid);
+    }
+ </script>
+
+
+
+<input type="button" style="width:173px" value="获取连麦用户" onclick="refreshLinedMicList()"/><br/>
+    <!--显示结果--><table>
+        <tr>
+            <td>
+                <select id="listMicList" size=10  onchange="onSelectUser()" style="width: 173px; height: 276px;top:194px; left: 11px;">
+            </select>
+            </td>
+            <td>
+        
+                <div id="txtMicListLog"   style="border-width: 1px; width:459px; height:276px; overflow-y:scroll; top: 195px; left: 193px; background-color:#EEEEEE"></div>
+            </td>
+        </tr>
+    </table>
+<div id="txtLog" style="top: 598px; left: 7px; width: 638px;"></div><br>
+
+     
+
+<input type="button"  value="跟TA连麦" onclick="onLinkedClick()"/>uid=<input id="txtLinkedUid" type="text"  value=""/><br>
+<input type="button"  value="跟TA取消连麦" onclick="onUnlinkedClick()"/>uid=<input id="txtUnlinkedUid" type="text"  value=""/><br>
+提示:可以在用户列表点击右键填入用户uid
+
+<br>
+
+
+<textarea id="txtConsole" cols=78 rows=6 name="S1"></textarea>
+
+</body>
+</html>

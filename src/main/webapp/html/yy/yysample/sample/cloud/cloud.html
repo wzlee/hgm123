@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body>
+
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>使用简单存储服务</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+
+
+<br>存储数据，在下面输入数据并存储到简单存储服务中<br>
+String<input id="txtStringValue" type="text" value="你好，云存储！hello cloud" style="width:160px"><br>
+int1<input id="txtIntValue1" type="text" value="1" style="width:80px"><br>
+int2<input id="txtIntValue2" type="text" value="100" style="width:80px"><br>
+<input type="button" id="btnAdd" style="width:200px"  value="存储数据" onclick="addData()" /><br>   
+<div id="logAdd"></div>
+<br>更新数据，更新刚刚保存的数据<br>
+String<input id="txtNewStringValue" type="text" value="这是新数据！this is new data" style="width:160px"><br>
+<input type="button" id="btnUpdate" style="width:200px" disabled value="更新数据" onclick="updateData()" /><br> 
+<div id="logUpdate"></div>
+
+
+<br>删除数据，删除刚刚新增的数据<br>
+<input type="button"" id="btnDel" style="width:200px"  value="删除数据" disabled onclick="deleteData()" /><br> 
+<div id="logDel"></div>
+
+<br>删除自己的所有数据<br>
+<input type="button"" id="btnDelAll" style="width:200px"  value="删除数据" onclick="deleteDataAll()" /><br> 
+<div id="logDelAll"></div>
+
+
+<br>查询最近10分钟内新增加的数据<br>
+<input type="button" style="width:200px"  value="查询" onclick="timeQueryData()" /><br>   
+<div id="logQuery"></div>
+<br>
+
+
+
+<script type="text/javascript" language="javascript">
+
+    var currentKey = 0;
+    var myStringValue = "";
+    debugMode = true;
+    //增加数据
+    function addData() {
+        myStringValue = document.getElementById("txtStringValue").value;
+        var int1 = parseInt(document.getElementById("txtIntValue1").value);
+        var int2 = parseInt(document.getElementById("txtIntValue2").value);
+        var result = yy.cloud.addData(int1, int2, myStringValue);
+        document.getElementById("btnUpdate").disabled = false;
+        if (result.ret == 0) {
+            document.getElementById("logAdd").innerHTML = "成功保存: key=" + result.key;
+            currentKey = result.key;
+        } else {
+            document.getElementById("logAdd").innerHTML = "保存出错！错误码"+result.ret;
+        }
+
+
+    }
+    //更新刚刚输入的数据
+    function updateData() {
+
+        var newStringValue = document.getElementById("txtNewStringValue").value;
+        var int1 = parseInt(document.getElementById("txtIntValue1").value);
+        var int2 = parseInt(document.getElementById("txtIntValue2").value);
+
+        var myFilter = new YYCloudFilter();
+        myFilter.field = YYCloudFilter.EField.UNIQUE_KEY;
+        myFilter.op = YYCloudFilter.EFilterOperator.EQ;
+        myFilter.value = currentKey;
+        myFilter.condition = YYCloudFilter.EFilterCondition.NONE;
+
+        var result = yy.cloud.updateData(int1, int2, newStringValue, [myFilter]);
+        document.getElementById("btnDel").disabled = false;
+        if (result.ret == 0) {
+            document.getElementById("logUpdate").innerHTML = "成功更新数据:" + result.ret;
+        }
+        else {
+            document.getElementById("logUpdate").innerHTML = "更新出错！错误码" + result.ret;
+        }
+
+
+    }
+    //删除刚刚加入的数据
+    function deleteData() {
+
+        var filterDel = new YYCloudFilter();
+
+
+        filterDel.field = YYCloudFilter.EField.UNIQUE_KEY;
+        filterDel.op = YYCloudFilter.EFilterOperator.EQ;
+        filterDel.value = currentKey;
+        filterDel.condition = YYCloudFilter.EFilterCondition.NONE;
+
+        var result = yy.cloud.deleteData([filterDel]);
+        if (result.ret == 0) {
+            document.getElementById("logDel").innerHTML = "成功删除:" + result.ret;
+        } else {
+            document.getElementById("logDel").innerHTML = "删除出错！错误码" + result.ret;
+        }
+
+    }
+    //删除自己的所有数据
+    function deleteDataAll() {
+
+        var filterDel = new YYCloudFilter();
+
+
+        filterDel.field = YYCloudFilter.EField.USER_ID;
+        filterDel.op = YYCloudFilter.EFilterOperator.EQ;
+        filterDel.value = yy.user.getCurrentUserInfo().uid ;
+        filterDel.condition = YYCloudFilter.EFilterCondition.NONE;
+
+        var result = yy.cloud.deleteData([filterDel]);
+        if (result.ret == 0) {
+            document.getElementById("logDelAll").innerHTML = "成功删除:" + result.ret;
+        } else {
+            document.getElementById("logDelAll").innerHTML = "删除出错！错误码" + result.ret;
+        }
+
+    }
+
+    //查找最近一小时的数据，并打印
+    function timeQueryData() {
+        var dt = new Date();
+        var filterTime = new YYCloudFilter();
+        filterTime.field = YYCloudFilter.EField.CREATE_TIME;
+        filterTime.op = YYCloudFilter.EFilterOperator.GREATER;
+        filterTime.value = Math.ceil(dt.getTime() / 1000 - 600);
+        filterTime.condition = YYCloudFilter.EFilterCondition.NONE;
+        
+        var result = yy.cloud.queryData([filterTime]);
+        if (result.ret == 0) {
+            document.getElementById("logQuery").innerHTML = "查询结果:<br/>"
+            for (var i = 0; i < result.data.length; i++) {
+                document.getElementById("logQuery").innerHTML += "key=" + result.data[i].key + " creatorUid=" + result.data[i].creatorUid + " createTime=" + result.data[i].createTime + " ......<br/>";
+            }
+        } else {
+            document.getElementById("logQuery").innerHTML = "查询错误: 错误码ret=  " + result.data.join(",");
+        }
+    }
+ </script>
+
+
+
+
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+
+</body>
+</html>

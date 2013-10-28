@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>用户的禁言设置</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = false;
+    //侦听用户登录事件
+    function init() {
+        yy.channel.addEventListener(IYYChannel.USER_ENTER_CHANNEL, onEnterChannel);
+    }
+    //其他用户登录时，自动填写uid
+    function onEnterChannel(eventData) {
+        document.getElementById("txtLog").innerHTML = "有新用户" + eventData.uid + "进入到" + eventData.cid + "频道";
+        document.getElementById("txtUid").value = eventData.uid;
+    }
+    function onDisableMsgClick() {
+
+        var uid =parseInt( document.getElementById("txtUid").value);
+        //禁止用户文字聊天
+        var result = yy.channel.userController.disableMsg(uid);
+
+        //显示结果到网页中
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "操作成功，用户被禁止文字聊天";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "操作失败，错误码"+result.ret;
+        }
+    }
+    function onEnableMsgClick() {
+        var uid = parseInt( document.getElementById("txtUid").value);
+        //允许用户文字聊天
+        var result = yy.channel.userController.enableMsg(uid);    
+        //显示结果到网页中
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "操作成功，用户被允许文字聊天";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "操作失败，错误码" + result.ret;
+        }
+    }
+    function onDisableSpeakClick() {
+        var uid = parseInt( document.getElementById("txtUid").value);
+        //禁止用户语音聊天
+        var result = yy.channel.userController.disableSpeak(uid);          
+        //显示结果到网页中
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "操作成功，用户被禁止语音聊天";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "操作失败，错误码" + result.ret;
+        }    
+    }
+    function onEnableSpeakClick() {
+        var uid = parseInt( document.getElementById("txtUid").value);
+        //允许用户语音聊天
+        var result = yy.channel.userController.enableSpeak(uid);            
+        //显示结果到网页中
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "操作成功，用户被允许语音聊天";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "操作失败，错误码" + result.ret;
+        }    
+    }              
+ </script>
+输入用户uid<input type="text" id="txtUid" style="width:150px" value="" />(新用户进入会自动填写)<br>
+<input type="button" style="width:200px" value="禁止文字聊天" onclick="onDisableMsgClick()"/>
+<input type="button" style="width:200px" value="允许文字聊天" onclick="onEnableMsgClick()"/><br><br>
+<input type="button" style="width:200px" value="禁止语言聊天" onclick="onDisableSpeakClick()"/>
+<input type="button" style="width:200px" value="允许语音聊天" onclick="onEnableSpeakClick()"/><br>
+<!--显示结果-->
+<br>
+<div id="txtLog"></div>
+<!--<textarea id="txtConsole" cols=78 rows=6></textarea><br>-->
+</body>
+</html>

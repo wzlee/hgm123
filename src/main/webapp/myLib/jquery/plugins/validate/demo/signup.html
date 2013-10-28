@@ -1,0 +1,86 @@
+<div class="hgm-logo pull-left">
+			  	<img src="resources/images/hgm123_logo_s.png">
+			</div>
+			<form class="signup-form pull-left">
+				<div class="control-group">
+			    	<div class="controls">
+						<div class="input-prepend">
+							<span class="add-on">账号:</span>
+							<input class="span2 upassid" name="upassid" type="text" placeholder="输入通行证账号..." data-required>
+						</div>
+						<span class="help-inline upassid-info" data-label="帐号"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<div class="input-prepend">
+							<span class="add-on">密码:</span>
+							<input class="span2 password" name="password" type="password" placeholder="输入通行证密码..." data-data-required>
+						</div>
+						<span class="help-inline password-info" data-label="密码"></span>
+					</div>
+			   	</div>
+			   	<div class="control-group">
+					<div class="input-prepend">
+						<span class="add-on">确认:</span>
+						<input class="span2 confirm" name="confirm" type="password" placeholder="输入确认密码..." data-required  data-conditional="confirm">
+					</div>
+					<span class="help-inline confirm-info" data-label="确认"></span>
+			   	</div>
+				<div class="control-group">
+						<div class="input-prepend">
+							<span class="add-on">昵称:</span>
+							<input class="span2 nickname" name="nickname" type="text" placeholder="输入通行证昵称..." data-required>
+						</div>
+						<span class="help-inline nickname-info" data-label="昵称"></span>
+				</div>
+				<div class="control-group">
+						<div class="input-prepend">
+							<span class="add-on">邮箱:</span>
+							<input class="span2 email" name="email" type="email" placeholder="输入常用邮箱..." data-required>
+						</div>
+						<span class="help-inline email-info" data-label="邮箱"></span>
+				</div>
+				<div class="control-group">
+						<div class="input-prepend">
+							<span class="add-on">Q Q:</span>
+							<input class="span2 qq" name="qq" type="number" placeholder="输入联系QQ...">
+						</div>
+						<span class="help-inline qq-info" data-label="QQ"></span>
+				</div>
+				<div class="control-group">
+						<div class="input-prepend">
+							<span class="add-on">身份:</span>
+							<select class="chzn-select groupname" style="width:170px" name="groupname" data-placeholder="--请选择身份--" data-required>
+							  	<option>游戏玩家</option>
+							  	<option>游戏GM</option>
+							</select>
+						</div>
+				</div>
+			   	<div class="control-group">
+	  				<input class="agreement" type="checkbox">
+	  				<span class="help-inline">同意使用协议 </span>
+	  				<span class="help-inline">
+	  					<a class="ag_target" href="html/agreement.html" role="button" data-toggle="modal" data-target="#agreement"><i class="icon-list-alt"></i></a>
+ 					</span>
+	  				<span class="help-inline agreement-tip"><i class="icon-exclamation-sign"></i>阅读HGM123使用协议!</span>
+		   			<span class="help-inline agreement-info" data-label="同意协议"></span>
+		   		</div>
+			</form>
+			<script>
+				$('.signup-form').validate({
+					onKeyup : true,
+					eachValidField : function() {
+						$(this).closest('div').removeClass('error').addClass('success');
+					},
+					eachInvalidField : function() {
+						$(this).closest('div').removeClass('success').addClass('error');
+					},
+					conditional : {
+						confirm : function() {
+
+							return $(this).val() == $('.password').val();
+						}
+					}
+				});
+			</script>

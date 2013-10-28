@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>设置马甲</h1>
+选中用户点击右键可以获取用户uid和cid<br><br>
+
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function init() {
+        yy.channel.userListPopMenu.unSetPopMenu();
+        yy.channel.userListPopMenu.setPopMenu("获取此用户uid和cid");
+        yy.channel.userListPopMenu.addEventListener(IYYChannelUserListPopMenu.CLICKED, onUserClick);
+
+
+    }
+    //其他用户登录时，自动填写uid
+    function onUserClick(eventData) {
+        document.getElementById("txtUid").value = eventData.uid;
+        document.getElementById("txtCid").value = eventData.cid;
+    }
+
+    function onSetRoleClick() {
+        //获取cid
+        var cid = parseInt(document.getElementById("txtCid").value);   
+        //获取用户uid
+        var uid = parseInt(document.getElementById("txtUid").value);
+
+        //获取选择的马甲信息
+        var selRole = document.getElementById("selRole");
+        var role = parseInt(selRole.options[selRole.selectedIndex].value);
+
+        //设置马甲
+        var result = yy.channel.userController.setUserRole(cid, uid, role);
+        
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = " 设置成功";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = " 设置失败。错误码" + result.ret;
+        }
+    }
+
+ </script>
+频道的cid<input id="txtCid" type="text" style="width:200px" value="" /><br>
+用户的uid<input id="txtUid" type="text" style="width:200px" value="" /><br>
+选择马甲
+<select id="selRole" style="width:200px" >
+
+<option value="25">游客(U)  白马 25</option>
+<option value="66">临时嘉宾(G) 浅绿色马甲 66</option>
+<option value="88">嘉宾(VIP)  绿马 88</option>
+<option value="100">会员(R)  蓝马 100</option>
+<option value="150">二级子频道管理员(CA2)  粉马 150</option>
+<option value="175">子频道管理员(CA) 红马 175</option>
+<option value="200">全频道管理员(MA)  黄马 200</option>
+<option value="230">频道总管理(VP) 橙马 230</option>
+
+
+</select><br>
+<input type="button" style="width:200px" value="设置马甲" onclick="onSetRoleClick()"/>
+
+<br>
+<!--显示结果-->
+<br>
+<div id="txtLog"></div><br>
+<div id="txtCidList"></div>
+    <br><br><br>
+<textarea id="txtConsole" cols=78 rows=6 name="S1"></textarea>
+</body>
+</html>

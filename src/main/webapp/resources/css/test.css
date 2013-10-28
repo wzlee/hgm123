@@ -1,0 +1,6 @@
+a,input,select,checkbox,button,.btn,a:focus,input:focus,select:focus,checkbox:focus,button:focus,.btn:focus {
+    outline:none;
+    -webkit-outline:none;
+    -moz-outline:none;
+    -ms-outline:none;
+}

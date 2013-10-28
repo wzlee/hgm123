@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body>
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>获取Token</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    function onButtonClick() {
+        //获取token
+        var result = yy.security.getToken() ;
+
+        //显示到网页中
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "token=" + result.token;
+        } else {
+            document.getElementById("txtLog").innerHTML = "无法获取token，ret=" + result.ret;
+        }
+
+
+    }
+ </script>
+
+<input type="button" style="width:200px" value="获取token" onclick="onButtonClick()"/><br>
+<!--显示结果-->
+<br>
+<div id="txtLog" />
+</body>
+</html>

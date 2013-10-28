@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+    <link rel="stylesheet" href="../../css/jquery.treeview.css" />
+</head>
+<body>
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>tree demo</h1>
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.js"  language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.cookie.js"  language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.treeview.js"  language="javascript"></script>
+
+<script type="text/javascript" language="javascript">
+    //debugMode = false;
+    
+    $(document).ready(function() {
+        $("#root").treeview({
+            persist: "location",
+            collapsed: true,
+            unique: true
+        });
+
+    });
+
+    $(function() {
+    //按钮被点击
+    $("#btnCreateTree").click(function() {
+            //得到根频道的信息
+            var result = yy.channel.getRootChannelId();
+            //根据根频道的id得到所有子频道的信息，并转成html代码返回
+            var htmlString = getTreeNodeString(result.cid);
+            //显示根频道的名字
+            var rootInfo = yy.channel.getChannelInfo(result.cid);
+            htmlString = "<li>" + rootInfo.name + htmlString + "</li>";
+            
+            //把递归得到得到的html添加到列表中，就会显示出树
+            var branches = $(htmlString).appendTo("#root");
+            $("#root").treeview({
+                add: branches
+            });
+        });
+
+        function getTreeNodeString(parentId) {
+            //得到所有子频道的id
+            var result = yy.channel.getSubChannelIds(parentId);
+            var childIds = result.cids;
+
+            var htmlString = "";
+            if (childIds.length > 0) {//如果没有子频道，返回""
+                for (var i = 0; i < childIds.length; i++) {//遍历所有子频道
+                    var channelInfo = yy.channel.getChannelInfo(childIds[i]);
+                    //递归调用
+                    htmlString += "<li id=C" + childIds[i] + ">" + channelInfo.name + getTreeNodeString(childIds[i]) + "</li>";
+                }
+                htmlString = "<ul>" + htmlString + "</ul>";
+            }
+            //返回html代码
+            return htmlString;
+        }
+
+
+
+    })	
+
+ </script>
+ <!--<textarea id="txtConsole" style="visibility:visible"  cols=78 rows=6 name="S1"></textarea>-->
+	<h4>demo 通过jquery的treeview插件，从yyapi中获得信息，并建立一个频道树</h4>
+	<button id="btnCreateTree">创建</button>
+	<ul id="root"></ul>
+</body>
+</html>

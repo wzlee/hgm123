@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body>
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>修改昵称</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function onReNameClick() {
+        //新昵称
+        var newName = document.getElementById("txtNewName").value;
+        //改名
+        var result = yy.user.rename(newName);
+        //显示结果
+        document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "修改昵称成功" : "修改昵称失败ret=" + result.ret;
+    }
+    function getCurrentName() {
+        var u = yy.user.getCurrentUserInfo();
+        document.getElementById("txtCurrentName").innerHTML ="我的昵称:"+ u.name;
+    }
+ </script>
+
+<input id="txtNewName" type="text" value="" style="width:200px" />
+
+
+<input type="button" style="width:150" value="修改" onclick="onReNameClick()"/>
+<input type="button" style="width:150" value="读取昵称" onclick="getCurrentName()"/><br><br>
+
+<!--显示结果-->
+<br>
+<div id="txtCurrentName" ></div><br>
+<div id="txtLog"></div>
+
+<br>
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>

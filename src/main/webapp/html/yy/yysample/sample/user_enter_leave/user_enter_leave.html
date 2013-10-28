@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+    <link rel="stylesheet" href="../../css/demo_page.css" />
+	<link rel="stylesheet" href="../../css/demo_table.css" />
+</head>
+<body onload="init()" style="font-size:9pt">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>用户登录登出记录</h1>
+<br><font style="font-size:9pt;color:Blue">请到open.yy.com的【下载中心】-->【开发示例下载】页面下载本示例源代码</font>
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.dataTables.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    var arrayUserLog = [];
+    //var arrayFriendLog = [];
+    var maxRow = 0;
+    function init() {
+        yy.channel.addEventListener(IYYChannel.USER_ENTER_CHANNEL, onUserEnter);
+        yy.channel.addEventListener(IYYChannel.USER_LEAVE_CHANNEL, onUserLeave);
+    }
+     
+    //用户进入频道
+    function onUserEnter(eventData) {
+        var uid = eventData.uid;
+        //记录uid
+        //马上开始获取用户信息
+        var u = yy.user.getUserInfo(uid);
+
+        $('#tableFriendLog').dataTable().fnAddData([u.uid, u.name, u.imId, u.points, u.level, u.role, u.sex]);
+        maxRow++;  
+
+        
+        
+        if (maxRow > 3)
+            $('#tableUserLog').dataTable().fnDeleteRow(0);
+        arrayUserLog.unshift(getTimeString() + "用户进入：" + eventData.uid);
+        if (arrayUserLog.length > 5) arrayUserLog.pop();
+        document.getElementById("txtLog").innerHTML =arrayUserLog.join("<br>");
+        
+        
+    }
+    //用户离开频道
+    function onUserLeave(eventData) {
+        var uid = eventData.uid;
+        //var userInfo = yy.user.getUserInfo(uid);//已经离开的用户无法取到信息
+
+        //var u = new YYUserInfo();
+        var u = {};
+        u.uid = eventData.uid;
+
+        arrayUserLog.unshift(getTimeString()+"用户离开：" + eventData.uid);
+        if (arrayUserLog.length>5) arrayUserLog.pop();
+        document.getElementById("txtLog").innerHTML = arrayUserLog.join("<br>");
+        
+    }
+
+
+    //表格初始化
+    $(document).ready(function() {
+
+        $('#tableFriendLog').dataTable(
+		 {
+		     "bFilter": false,
+		     "bInfo": false,
+		     "oLanguage":
+		     {
+		         "oPaginate":
+		         {
+		             "sNext": "下一页",
+		             "sPrevious": "上一页"
+
+		         },
+		         "sLengthMenu": "每页显示 _MENU_ 数据",
+		         "sInfo": "显示第 _START_ 到第 _END_ 共 _TOTAL_ 条数据",
+		         "sEmptyTable": "暂无数据"
+
+		     }
+		 });
+
+
+		
+		
+		
+    });
+
+
+    function getTimeString() {
+        var dt = new Date();
+        var hour = dt.getHours() < 10 ? "0" + dt.getHours() : dt.getHours();
+        var minute = dt.getMinutes() < 10 ? "0" + dt.getMinutes() : dt.getMinutes();
+        var second = dt.getSeconds() < 10 ? "0" + dt.getSeconds() : dt.getSeconds();
+        return hour + ":" + minute + ":" + second;
+    }      
+ </script>
+
+
+<!--显示结果-->
+<br>
+
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableFriendLog">
+	<thead>
+		<tr>
+			<th>uid</th>
+			<th>姓名</th>
+			<th>YY号</th>
+			<th>角色</th>
+			<th>积分</th>
+			<th>等级</th>
+			<th>性别</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table><br>
+<h3>用户登录记录</h3>
+<br>
+<div id="txtLog"></div><br>
+
+<textarea id="txtConsole" style="visibility:hidden" cols=78 rows=6></textarea><br>
+</body>
+</html>

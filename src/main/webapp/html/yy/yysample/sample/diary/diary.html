@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+
+	<link rel="stylesheet" href="../../css/demo_page.css" />
+	<link rel="stylesheet" href="../../css/demo_table.css" />
+	<link type="text/css" href="../../css/ui-lightness/jquery.ui.css" rel="stylesheet" />
+    <style type="text/css">
+        body
+        {
+            margin-left:0px;
+            margin-top:0px;
+            margin-right:0px;
+            margin-bottom:0px;
+            font-size:9pt;
+            
+        }
+    </style>	
+</head>
+<body onload="init()">
+<img alt="点击返回" src="images/back.png"  onclick="javascript:history.back();" />
+<br><font style="font-size:9pt;color:Blue">请到open.yy.com的【下载中心】-->【开发示例下载】页面下载本示例源代码</font>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.dataTables.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.ui.js" language="javascript"></script>
+<center>
+<h1>我的日记</h1>
+<input id="txtDiaryTitle" type="text" value="" style="width:643px" />
+<textarea id="txtDiaryContent" style="width:643px; height: 146px;"></textarea><br/>
+
+<input id="btnSave" type="button" style="width:109px" value="保存" onclick="saveDiaryClick()" /><br>
+</center>
+<script type="text/javascript" language="javascript">
+    debugMode = false;
+    var giCount = 1;
+    //表格初始化
+    var oTable = null;
+    $(document).ready(function() {
+
+        var oTable = $('#tableDiaryList').dataTable(
+		 {
+		     "bFilter": false,
+		     "bInfo": false,
+		     "oLanguage":
+		     {
+		         "oPaginate":
+		         {
+		             "sNext": "下一页",
+		             "sPrevious": "上一页"
+
+		         },
+		         "sLengthMenu": "每页显示 _MENU_ 数据",
+		         "sInfo": "显示第 _START_ 到第 _END_ 共 _TOTAL_ 条数据",
+		         "sEmptyTable": "暂无数据"
+
+		     },
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [ 0 ] }]		     
+		 });
+
+
+
+        $('#tableDiaryList tbody a').live('click', function() {
+            //document.getElementById("txtLog").innerHTML = this.innerHTML;
+            var nTr = $(this).parents('tr')[0];
+            var aData = oTable.fnGetData(nTr);
+            var strKey = aData[0];
+            if (this.innerHTML == "删除") {
+                //取到选中行信息
+                deleteDiary(strKey,nTr,oTable);
+            }
+            if (this.innerHTML == "查看") {
+                showDiaryInDialog(strKey);
+
+            }
+        });
+    });
+
+    
+    
+    
+    
+    function init() {
+        showDiaryInTable();
+        $("#dialogDiaryDetail").dialog({ autoOpen: false,resizable:false });
+        $("#dialogDeleteConfirm").dialog({ autoOpen: false, modal: true, resizable: false });
+    }
+
+    //保存日记
+    function saveDiaryClick() {
+        document.getElementById("txtLog").innerHTML = "";
+        var title = document.getElementById("txtDiaryTitle").value;
+        var content = document.getElementById("txtDiaryContent").innerText;
+        if (title == "" || content == "") {
+            document.getElementById("txtLog").innerHTML = "<font color=red>请填入内容</font>";
+            return;
+        }
+
+        var result = yy.cloud.addData(0, 0, encodeURI(title + "##" + content));
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "保存成功！";
+            document.getElementById("txtDiaryTitle").value = "";
+            document.getElementById("txtDiaryContent").innerText = "";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "<font color=red>保存失败</font>";
+        }
+
+
+        showDiaryInTable();
+    }
+    
+    //显示日记到列表中
+    function showDiaryInTable() {
+        var oTable = $('#tableDiaryList').dataTable();
+        oTable.fnClearTable();
+
+        //查询自己的数据
+        var filterUserId = new YYCloudFilter();
+        filterUserId.field = YYCloudFilter.EField.USER_ID;
+        filterUserId.op = YYCloudFilter.EFilterOperator.EQ;
+        filterUserId.value = yy.user.getCurrentUserInfo().uid;
+        filterUserId.condition = YYCloudFilter.EFilterCondition.NONE;
+        
+        
+        var result = yy.cloud.queryData([filterUserId]);
+        for (var i = 0; i < result.length; i++) {
+            var str = decodeURI(result[i].stringValue);
+            var pos = str.indexOf("##");
+            if (pos > 0) {
+                var title = str.substring(0, pos);
+                var content = str.substring(pos + 2);
+                if (content.length > 10) {
+                    content = str.substr(pos + 2, 10)+"...";
+                }
+                
+                //info.push(dt);
+
+                oTable.fnAddData([result[i].uniqueKey, result[i].createTime, title, content, "<a style='cursor:hand'>查看</a>", "<a style='cursor:hand'>删除</a>"]);
+            }
+        }
+
+                  
+    }
+
+
+
+    //删除指定的数据，弹出确认对话框
+    function deleteDiary(key,nTr,table) {
+
+        $("#dialogDeleteConfirm").dialog(
+            {
+                buttons: [
+                { text: "确定", click: function() {
+                    $(this).dialog("close"); table.fnDeleteRow(nTr); startDeleteDiary(key);
+                } },
+                { text: "取消", click: function() { $(this).dialog("close"); } }
+                ]
+            }
+            );
+
+
+            
+        $("#dialogDeleteConfirm").html("是否要删除选中的日记？");
+        $("#dialogDeleteConfirm").dialog("open");
+
+
+
+    }
+    //执行删除操作
+    function startDeleteDiary(key) {
+        var filterDel = new YYCloudFilter();
+        filterDel.field = YYCloudFilter.EField.UNIQUE_KEY;
+        filterDel.op = YYCloudFilter.EFilterOperator.EQ;
+        filterDel.value = key;
+        filterDel.condition = YYCloudFilter.EFilterCondition.NONE;
+
+        var result = yy.cloud.deleteData([filterDel]);
+        if (result == 0) {
+            document.getElementById("txtLog").innerHTML = "成功删除:" + result;
+            return true;
+        } else {
+            document.getElementById("txtLog").innerHTML = "删除出错！错误码" + result;
+            return false;
+        }
+    }
+    
+    //显示日记内容到对话框中
+    function showDiaryInDialog(key) {
+        var filterFind = new YYCloudFilter();
+        filterFind.field = YYCloudFilter.EField.UNIQUE_KEY;
+        filterFind.op = YYCloudFilter.EFilterOperator.EQ;
+        filterFind.value = key;
+        filterFind.condition = YYCloudFilter.EFilterCondition.NONE;
+
+        var result = yy.cloud.queryData([filterFind]);
+        if (result.length > 0) {
+            str=decodeURI( result[0].stringValue)
+            var pos =str.indexOf("##")
+            if (pos > 0) {
+                var title = str.substring(0, pos);
+                var content = str.substring(pos + 2);
+                $("#dialogDiaryDetail").dialog({title:title})
+                $("#dialogDiaryDetail").html("<left><textarea cols=41 rows=10> " + content + " </textarea></left>");
+                $("#dialogDiaryDetail").dialog('open');                   
+            }
+         
+            
+        } 
+
+    }
+    String.prototype.trim = function() { return this.replace(/(^\s*)|(\s*$)/g, ""); } 	
+ </script>
+<div id="txtLog" ></div>
+<br>
+<br>
+<br>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableDiaryList">
+	<thead>
+		<tr>
+		    <th>key</th>
+			<th>时间</th>
+			<th>标题</th>
+			<th>摘要</th>
+			<th>查看</th>
+			<th>删除</th>			
+		</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+
+ <div id="dialogDiaryDetail" title="日记"></div>
+ <div id="dialogDeleteConfirm" title="删除确认"></div>
+<!--<textarea id="txtConsole" cols=78 rows=6></textarea><br>-->
+ 
+</body>
+</html>

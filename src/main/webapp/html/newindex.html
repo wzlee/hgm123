@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>newindex.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<link rel="stylesheet" type="text/css" href="jsLib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="jsLib/bootstrap/css/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/css" href="jsLib/showLoading/css/showLoading.css">
+	<link rel="stylesheet" type="text/css" href="resources/style/common.css">
+	<link rel="stylesheet" type="text/css" href="resources/style/index.css">
+  </head>
+  
+  <body>
+  	<!-- 顶部导航条 -->
+ 	<div class="navbar navbar-static-top">
+       	<div class="navbar-inner">
+           	<div class="container">
+            	<div class="nav-collapse collapse navbar-responsive-collapse">
+                	<ul class="nav">
+                	    <li class="index"><a href="./">首页</a></li>
+                	    <li class="divider-vertical"></li>
+	                  	<li><a href="#">腾讯微博</a></li>
+	                  	<li><a href="#">新浪微博</a></li>
+	                </ul>
+               		<ul class="nav pull-right">
+                		<li class="ulogin">
+                			<a class="qqlogin" href="qqlogin"><img src="resources/images/Connect_logo_3.png"/></a>
+                		</li>
+                		<li class="ucenter">
+                			<a calss="userinfo" href="#userInfo" role="button" data-toggle="modal"><i class="icon-user"></i>wzlee</a>
+                		</li>
+               			<li class="divider-vertical"></li>
+               			<li class="dropdown">
+	                    	<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-globe"></i> 网站地图 <b class="caret"></b></a>
+		                    <ul class="dropdown-menu">
+		                      	<li><a href="#">人气热服</a></li>
+	                      		<li><a href="#">今日上榜</a></li>
+		                      	<li><a href="#">Hgm论坛</a></li>
+		                      	<li><a href="jsLib/bootstrap/docs/index.html" target="_blank">Bootstrap Docs</a></li>
+		                      	<li><a href="index.html" target="_blank">baidu样式首页</a></li>
+		                      	<li class="divider"></li>
+		                      	<li><a href="#aboutModal" role="button" data-toggle="modal"><i class="icon-exclamation-sign"></i> 关于Hgm123</a></li>
+		                    </ul>
+	                  	</li>
+	                  	<li><a href="#"><i class="icon-home"></i>设为首页</a></li>
+               		</ul>
+           		</div><!-- /.nav-collapse -->
+           	</div>
+       	</div><!-- /navbar-inner -->
+   	</div><!-- /navbar -->
+        
+    <!-- 登陆窗口 -->
+    <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h5 id="myModalLabel"><i class="icon-flag"></i>用户登录</h5>
+		</div>
+		<div class="modal-body">
+			<div class="userImg">
+	    		<img src="resources/images/hgm123_logo_s.png" class="img-polaroid">
+			</div>
+			<div class="loginForm">
+				<form id="loginform" class="form-horizontal">
+					<div class="control-group">
+				    	<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on">账号:</span>
+								<input class="span2" id="username" name="user.username" type="text" placeholder="输入登陆账号..." data-placement="right" required>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on">密码:</span>
+								<input class="span2" id="password" name="user.password" type="password" placeholder="输入登陆密码..." data-placement="right" required>
+							</div>
+						</div>
+			    	</div>
+			    	<div class="control-group">
+			    		<div class="controls">
+			    			<label class="checkbox">
+			    				<input id="remenber_u" type="checkbox">记住账号
+			    			</label>
+			    		</div>
+			    	</div>
+		    	</form>
+			</div>
+    	</div>
+		<div class="modal-footer">
+			<span class="login_tip">温馨提示:请妥善保管自己的账号和密码!<a href="#">忘记密码</a>?</span>
+			<button type="button" id="login_btn" class="btn btn-primary" data-loading-text="登陆中...">登陆</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+		</div>
+	</div>
+	
+	<!-- 注册窗口 -->
+    <div id="signinModal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h5 id="myModalLabel"><i class="icon-user"></i>用户注册</h5>
+		</div>
+		<div class="modal-body">
+			<div class="userImg">
+	    		<img src="resources/images/hgm123_logo_s.png" class="img-polaroid">
+			</div>
+			<div class="signinForm">
+				<form id="signinform" class="form-horizontal">
+					<div class="control-group">
+				    	<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on">账号:</span>
+								<input class="span2" id="susername" name="user.username" type="text" placeholder="推荐使用QQ账号..." data-placement="right" required>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+				    	<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on">昵称:</span>
+								<input class="span2" id="snickname" name="user.nickname" type="text" placeholder="输入昵称..." data-placement="right" required>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+				    	<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on">邮箱:</span>
+								<input class="span2.5" id="semail" name="user.email" type="email" placeholder="输入常用邮箱(推荐QQ邮箱)..." data-placement="right" required>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on">密码:</span>
+								<input class="span2" id="spassword" name="user.password" type="password" placeholder="请勿使用QQ密码..." data-placement="right" required>
+							</div>
+						</div>
+			    	</div>
+			    	<div class="control-group">
+						<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on">确认:</span>
+								<input class="span2" id="cpassword" type="password" placeholder="输入确认密码..." data-placement="right" required>
+							</div>
+						</div>
+			    	</div>
+			    	<div class="control-group">
+			    		<div class="controls">
+			    			<label class="checkbox">
+			    				<input id="agreement" type="checkbox">同意 [<i class="icon-list-alt"></i><a href="#">用户协议</a>]
+			    			</label>
+			    		</div>
+			    	</div>
+		    	</form>
+			</div>
+    	</div>
+		<div class="modal-footer">
+			<span class="other_login">关联合作账号: <span id="qqlogin"><img src="resources/images/Connect_logo_1.png"></span></span>
+			<button type="button" id="signin_btn" class="btn btn-primary" data-loading-text="提交中...">提交</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+		</div>
+	</div>
+	
+	<!-- 注册提示窗口 -->
+	<div id="signInfoModal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h5 id="myModalLabel">用户注册提示</h5>
+		</div>
+		<div class="modal-body">
+			<div class="signInfoMsg"></div>
+			<div class="goMailBox"><a class="btn" target="_blank"><i class="icon-envelope"></i>立即去激活</a></div>
+		</div>
+	</div>
+	
+	<!-- 注册提示窗口 -->
+	<div id="modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h5 id="myModalLabel">用户信息</h5>
+		</div>
+		<div class="modal-body"></div>
+	</div>
+		
+	<!-- 关于hgm123窗口 -->
+    <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h5 id="myModalLabel">关于Hgm123:</h5>
+		</div>
+		<div class="modal-body">
+			欢迎登陆HaoGM免费服务平台,为了获得最佳体验效果,推荐使用&nbsp;
+	    	<a href='http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI' title='点击下载最新版本Google Chrome'>Google浏览器</a>
+	    	&nbsp;或者&nbsp;<a href='http://download.firefox.com.cn/releases/partners/baidu/webins3.0/zh-CN/Firefox-setup.exe' title='点击下载最新版本FireFox'>FireFox浏览器</a>,
+	    	&nbsp;系统字体模糊看不清?下载&nbsp;<a href='http://www.microsoft.com/typography/ClearTypePowerToy.mspx' title='点击下载 ClearType Tuner PowerToy'>微软字体清晰补丁</a>&nbsp;试试吧..<br>
+	    	<hr>
+	    	<p>版本号:<font color='green'>1.0.1</font></p>
+	    	<p>更新时间:<font color='green'>2013-01-10</font></p>
+	    	<p>更新内容:</p>
+	    	<ol>
+	           <li>重构页面JS源码加载方式,提升页面加载速度;</li>
+	    		<li>优化控件载入方法,组件间切换更加流畅;</li>
+	    		<li>加入更换主题功能,系统界面更加丰富多彩;</li>
+	    		<li>新增统计分析模块部分数据曲线显示功能;</li>
+	    		<li>修复某些已知BUG;</li>
+	        </ol>
+    	</div>
+	</div>
+	<div class="container">
+		<div class="banner">
+           	<div id="carousel" class="carousel slide">
+			    <!-- Carousel items -->
+			    <div class="carousel-inner">
+			    	<div class="active item">
+			    		<a target="_blank" href="./about">
+			    			<img src="resources/images/banner/banner.png" alt="" />
+		    			</a>
+	    			</div>
+			    	<div class="item">
+			    		<a target="_blank" href="./about">
+	  						<img src="resources/images/banner/banner.png" alt="" />
+  						</a>
+					</div>
+			    	<div class="item">
+			    		<a target="_blank" href="./about">
+	  						<img src="resources/images/banner/banner.png" alt="" />
+  						</a>
+					</div>
+			    </div>
+				    <!-- Carousel nav -->
+			    <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
+			    <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
+   			</div>
+       	</div><!-- /banner -->
+       	<div class="body-content">
+        	<div class="row">
+        		<div class="game-tab">
+		    	<ul class="nav nav-tabs ">
+		    		<li class="active"><a href="#top-site" data-toggle="tab" data-url="topsite">网站</a></li>
+		    		<li><a href="#top-agency" data-toggle="tab">代理</a></li>
+		    		<li><a href="#top-pay" data-toggle="tab">支付平台</a></li>
+		    		<li><a href="#top-dragon" data-toggle="tab">一条龙</a></li>
+		    		<li><a href="#top-soft" data-toggle="tab">人气软件</a></li>
+		    		<li><a href="#game-hot" data-toggle="tab">人气游戏</a></li>
+		    		<li><a href="#game-176" data-toggle="tab">1.76版本</a></li>
+			    	<li><a href="#game-185" data-toggle="tab">1.85版本</a></li>
+			    	<li><a href="#game-190" data-toggle="tab">1.90版本</a></li>
+			    	<li><a href="#game-abnormal" data-toggle="tab">变态版本</a></li>
+			    	<li><a href="#game-sabnormal " data-toggle="tab">超级变态</a></li>
+			    	<li><a href="#game-unknown" data-toggle="tab">未知版本</a></li>
+			    	<li><a href="#black-list" data-toggle="tab">黑名单</a></li>
+		    	</ul> 
+			</div>
+			<div class="tab-content">
+					<div class="tab-pane active" id="top-site">
+						<div class="top-site">
+              				<!--
+              				<a href="./buzz?b=1" class="apply">申请收录</a>
+            				<a href="./buzz?b=1" class="whole">完整榜单</a>
+							-->
+						</div>
+					</div>
+					<div class="tab-pane" id="game-176">
+						<div class="game-advertise">
+				      		<table class="table table-hover advertise">
+				      			<caption>
+					      			<div class="input-append">
+									    <input class="span6" id="appendedDropdownButton" type="text" placeholder="输入搜索关键字或搜索条件…">
+									    <div class="btn-group">
+									    	<button class="btn dropdown-toggle" data-toggle="dropdown">
+									    		搜索类别<span class="caret"></span>
+									    	</button>
+								    		<ul class="dropdown-menu">
+								    			<li><a>按照游戏名字搜索</a></li>
+								    			<li><a>按照游戏版本搜索</a></li>
+								    			<li><a>按照线路类型搜索</a></li>
+								    			<li><a>按照开区时间搜索</a></li>
+								    		</ul>
+								    	</div>
+								    </div>
+				      			</caption>
+							    <thead>
+								    <tr>
+									    <th>游戏名称</th>
+									    <th>版本</th>
+									    <th>线路</th>
+									    <th>开区时间</th>
+									    <th>特色介绍</th>
+								    </tr>
+							    </thead>
+							    <tbody>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    </tbody>
+						    </table>
+			      		</div>
+					</div>
+					<div class="tab-pane" id="game-185">
+						<div class="game-advertise">
+				      		<table class="table table-hover advertise">
+				      			<caption>
+					      			<div class="input-append">
+									    <input class="span6" id="appendedDropdownButton" type="text" placeholder="输入搜索关键字或搜索条件…">
+									    <div class="btn-group">
+									    	<button class="btn dropdown-toggle" data-toggle="dropdown">
+									    		搜索类别<span class="caret"></span>
+									    	</button>
+								    		<ul class="dropdown-menu">
+								    			<li><a>按照游戏名字搜索</a></li>
+								    			<li><a>按照游戏版本搜索</a></li>
+								    			<li><a>按照线路类型搜索</a></li>
+								    			<li><a>按照开区时间搜索</a></li>
+								    		</ul>
+								    	</div>
+								    </div>
+				      			</caption>
+							    <thead>
+								    <tr>
+									    <th>游戏名称</th>
+									    <th>版本</th>
+									    <th>线路</th>
+									    <th>开区时间</th>
+									    <th>特色介绍</th>
+								    </tr>
+							    </thead>
+							    <tbody>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.85</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    </tbody>
+						    </table>
+			      		</div>
+				    </div>
+					<div class="tab-pane" id="game-190">
+						<div class="game-advertise">
+				      		<table class="table table-hover advertise">
+				      			<caption>
+					      			<div class="input-append">
+									    <input class="span6" id="appendedDropdownButton" type="text" placeholder="输入搜索关键字或搜索条件…">
+									    <div class="btn-group">
+									    	<button class="btn dropdown-toggle" data-toggle="dropdown">
+									    		搜索类别<span class="caret"></span>
+									    	</button>
+								    		<ul class="dropdown-menu">
+								    			<li><a>按照游戏名字搜索</a></li>
+								    			<li><a>按照游戏版本搜索</a></li>
+								    			<li><a>按照线路类型搜索</a></li>
+								    			<li><a>按照开区时间搜索</a></li>
+								    		</ul>
+								    	</div>
+								    </div>
+				      			</caption>
+							    <thead>
+								    <tr>
+									    <th>游戏名称</th>
+									    <th>版本</th>
+									    <th>线路</th>
+									    <th>开区时间</th>
+									    <th>特色介绍</th>
+								    </tr>
+							    </thead>
+							    <tbody>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.90</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.90</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.90</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.90</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    </tbody>
+						    </table>
+			      		</div>
+				    </div>
+					<div class="tab-pane" id="game-abnormal">								
+						<div class="game-advertise">
+				      		<table class="table table-hover advertise">
+				      			<caption>
+					      			<div class="input-append">
+									    <input class="span6" id="appendedDropdownButton" type="text" placeholder="输入搜索关键字或搜索条件…">
+									    <div class="btn-group">
+									    	<button class="btn dropdown-toggle" data-toggle="dropdown">
+									    		搜索类别<span class="caret"></span>
+									    	</button>
+								    		<ul class="dropdown-menu">
+								    			<li><a>按照游戏名字搜索</a></li>
+								    			<li><a>按照游戏版本搜索</a></li>
+								    			<li><a>按照线路类型搜索</a></li>
+								    			<li><a>按照开区时间搜索</a></li>
+								    		</ul>
+								    	</div>
+								    </div>
+				      			</caption>
+							    <thead>
+								    <tr>
+									    <th>游戏名称</th>
+									    <th>版本</th>
+									    <th>线路</th>
+									    <th>开区时间</th>
+									    <th>特色介绍</th>
+								    </tr>
+							    </thead>
+							    <tbody>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    </tbody>
+						    </table>
+			      		</div>
+				    </div>
+				    <div class="tab-pane" id="game-sabnormal">								
+						<div class="game-advertise">
+				      		<table class="table table-hover advertise">
+				      			<caption>
+					      			<div class="input-append">
+									    <input class="span6" id="appendedDropdownButton" type="text" placeholder="输入搜索关键字或搜索条件…">
+									    <div class="btn-group">
+									    	<button class="btn dropdown-toggle" data-toggle="dropdown">
+									    		搜索类别<span class="caret"></span>
+									    	</button>
+								    		<ul class="dropdown-menu">
+								    			<li><a>按照游戏名字搜索</a></li>
+								    			<li><a>按照游戏版本搜索</a></li>
+								    			<li><a>按照线路类型搜索</a></li>
+								    			<li><a>按照开区时间搜索</a></li>
+								    		</ul>
+								    	</div>
+								    </div>
+				      			</caption>
+							    <thead>
+								    <tr>
+									    <th>游戏名称</th>
+									    <th>版本</th>
+									    <th>线路</th>
+									    <th>开区时间</th>
+									    <th>特色介绍</th>
+								    </tr>
+							    </thead>
+							    <tbody>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    </tbody>
+						    </table>
+			      		</div>
+				    </div>
+				    <div class="tab-pane" id="game-unknown">								
+						<div class="game-advertise">
+				      		<table class="table table-hover advertise">
+				      			<caption>
+					      			<div class="input-append">
+									    <input class="span6" id="appendedDropdownButton" type="text" placeholder="输入搜索关键字或搜索条件…">
+									    <div class="btn-group">
+									    	<button class="btn dropdown-toggle" data-toggle="dropdown">
+									    		搜索类别<span class="caret"></span>
+									    	</button>
+								    		<ul class="dropdown-menu">
+								    			<li><a>按照游戏名字搜索</a></li>
+								    			<li><a>按照游戏版本搜索</a></li>
+								    			<li><a>按照线路类型搜索</a></li>
+								    			<li><a>按照开区时间搜索</a></li>
+								    		</ul>
+								    	</div>
+								    </div>
+				      			</caption>
+							    <thead>
+								    <tr>
+									    <th>游戏名称</th>
+									    <th>版本</th>
+									    <th>线路</th>
+									    <th>开区时间</th>
+									    <th>特色介绍</th>
+								    </tr>
+							    </thead>
+							    <tbody>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								     <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    	<tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+								    <tr>
+									    <td>元旦精品</td>
+									    <td>1.76精品</td>
+									    <td>电信/网通双线</td>
+									    <td>2013-01-20 20:30</td>
+									    <td>１.７６精品↗运９好搞↗四级技能↗猛</td>
+								    </tr>
+							    </tbody>
+						    </table>
+			      		</div>
+				    </div>
+		      	</div>
+        	</div>
+        </div>
+	</div>
+    <div class="footer">
+  		<hr width="70%" size="3" color="#5151A2"><br>
+  		&copy;2013 Hgm123&nbsp;&nbsp;&nbsp;|<a href="http://www.hgm123.com/duty/index.html" target="_blank">好GM必读</a>&nbsp;&nbsp;&nbsp;|<a href="./help">关于hgm123</a>&nbsp;&nbsp;&nbsp;|
+  		<script src="http://s17.cnzz.com/stat.php?id=4945862&amp;web_id=4945862&amp;show=pic" type="text/javascript"></script>
+	</div>
+ 	
+ 	<!-- 获取ba -->	
+	<div class="aysw-quicksupport">
+		<div class="aysw-quicksupport-header">获取帮助</div>
+			<div class="aysw-quicksupport-body">
+				<a href="#" target="_blank">功能介绍</a>
+			<hr>
+			<a href="#" target="_blank">GM专题</a>
+			<hr>
+			<a href="#" target="_blank">技术支持</a>
+			<hr>
+			<a href="#" target="_blank">合作洽谈</a>
+			<hr>
+			<a href="#" target="_blank">问题反馈</a>
+			<hr>
+			<a href="#" target="_blank">投诉举报</a>
+		</div>
+	</div>
+	
+ 	<div style="width:28px; height: 98px; position: fixed; left: 50%; top: 425px; margin-left: 493px; z-index: 100; text-align: center; cursor: pointer; display: block;" id="full"> <a href="javascript:void(0)"><img border="0" alt="返回顶部" src="http://top.baidu.com/frontend/static/common/images/return_top.png"></a> </div>
+ 	<script src="jsLib/jquery/jquery-1.9.0.min.js"></script>
+ 	<script src="jsLib/jquery/jquery.cookie.js"></script>
+ 	<script src="jsLib/jquery/jquery.sidebarfollow.js"></script>
+ 	<script src="jsLib/showLoading/js/jquery.showLoading.js"></script>
+    <script src="jsLib/bootstrap/js/bootstrap.js"></script>
+    <script src="resources/js/index.js"></script>
+  </body>
+</html>

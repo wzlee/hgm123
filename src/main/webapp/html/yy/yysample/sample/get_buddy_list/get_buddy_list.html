@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body>
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>获取好友列表</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+	debugMode=true;
+    function onGetBuddyListClick() {
+        //获取当前登录用户的信息
+        var result = yy.im.getAllBuddyList();
+		for(var i=0;i<result.buddyList.length;i++)
+		{
+		    var userInfo = yy.im.getIMUserInfo(result.buddyList[i]);
+			document.getElementById("txtBuddyList").innerHTML +="uid="+userInfo.uid+" YY号="+userInfo.imId+" 昵称="+userInfo.name+"<br>";
+		}
+    }
+	function onGetUserInfoClick() {
+		var uid= parseInt(document.getElementById("txtUid").value);
+		var userInfo=yy.im.getIMUserInfo(uid);
+		document.getElementById("txtIMUserInfo").innerHTML ="uid="+userInfo.uid+" YY号="+userInfo.imId+" 昵称="+userInfo.name;
+	}
+ </script>
+
+<input type="button" style="width:200px" value="获取好友信息" onclick="onGetBuddyListClick()"/><br>
+<!--显示结果-->
+<br>
+<div id="txtBuddyList"></div>
+<br>
+
+
+<br>
+好友的uid <input type="text" id="txtUid" style="width:150px" value="" /> <input type="button" style="width:200px" value="获取用户信息" onclick="onGetUserInfoClick()"/><br>
+<div id="txtIMUserInfo"></div>
+<br>
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>

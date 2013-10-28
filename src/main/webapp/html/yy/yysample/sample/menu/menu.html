@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>用户菜单设置</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+
+增加的菜单项名称为<input id="txtMenu" type="text" value="hello,你好,ぁぃぅицл" style="width:100px" />
+<input type="button" style="width:100px"  value="增加" onclick="onSetMenu()" /> 
+<input type="button" style="width:100px"  value="消除" onclick="onUpSetMenu()" />
+
+<script type="text/javascript" language="javascript">
+	debugMode=false;
+    function init() {
+        yy.channel.userListPopMenu.addEventListener(IYYChannelUserListPopMenu.CLICKED, onMenuClicked);
+    }
+    function onMenuClicked(eventData) {
+        document.getElementById("txtClicked").innerHTML += "<br>菜单被点击，uid=" + eventData.uid + " cid=" + eventData.cid;
+    }
+    function onSetMenu() {
+        //获取当前登录用户的信息
+        var menuName = document.getElementById("txtMenu").value;
+        var result = yy.channel.userListPopMenu.setPopMenu(menuName);
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "成功设置，在用户列表点击右键可以看到";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "出错了，错误码" + result.ret;
+        }
+
+    }
+    function onUpSetMenu() {
+        var result = yy.channel.userListPopMenu.unSetPopMenu();
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "成功去掉了菜单项";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "出错了，错误码" + result.ret;
+        }    
+    }  
+ </script>
+
+<!--显示结果-->
+<br>
+<div id="txtLog" ></div>
+<div id="txtClicked" ></div><br>
+<!--<textarea id="txtConsole" cols=78 rows=6 name="S1"></textarea>-->
+
+</body>
+</html>

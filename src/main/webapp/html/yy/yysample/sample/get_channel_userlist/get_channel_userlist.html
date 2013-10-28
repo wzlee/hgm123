@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>获取频道用户</h1>
+随机返回指定频道最多200名用户的uid<br>
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+	debugMode=true;
+	function init()
+	{
+        var result = yy.channel.getRootChannelId();
+        document.getElementById("txtChannelIds").innerHTML = "<br>以下是频道id,可以复制填入<br><br>根频道:" + result.cid;
+        printSubChannelId(result.cid);
+	}
+    function onGetListClick() {
+		
+		var cid=parseInt(document.getElementById("txtCid").value);
+        var result = yy.channel.getUserList(cid);
+        document.getElementById("txtUserList").innerHTML = "人数=" + result.userList.length + "<br/>" ;
+        for (var i = 0; i < result.userList.length; i++) {
+            var userInfo = yy.user.getUserInfo(result.userList[i]);
+            document.getElementById("txtUserList").innerHTML += "uid=" + result.userList[i] + " YY号=" + userInfo.imId + " 昵称=" + userInfo.name + "<br>";
+        }
+    }
+	    //输出所有的子频道id供测试
+    function printSubChannelId(parentId) {
+        var result = yy.channel.getSubChannelIds(parentId);
+        for (var i = 0; i < result.cids.length; i++) {//遍历所有子频道
+            var cinfo=yy.channel.getChannelInfo(result.cids[i]);
+            document.getElementById("txtChannelIds").innerHTML += "<br>" + cinfo.name + ": " + cinfo.longId;
+            printSubChannelId(cinfo.longId);
+        }
+    }
+ </script>
+
+子频道的长位id <input type="text" id="txtCid" style="width:150px" value="" /> <input type="button" style="width:200px" value="获取频道用户" onclick="onGetListClick()"/><br>
+<!--显示结果-->
+<br><div id="txtUserList">频道用户列表:</div>
+<br>
+<div id="txtChannelIds"></div>
+
+<br>
+<div id="txtLog"></div>
+
+<br>
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>

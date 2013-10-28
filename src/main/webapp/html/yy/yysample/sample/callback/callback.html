@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="addListener()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>接收平台事件</h1>
+尝试修改用户昵称，你可以看到网页会打印出你的新昵称
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = false;
+    //添加一个侦听函数用来接收个人信息变化事件
+    function addListener() {
+        yy.user.addEventListener(IYYUser.USER_INFO_CHANGED, onUserInfoChanged);
+    }
+    //侦听函数，收到事件后会调用此函数
+    function onUserInfoChanged(eventData) {
+        document.getElementById("txtLog").innerHTML = "新的昵称:" + eventData.name;
+    }
+ </script>
+<br>
+<!--显示结果-->
+<div id="txtLog"></div><br>
+
+ <!--
+ <textarea id="txtConsole" cols=78 rows=6></textarea><br>-->
+</body>
+</html>

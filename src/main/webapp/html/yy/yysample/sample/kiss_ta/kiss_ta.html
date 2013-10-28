@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" href="../../css/ui-lightness/jquery.ui.css" rel="stylesheet" />
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<br><font style="font-size:9pt;color:Blue">请到open.yy.com的【下载中心】-->【开发示例下载】页面下载本示例源代码</font>
+<h1>亲TA一下</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.ui.js" language="javascript"></script>
+
+<script type="text/javascript" language="javascript">
+    debugMode = false;
+    $(document).ready(function() {
+        //var u = yy.user.getCurrentUserInfo();
+        //$("#dialogKissMessage").html(u.toString());
+        $("#dialogKissMessage").dialog({ autoOpen: false });
+
+    });
+    function init() {
+        yy.channel.userListPopMenu.unSetPopMenu();
+        yy.channel.userListPopMenu.setPopMenu("亲TA一下");
+        yy.channel.userListPopMenu.addEventListener(IYYChannelUserListPopMenu.CLICKED, onMenuClicked);
+        yy.net.addEventListener(IYYNet.RECV, onRecvMsg);
+    }
+    function onRecvMsg(eventData) {
+
+
+        if (eventData.data.indexOf("KissMsg") >= 0) {
+
+            var htmlCode = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="170" height="170" id="Untitled-1" align="middle">';
+            htmlCode += '<param name="allowScriptAccess" value="sameDomain" />';
+            htmlCode += '<param name="movie" value="kiss_ta.swf" />';
+            htmlCode += '<param name="quality" value="high" />';
+            htmlCode += '<param name="wmode" value="transparent" />';
+            htmlCode += '<param name="bgcolor" value="#ffffff" /> ';
+            htmlCode += '<embed src="kiss_ta.swf" quality="high" wmmode="transparent" bgcolor="#ffffff" width="170" height="170" name="mymovie" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />';
+            htmlCode += '</object>';
+
+            var info = eventData.data.split(",");
+
+            $("#dialogKissMessage").html("<center> " + info[2] + " 亲了你一下<br>"+htmlCode+"</center>");
+            $("#dialogKissMessage").dialog('open');
+            //保存到信息
+            var result = yy.cloud.addData(1, parseInt(info[1]), getTimeString() + " " + info[2] + " 亲了我一下");
+        }
+    }
+    function onMenuClicked(eventData) {
+
+        var my = yy.user.getCurrentUserInfo();
+        var ret = yy.net.broadcastToUsers("KissMsg," + my.uid + "," + my.name, [eventData.uid]);
+        var u = yy.user.getUserInfo(eventData.uid);
+        //保存到信息
+        var result = yy.cloud.addData(2, eventData.uid, getTimeString()+" 我亲了 " + u.name + " 一下");
+
+    }
+    //显示我亲过的
+    function showKissed() {
+
+        //类型亲过我的
+        var filterKissType = new YYCloudFilter();
+        filterKissType.field = YYCloudFilter.EField.EXTERNAL_VALUE1;
+        filterKissType.op = YYCloudFilter.EFilterOperator.EQ;
+        filterKissType.value = 2;
+        filterKissType.condition = YYCloudFilter.EFilterCondition.AND;
+
+        //查询自己的数据
+        var filterUserId = new YYCloudFilter();
+        filterUserId.field = YYCloudFilter.EField.USER_ID;
+        filterUserId.op = YYCloudFilter.EFilterOperator.EQ;
+        filterUserId.value = yy.user.getCurrentUserInfo().uid;
+        filterUserId.condition = YYCloudFilter.EFilterCondition.AND;
+
+        var result = yy.cloud.queryData([filterKissType, filterUserId]);
+        document.getElementById("divKissLog").innerHTML = "我亲过的:<br>";
+        for (var i = 0; i < result.length; i++) {
+            document.getElementById("divKissLog").innerHTML += "<br>" + result[i].stringValue;
+        }        
+    }
+    //显示亲过我的
+    function showKissMe() {
+ 
+        //类型亲过我的
+        var filterKissType = new YYCloudFilter();
+        filterKissType.field = YYCloudFilter.EField.EXTERNAL_VALUE1;
+        filterKissType.op = YYCloudFilter.EFilterOperator.EQ;
+        filterKissType.value = 1;
+        filterKissType.condition = YYCloudFilter.EFilterCondition.AND;
+        
+        //查询自己的数据
+        var filterUserId = new YYCloudFilter();
+        filterUserId.field = YYCloudFilter.EField.USER_ID;
+        filterUserId.op = YYCloudFilter.EFilterOperator.EQ;
+        filterUserId.value = yy.user.getCurrentUserInfo().uid;
+        filterUserId.condition = YYCloudFilter.EFilterCondition.AND;
+
+        var result = yy.cloud.queryData([filterKissType,filterUserId]);
+        document.getElementById("divKissLog").innerHTML = "亲过我的:<br>";
+        for (var i = 0; i < result.length; i++) {
+            document.getElementById("divKissLog").innerHTML += "<br>"+ result[i].stringValue;
+        }
+    }
+    function getTimeString() {
+        var dt = new Date();
+        var hour = dt.getHours() < 10 ? "0" + dt.getHours() : dt.getHours();
+        var minute = dt.getMinutes() < 10 ? "0" + dt.getMinutes() : dt.getMinutes();
+        var second = dt.getSeconds() < 10 ? "0" + dt.getSeconds() : dt.getSeconds();
+        return hour + ":" + minute + ":" + second;
+    }       
+ </script>
+
+<!--显示结果-->
+<br>
+
+
+<input  type="button" value="亲过我的" onclick="showKissMe()" /><input  type="button" value="我亲过的" onclick="showKissed()" />
+<div id="dialogKissMessage" title="收到Kiss"></div>
+<div id="divKissLog" ></div>
+<!--<textarea id="txtConsole" cols=78 rows=6 ></textarea>-->
+</body>
+</html>

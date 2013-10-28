@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()" onunload="quit()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>临时语音</h1>
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    //页面加载时初始化
+    var currentVolume=0;    //音量大小
+    function init() {
+        //侦听广播   
+        yy.net.addEventListener(IYYNet.RECV, onRecv);
+        yy.tempAudioSession.addEventListener(IYYTempAudioSession.USER_ENTER_ROOM, onUserEnterRoom);
+        yy.tempAudioSession.addEventListener(IYYTempAudioSession.USER_LEAVE_ROOM, onUserLeaveRoom);  
+    }
+    //用户离开房间事件
+    function onUserEnterRoom(eventData) {
+        document.getElementById("txtEventLog").innerHTML += "用户" + eventData.uid + " 进入了房间" + eventData.rid + "<br>";
+    }
+    function onUserLeaveRoom(eventData) {
+        document.getElementById("txtEventLog").innerHTML += "用户" + eventData.uid + " 离开了房间" + eventData.rid + "<br>";
+    }
+    //接收广播过来的rid，rid即roomId
+    function onRecv(eventData) {
+        if(eventData.data.substring(0,3)=="rid") {
+            //填写到文本框中
+            document.getElementById("txtRoomId").value=eventData.data.split("=")[1];
+        }
+    }
+    
+    function createRoomClick() {
+        //创建一个房间
+        var result = yy.tempAudioSession.createRoom();
+        //如果创建成功，就全频道广播rid
+        if (result.ret==0) {
+            yy.net.broadcastAllChannel("rid=" + result.rid);
+            document.getElementById("txtCreateRoomId").innerHTML = "成功创建房间并进入 rid=" + result.rid;
+            //创建成功默认已经进入房间
+            //document.getElementById("btnLeaveRoom").disabled = false;
+            //document.getElementById("btnStartSpeak").disabled = false;
+            //document.getElementById("btnStopSpeak").disabled = true;
+            showVolume();
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "创建房间失败 rid=" + result.rid;
+        }
+
+    }
+    //进入房间
+    function enterRoomClick() {
+        var rid = parseInt(document.getElementById("txtRoomId").value);
+        var result = yy.tempAudioSession.enterRoom(rid);
+        if (result.ret == 0) {
+            
+            //document.getElementById("btnLeaveRoom").disabled = false;
+            //document.getElementById("btnStartSpeak").disabled = false;
+            //document.getElementById("btnStopSpeak").disabled = true;
+            
+            document.getElementById("txtLog").innerHTML = "进入房间成功 ret=" + result.ret;
+            showVolume();
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "进入房间失败 ret=" + result.ret;
+        }
+
+    }
+    //开始说话
+    function startSpeakClick() {
+        //document.getElementById("btnStartSpeak").disabled = true;
+        //document.getElementById("btnStopSpeak").disabled = false;
+        var result=yy.tempAudioSession.startSpeak();
+        document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "开始说话成功" : "开始说话失败" + result.ret;
+    }
+    //停止说话
+    function stopSpeakClick() {
+        //document.getElementById("btnStartSpeak").disabled = false;
+        //document.getElementById("btnStopSpeak").disabled = true;
+        var result = yy.tempAudioSession.stopSpeak();
+        document.getElementById("txtLog").innerHTML = (result.ret == 0) ? "停止说话成功" : "停止说话失败" + result.ret;
+    }
+    //关闭窗口的时候离开房间
+    function quit() {
+
+        //不需要leaveRoom,系统自动会leaveRoom
+        //yy.tempAudioSession.leaveRoom();
+    } 
+    function leaveRoom() {
+        yy.tempAudioSession.leaveRoom();
+    }
+    //获取音量信息
+
+    function showVolume() {
+        //获取音量信息
+        var result = yy.tempAudioSession.getVolume();
+        document.getElementById("txtVolume").value = result.volume;
+        currentVolume = result.volume;
+    }
+     //增加音量
+    function onVolumeUpClick() {
+        yy.tempAudioSession.setVolume(currentVolume + 10);
+        showVolume();
+    }
+    //减少音量
+    function onVolumeDownClick() {
+        yy.tempAudioSession.setVolume(currentVolume - 10);
+        showVolume();
+    }
+    function setVolume() {
+        var v = parseInt(document.getElementById("txtVolume").value);
+        yy.tempAudioSession.setVolume(v);
+        showVolume();
+    }
+    //获取使用者的appId
+    function onGetOwnerClick() {
+        document.getElementById("txtAppId").innerHTML = "当前使用临时语音功能应用的appId owner=" + yy.tempAudioSession.getOwner().ownerAppId;
+    }
+ </script>
+
+<input type="button" style="width:200px" value="创建房间" onclick="createRoomClick()"/><div id="txtCreateRoomId"></div><br>
+<input type="button" style="width:200px" value="进入房间" onclick="enterRoomClick()"/>rid=<input type="text" id="txtRoomId" style="width:200px" value="" /><br><br>
+<input type="button" id="btnLeaveRoom" style="width:200px"  value="离开房间" onclick="leaveRoom()"/><br><br>
+<input type="button" id="btnStartSpeak" style="width:200px"  value="开始说话" onclick="startSpeakClick()"/><input type="button" id="btnStopSpeak" style="width:200px" value="停止说话" onclick="stopSpeakClick()"/>
+<br>
+音量控制：<br/> 当前音量<input type="text" id="txtVolume"></input>
+     <input type="button"  style="width:80px"  value="设置音量" onclick="setVolume()"/><input type="button"  style="width:80px"  value="获取" onclick="showVolume()"/><br>
+ <input type="button"  style="width:80px"  value="减少音量" onclick="onVolumeDownClick()"/>
+  <input type="button"  style="width:80px"  value="增加音量" onclick="onVolumeUpClick()"/>
+  <br><br>  
+  创建当前房间的appId：<input type="button"    value="获取" onclick="onGetOwnerClick()"/> <div id="txtAppId"></div>  
+<!--显示结果-->
+<br>
+<div id="txtLog"></div><br>
+<br>用户进出事件:<br>
+<div id="txtEventLog"></div><br>
+<textarea id="txtConsole" cols=78 rows=6></textarea><br> 
+</body>
+</html>

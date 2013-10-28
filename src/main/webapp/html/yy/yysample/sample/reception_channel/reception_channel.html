@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>设置接待频道</h1>
+
+
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function init() {
+        //为了方便使用Api，打印出所有频道长位id供使用
+        var result = yy.channel.getRootChannelId();
+        document.getElementById("txtCidList").innerHTML = "<br>以下是频道id,可以复制填入<br><br>根频道:" + result.cid;
+        printSubChannelId(result.cid);
+
+    }
+    //输出所有的子频道id供测试
+    function printSubChannelId(parentId) {
+        var result = yy.channel.getSubChannelIds(parentId);
+        for (var i = 0; i < result.cids.length; i++) {//遍历所有子频道
+            var cinfo = yy.channel.getChannelInfo(result.cids[i]);
+            document.getElementById("txtCidList").innerHTML += "<br>" + cinfo.name + ": " + cinfo.longId;
+            printSubChannelId(cinfo.longId);
+        }
+    }
+
+
+    function onSetClick() {
+
+        var cid = parseInt(document.getElementById("txtCid").value);
+        var result = yy.channel.receptionChannel.setReceptionChannel(cid);
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = " 设置成功";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "设置失败。错误码" + result.ret;
+        }        
+    }
+    function onUnSetClick() {
+        var result = yy.channel.receptionChannel.unSetReceptionChannel();
+        if (result.ret == 0) {
+            document.getElementById("txtLog").innerHTML = "移除接待频道成功";
+        }
+        else {
+            document.getElementById("txtLog").innerHTML = "移除接待频道失败。错误码" + result.ret;
+        }
+    }
+    function onGetClick() {
+        var result = yy.channel.receptionChannel.getReceptionChannel();
+        document.getElementById("txtLog").innerHTML = "接待频道：" + result.cid;
+    }
+ </script>
+频道的cid<input id="txtCid" type="text" style="width:200px" value="" /><br>
+
+<input type="button" style="width:150px" value="设置接待频道" onclick="onSetClick()"/><input type="button" style="width:150px" value="移除接待频道" onclick="onUnSetClick()"/>
+<input type="button" style="width:150px" value="获取接待频道" onclick="onGetClick()"/>
+<br>
+<!--显示结果-->
+<br>
+<div id="txtLog"></div><br><br><br><br>
+<textarea id="txtConsole" cols=78 rows=6 name="S1"></textarea>
+<div id="txtCidList"></div>
+
+</body>
+</html>

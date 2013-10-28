@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+    <link rel="stylesheet" href="../../css/jquery.treeview.css" />
+    <style type="text/css">
+        .treeview ul {
+	        background-color:black;
+        }  
+        .treeview li { 
+	        color:white;
+        }              
+        #divTreeView
+        {
+            position:absolute;
+            width: 165px;
+            background-color:Black;
+            vertical-align:top;
+            text-align:left;
+            
+        }
+        #divMicList
+        {
+            position:absolute;
+            left:166px;
+            height: 30px;
+            top:0px;
+            background-color:#888888;
+            width: 961px;   
+            color:White;    
+            text-align:left;
+        }
+        
+        #divContent
+        {
+            position:absolute;
+            left:166px;
+            top:30px;
+            background-color:#FFFF00;
+            
+            
+        }
+        #root
+        {
+            position:absolute;
+            top: 0px;
+            left: 0px;
+            width: 160px;
+            height:auto;
+        }
+        body
+        {
+            margin-left:0px;
+            margin-top:0px;
+            margin-right:0px;
+            margin-bottom:0px;
+            font-size:9pt;
+        }
+    </style>
+</head>
+<body onload="init()" >
+
+
+	
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.js"  language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.cookie.js"  language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.treeview.js"  language="javascript"></script>
+
+<script type="text/javascript" language="javascript">
+    debugMode = false;
+    $(document).ready(function() {
+        $("#root").treeview({
+            persist: "location",
+            collapsed: true,
+            unique: true
+        });
+        createTree();
+        //设置div的大小
+        var width = $(window).width();
+        var height = $(window).height();
+        $("#divTreeView").height(height);
+        $("#divContent").height(height - 30);
+        $("#divContent").width(width - 166);
+        $("#divMicList").width(width - 166);
+        //$("#root").height(height);
+    });
+    $(window).resize(function() {
+        var width = $(window).width();
+        var height = $(window).height();
+        $("#divTreeView").height(height);
+        $("#divContent").height(height - 30);
+        $("#divContent").width(width - 166);
+        $("#divMicList").width(width - 166);        
+    });
+
+    function init() {
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_JOIN, refreshMicList);
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_LEAVE, refreshMicList);
+        yy.channel.micList.addEventListener(IYYChannelMicList.USER_MOVE, refreshMicList);
+        yy.channel.micList.addEventListener(IYYChannelMicList.CLEAR, refreshMicList);
+    }
+
+    function refreshMicList(eventData) {
+        //获取麦序信息
+        var result = yy.channel.micList.getMicList();
+
+
+
+
+        //添加出麦序中每个人的信息到列表中
+        document.getElementById("divMicList").innerHTML = "";
+        for (var i = 0; i < result.micList.length; i++) {
+            var u = yy.user.getUserInfo(result.micList[i]);
+
+            document.getElementById("divMicList").innerHTML += "  "+u.name;
+        }
+
+    }    
+        //按钮被点击
+        function createTree() {
+            //得到根频道的信息
+            var rootId = yy.channel.getRootChannelId();
+            //根据根频道的id得到所有子频道的信息，并转成html代码返回
+            var htmlString = getTreeNodeString(rootId.cid);
+            //显示根频道的名字
+            var rootInfo = yy.channel.getChannelInfo(rootId.cid);
+            htmlString = "<li><a style='cursor:hand' onclick='onChannelClick("+rootId+")'>" + rootInfo.name +"</a>"+ htmlString + "</li>";
+
+            //把递归得到得到的html添加到列表中，就会显示出树
+            var branches = $(htmlString).appendTo("#root");
+            $("#root").treeview({
+                add: branches
+            });
+        }
+
+        function getTreeNodeString(parentId) {
+            //得到所有子频道的id
+            var result = yy.channel.getSubChannelIds(parentId);
+            var childIds = result.cids;
+
+            var htmlString = "";
+            if (childIds.length > 0) {//如果没有子频道，返回""
+                for (var i = 0; i < childIds.length; i++) {//遍历所有子频道
+                    var channelInfo = yy.channel.getChannelInfo(childIds[i]);
+                    //递归调用
+                    htmlString += "<li id=C" + childIds[i] + "><a style='cursor:hand' onclick='onChannelClick(" + childIds[i] + ")'>" + channelInfo.name + "</a>" + getTreeNodeString(childIds[i]) + "</li>";
+                }
+                htmlString = "<ul>" + htmlString + "</ul>";
+            }
+            //返回html代码
+            return htmlString;
+        }
+
+        function onChannelClick(cid) {
+            //document.getElementById("divMicList").innerHTML = cid;
+            var ret = yy.channel.userController.jumpToSubChannel(cid);
+            var li = document.getElementById("C" + cid);
+            //yytrace(li.innerHTML );
+        }
+
+
+ </script>
+<div id="divTreeView"><ul id="root"></ul></div>
+
+
+	
+	<div id="divMicList"></div>
+	<div id="divContent" ><img id="imgbg" src="http://dl.open.yy.com//happyktv/ChannelBack/bg2.jpg" width="100%" height="100%" style="right: 0; bottom: 0;
+ top: 0; left: 0; z-index: -1" /></div>
+	
+	<input  style="top:0px;position:absolute;visibility:hidden" type="button" value="返回" onclick="javascript:history.back();" /><input  style="top:0px;position:absolute;visibility:hidden" type="button" value="刷新麦序" onclick="refreshMicList(null)" />
+<!--
+	<textarea id="txtConsole" style="top:490px;position:absolute;visibility:hidden"  cols=78 rows=6 name="S1"></textarea>-->
+</body>
+</html>

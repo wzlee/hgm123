@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>频道跳转</h1>
+<br>本例子演示如何让自己跳到某一频道 和 将别人拉入某一频道，注意部分操作需要权限，请参考文档。
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function init() {
+        //为了方便使用Api，记录新进入的用户的uid供使用
+        yy.channel.addEventListener(IYYChannel.USER_ENTER_CHANNEL, onEnterChannel);
+        //为了方便使用Api，打印出所有频道长位id供使用
+        var result = yy.channel.getRootChannelId();
+        document.getElementById("txtLog").innerHTML = "<br>以下是频道id,可以复制填入<br><br>根频道:" + result.cid;
+        printSubChannelId(result.cid);
+    }
+    //其他用户登录时，自动填写uid
+    function onEnterChannel(eventData) {
+        document.getElementById("txtLog").innerHTML += "<br>有新用户[" + eventData.uid + "]进入大频道";
+        document.getElementById("txtUid").value = eventData.uid;
+        document.getElementById("txtUid2").value = eventData.uid;
+    }    
+    //输出所有的子频道id供测试
+    function printSubChannelId(parentId) {
+        var result = yy.channel.getSubChannelIds(parentId);
+        for (var i = 0; i < result.cids.length; i++) {//遍历所有子频道
+            var cinfo=yy.channel.getChannelInfo(result.cids[i]);
+            document.getElementById("txtLog").innerHTML += "<br>" + cinfo.name + ": " + cinfo.longId;
+            printSubChannelId(cinfo.longId);
+        }
+    }
+    
+    //自己进入子频道
+    function onJumpToClick() {
+        var cid =parseInt(document.getElementById("txtEnterCid").value);//必须转int
+        //开始跳转
+        var result = yy.channel.userController.jumpToSubChannel(cid);
+        if (result.ret == 0) {
+            document.getElementById("txtJumpToLog").innerHTML = "跳频道成功！";
+        }
+        else {
+            document.getElementById("txtJumpToLog").innerHTML = "跳频道失败,错误码" + result.ret;
+        }        
+        
+    }
+    //拉人进子频道
+    function onPullToClick() {
+        var uid =parseInt( document.getElementById("txtUid").value);
+        var cid =parseInt( document.getElementById("txtPullToCid").value);
+        //开始拉人
+        var result = yy.channel.userController.pullToSubChannel(uid, cid);
+        if (result.ret == 0) {
+            document.getElementById("txtPullLog").innerHTML = "拉人成功！";
+        }
+        else {
+            document.getElementById("txtPullLog").innerHTML = "拉人失败,错误码" + result.ret;
+        }        
+    }
+    //得到用户所在的子频道Id
+    function onGetChannelId() {
+        //得到用户的uid
+        var uid = parseInt(document.getElementById("txtUid2").value);
+        //得到所在频道Id
+        var result = yy.channel.userController.getUserSubChannelId(uid);
+        if (result.ret == 0) {
+            document.getElementById("txtChannelId").innerHTML = "TA正在频道" + result.cid;
+        }
+        else {
+            document.getElementById("txtChannelId").innerHTML = "获取频道失败";
+        }
+    }        
+ </script>
+ <h3>自己跳转到一个子频道</h3>
+子频道的长位id <input type="text" id="txtEnterCid" style="width:150px" value="" />
+    <br />
+<input type="button" style="width:79px" value="我跳！" onclick="onJumpToClick()"/><br>
+<div id="txtJumpToLog"></div><br>
+
+
+
+<h3>拉某一个用户进子频道</h3>
+用户的uid<input type="text" id="txtUid" style="width:130px" value="" />(新用户进入会自动填写)<br>
+频道的长位id<input type="text" id="txtPullToCid" style="width:130px" value="" /><br>
+<input type="button" style="width:80px" value="进去吧！" onclick="onPullToClick()"/><br>
+<div id="txtPullLog"></div><br>
+<!--显示结果-->
+
+<h3>&nbsp;获取指定用户所在的频道id</h3>
+用户的uid<input type="text" id="txtUid2" style="width:130px" value="" />(新用户进入会自动填写)写)<br>
+<div id="txtChannelId"></div><br>
+<input type="button" style="width:80px" value="获取频道id" onclick="onGetChannelId()"/><br>
+<br>
+<br>
+<div id="txtLog"></div>
+<textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>

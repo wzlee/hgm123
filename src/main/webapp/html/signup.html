@@ -1,0 +1,100 @@
+<form class="signup-form">
+	<div class="control-group">
+    	<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">账号:</span>
+				<input class="span2 upassid" name="upassid" type="text" placeholder="输入通行证账号..." data-placement="right" required>
+			</div>
+			<span class="help-inline upassid-tip"><i class="icon-exclamation-sign"></i>请输入3位数以上的字母和数字!</span>
+			<span class="help-inline upassid-info" data-label="帐号"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">密码:</span>
+				<input class="span2 password" name="password" type="password" placeholder="输入通行证密码..." data-placement="right" required>
+			</div>
+			<span class="help-inline password-tip"><i class="icon-exclamation-sign"></i>请输入6位数以上的密码!</span>
+			<span class="help-inline password-info" data-label="密码"></span>
+		</div>
+   	</div>
+   	<div class="control-group">
+		<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">确认:</span>
+				<input class="span2 cpassword" name="cpassword" type="password" placeholder="输入确认密码..." data-placement="right" required>
+			</div>
+			<span class="help-inline cpassword-tip"><i class="icon-exclamation-sign"></i>请再次输入密码!</span>
+			<span class="help-inline cpassword-info" data-label="确认"></span>
+		</div>
+   	</div>
+	<div class="control-group">
+    	<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">昵称:</span>
+				<input class="span2 nickname" name="nickname" type="text" placeholder="输入通行证昵称..." data-placement="right" required>
+			</div>
+			<span class="help-inline cpassword-tip"><i class="icon-exclamation-sign"></i>请输入显示的昵称!</span>
+			<span class="help-inline nickname-info" data-label="昵称"></span>
+		</div>
+	</div>
+	<div class="control-group">
+    	<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">邮箱:</span>
+				<input class="span2 email" name="email" type="email" placeholder="输入常用邮箱..." data-placement="right" required>
+			</div>
+			<span class="help-inline cpassword-tip"><i class="icon-exclamation-sign"></i>用于接收通行证激活邮件!</span>
+			<span class="help-inline email-info" data-label="邮箱"></span>
+		</div>
+	</div>
+	<div class="control-group">
+    	<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">Q Q:</span>
+				<input class="span2 qq" name="qq" type="number" placeholder="输入联系QQ..." data-placement="right">
+			</div>
+			<span class="help-inline qq-tip"><i class="icon-exclamation-sign"></i>建议输入常用QQ,便于加入游戏群!</span>
+			<span class="help-inline qq-info" data-label="QQ"></span>
+		</div>
+	</div>
+	<div class="control-group">
+    	<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">身份:</span>
+				<select class="chzn-select groupname" style="width:170px" name="groupname" data-placeholder="--请选择身份--" required>
+				  	<option>游戏玩家</option>
+				  	<option>游戏GM</option>
+				</select>
+			</div>
+			<span class="help-inline group-tip"><i class="icon-exclamation-sign"></i>更多的角色即将开放!</span>
+		</div>
+	</div>
+   	<div class="control-group">
+   		<div class="controls">
+  				<input class="agreement" type="checkbox">
+  				<span class="help-inline">同意使用协议 </span>
+  				<span class="help-inline">
+  					<a class="ag_target" href="html/agreement.html" role="button" data-toggle="modal" data-target="#agreement"><i class="icon-list-alt"></i></a>
+ 					</span>
+  				<span class="help-inline agreement-tip"><i class="icon-exclamation-sign"></i>阅读HGM123使用协议!</span>
+   			<span class="help-inline agreement-info" data-label="同意协议"></span>
+   		</div>
+   	</div>
+</form>
+	   	
+<!-- 用户协议窗口 -->
+<div id="agreement" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<h5 id="myModalLabel"><i class="icon-list-alt"></i>用户协议(修订版)</h5>
+	</div>
+	<div class="modal-body">
+	</div>
+	<div class="modal-footer">
+		<span class="pull-left"><i class="icon-tag"></i>请认真阅读本协议,有任何异议都可以与管理员取得联系!</span>
+		<button class="btn btn-primary agree" ><i class="icon-check"></i> 同意</button>
+		<button class="btn unagree"><i class="icon-check-empty"></i> 不同意</button>
+	</div>
+</div>
+<script type="text/javascript" src="resources/js/signup.js"></script>

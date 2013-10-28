@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <link rel="stylesheet" type="text/css" href="../myLib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../myLib/bootstrap/css/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="../myLib/jquery/jqwidgets/styles/jqx.base.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/index.css?v=20130501">
+  </head>
+  
+  <body class='default'>
+  	<div class="navbar navbar-fixed-top">
+    	<div class="navbar-inner">
+      		<div class="container">
+          		<ul class="nav pull-left">
+       				<li class="index"><a href="./">首页</a></li>
+       				<li class="divider-vertical"></li>
+       				<li><a href="#"><i class="icon-home"></i>设为首页</a></li>
+   					<li class="divider-vertical"></li>
+            		<li>
+				        <div class="navbar-form pull-left">
+				        	<input class="span3 input-filter" type="text" placeholder="输入关键字(多个用空格隔开),按回车搜索..." required>
+				        	<div class="btn-group">
+								<button class="btn submit-filter" type="button"><i class="icon-search"></i> 搜索</button>
+							    <button data-toggle="dropdown" class="btn dropdown-toggle">
+				                  	<span class="caret"></span>
+				                </button>
+			                	<ul class="dropdown-menu search-keys">
+			                  		<li><a class="search-key" data-key="首区" href="#"><i class="icon-tag"></i> 首区/一区</a></li>
+			                  		<li><a class="search-key" data-key="1.76" href="#"><i class="icon-tag"></i> 1.76版本</a></li>
+			                  		<li><a class="search-key" data-key="1.85" href="#"><i class="icon-tag"></i> 1.85版本</a></li>
+			                  		<li><a class="search-key" data-key="精品" href="#"><i class="icon-tag"></i> 精品传奇</a></li>
+			                  		<li class="divider"></li>
+			                  		<li><a href="#"><i class="icon-bar-chart"></i> 搜索统计</a></li>
+			                	</ul>
+			              	</div>
+		                	<button class="btn clear-filter hide" type="button"><i class="icon-remove-sign"></i> 清除</button>
+					  	</div>
+			    	</li>
+			    	<li class="divider-vertical"></li>
+               	</ul>
+               	<ul class="nav pull-right">
+					<li class="ulogin">
+			    		<a href="#" role="button" data-toggle="modal" data-target=".signin-modal"><i class="icon-signin"></i> 登录</a>
+             		</li>
+             		<li class="ureg">
+             			<a href="#" role="button" data-toggle="modal" data-target=".signup-modal"><i class="icon-user"></i> 注册</a>
+             		</li>
+             		<li class="dropdown ucenter hide">
+	               		<div class="btn-group pull-left">
+					 			<a class="btn nickname" href="#" role="button" data-toggle="modal" data-target=".ucenter-modal"></a>
+							<button class="btn dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#" role="button" data-toggle="modal" data-target=".publish-modal"><i class="icon-share"></i> 游戏资讯发布</a></li>
+		                   	 	<li class="dropdown-submenu" role="menu" aria-labelledby="dLabel">
+									<a href="#" bgcolor="#FFFF98"><i class="icon-desktop"></i> 创建游戏网站</a>
+									<ul class="dropdown-menu">
+			                    		<li><a href="#" role="button" data-toggle="modal" data-target=".use-template-modal"><i class="icon-magic"></i> 创建模板网站</a></li>
+			                    		<li><a href="#" role="button" data-toggle="modal" data-target=".upload-code-modal"><i class="icon-upload-alt"></i> 上传网站代码</a></li>
+									</ul>
+								</li>
+		                  		<li><a href="#"><i class="icon-bar-chart"></i> 游戏数据统计</a></li>
+		                  		<li class="dropdown-submenu" role="menu" aria-labelledby="dLabel">
+									<a href="#"><i class="icon-share"></i> HGM联盟</a>
+									<ul class="dropdown-menu">
+			                    		<li><a href="http://hgm8.com" target="_blank"><i class="icon-home"></i> Hgm8.com主站</a></li>
+			                    		<li><a href="#" role="button" data-toggle="modal" data-target=".qq-qun-modal"><i class="icon-group"></i> HGM官方QQ群</a></li>
+									</ul>
+								</li>
+		                    	<li class="divider"></li>
+		                    	<li><a class="btn-logout text-error" href="#"><i class="icon-off"></i> 退出登录</a></li>
+							</ul>
+						</div>
+	               	</li>
+	           		<li class="divider-vertical"></li>
+              		<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-globe"></i> 网站导航 <b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+	                   		<li><a href="http://hgm8.com" target="_blank"><i class="icon-home"></i> Hgm8.com主站</a></li>
+	                   		<li><a href="#" role="button" data-toggle="modal" data-target=".qq-qun-modal"><i class="icon-group"></i> HGM官方QQ群</a></li>
+	                     	<li><a href="#" role="button" data-toggle="modal" data-target=".about-modal"><i class="icon-exclamation-sign"></i> 关于与帮助</a></li>
+						</ul>
+					</li>
+           		</ul>
+        	</div><!-- container -->
+      	</div><!-- navbar-inner -->
+    </div><!-- navbar -->	
+  	<div class="container">
+  		<div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;margin-top:45px;">
+	        <div id="jqxgrid">
+	        </div>
+	        <div id="eventslog" style="display: none; margin-top: 30px;">
+	            <div style="float: left;">
+	                Event Log:
+	                <div style="border: none;" id="events">
+	                </div>
+	            </div>
+	            <div style="float: left;">
+	                Sort Details:
+	                <div id="sortinfo">
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+  	<script src="../myLib/jquery/jquery-1.9.0.min.js"></script>
+    <script src="../resources/js/test.js"></script>
+  </body>
+</html>

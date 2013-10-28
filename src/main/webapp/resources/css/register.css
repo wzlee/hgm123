@@ -1,0 +1,108 @@
+/* -- 全局样式 -- */
+body {
+    color: #4D4D4D;
+    font-family:"微软雅黑","新宋体",Arial,"simsun";
+    font-size: 12px;
+}
+a {
+    color: #2464B2;
+    text-decoration: none;
+}
+.maroon::selection {
+	background:maroon;
+	color:#fff;
+}
+::-moz-selection,
+::-webkit-selection,
+::-ms-selection	{
+	background:maroon;
+	color:#fff;
+}
+a,input,select,checkbox,button,.btn,a:focus,input:focus,select:focus,checkbox:focus,button:focus,.btn:focus {
+    outline:none;
+    -webkit-outline:none;
+    -moz-outline:none;
+    -ms-outline:none;
+}
+.input-prepend {
+	margin-bottom: 0px;
+}
+form {
+	margin: 0px;
+}
+input, button, select, textarea {
+    font-family: "微软雅黑",Helvetica,Arial,sans-serif!important;
+}
+input[type="checkbox"]{
+	margin:0px;
+}
+.dropdown-menu{
+	min-width: 100px;
+}
+span[class*="-error-info"]{
+	color:#EE5F5B;
+}
+/* -- 导航条 -- */
+.navbar{
+	margin-bottom:0!important;
+}
+.nav li.index a{
+	padding:0;
+	display:block;
+	width:94px;
+	height:39px;
+	text-indent:-999em;
+	overflow:hidden;
+	background:url(../images/hgm123_logo.png) no-repeat;
+}
+.signup-modal{
+	width:600px;
+	margin:10px auto;
+}
+.signup-modal .hgm-logo {
+	width:100px;
+	height:100px;
+	margin:100px 10px 0px 50px;
+}
+.signup-modal .modal-body {
+	max-height: 500px;
+}
+.signup-form {
+    border-left: 1px dashed #CCCCCC;
+    margin-bottom: 0;
+    padding-left: 10px;
+}
+.agreement-tip {
+	display: none;
+}
+.feedback-category {
+	width:100px;
+}
+.category-info {
+	margin-bottom: 10px;
+}
+.feedback-content {
+	border-radius: 0px 4px 4px 4px;
+}
+/* -- 底部 -- */
+.footer {
+    clear: both;
+	width: 100%;
+    text-align: center;
+    font-size:12px;
+    height:50px;
+    position: absolute;
+    bottom: 0px;
+    padding-top:10px;
+    border-top: 1px solid #DDDDDD;
+    box-shadow: 10px 0px 0px rgba(0, 0, 0, 0.1);
+}
+.footer a {
+    color: #919191;
+    margin-left: 10px;
+    text-decoration: none;
+}
+.footer hr{
+	margin:0 auto;
+	FILTER: alpha(opacity=100,finishopacity=0,class=3);
+}

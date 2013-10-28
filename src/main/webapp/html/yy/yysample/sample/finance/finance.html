@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+</head>
+<body onload="init()">
+<input  type="button" value="返回" onclick="javascript:history.back();" />
+<h1>财务接口</h1>
+   您需要有自己的应用服务器，本例所用的应用服务器仅供测试<br />
+   本例所用的应用服务器: http://111.178.146.46:5789/getPayToken/ <br />   
+
+<script type="text/javascript" src="../../yyapi/yyapi.js" language="javascript"></script>
+<script type="text/javascript" src="../../jquery/jquery.js" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    debugMode = true;
+    function init() {
+        yy.channel.userListPopMenu.setPopMenu("填入此人uid");
+        yy.channel.userListPopMenu.addEventListener(IYYChannelUserListPopMenu.CLICKED, onMenuClick);
+
+        yy.finance.addEventListener(IYYFinance.BUY_RESPONSE, onBuyResponse);
+        yy.finance.addEventListener(IYYFinance.BUY_GIFTS_RESPONSE, onBuyGiftsResponse);
+    }
+
+
+    //右键菜单填入uid
+    function onMenuClick(eventData) {
+        document.getElementById("txtToUid").value = eventData.uid;
+    }
+    //-------------------------------支付------------------------------------
+    //向应用服务器发送Y币支付请求
+    function onBuyClick() {
+        //不能出现小数
+        var price = document.getElementById("txtPrice").value ;
+        
+        var userInfo = yy.user.getCurrentUserInfo();
+        var result = yy.channel.getRootChannelId();
+        $.ajax({
+            type: "GET",
+            url: "http://111.178.146.46:5789/getPayToken/",
+            data: { uid: userInfo.uid, chn: result.cid, money: price },
+            jsonpCallback: "callback",
+            crossDomain:true,
+		    dataType: "jsonp"
+        }).done(onRecvBuyToken).error(onBuyError);
+        document.getElementById("txtBuyResponse").innerHTML = "向应用服务器发送扣费请求...<br/>";
+    }
+
+
+    function onBuyError(dt, txt, jqXHR) {
+        document.getElementById("txtBuyResponse").innerHTML += "应用服务器返回错误Error:" + txt+"<br/>";
+        alert("Error:" + txt);
+    }
+    //收到应用服务器的支付信息
+    function onRecvBuyToken(dt, txt, jqXHR) {
+
+        document.getElementById("txtSNBuy").value = dt.sn;
+        document.getElementById("txtServerIdBuy").value = dt.srvid;
+        document.getElementById("txtMoney").value = dt.money;
+        document.getElementById("txtTokenBuy").value = dt.token;
+
+
+        //提交支付请求
+        if (dt.token === null || dt.token === undefined || dt.token === "") {
+            document.getElementById("txtBuyResponse").innerHTML += "收到应用服务器扣费返回信息op_ret=" + dt.op_ret + " 参数不正确<br/>";
+            return;
+        } else {
+
+            document.getElementById("txtBuyResponse").innerHTML += "收到应用服务器扣费返回信息op_ret=" + dt.op_ret + " token=" + dt.token + "<br/>";
+        }
+
+        var result;
+        //根据版本选择接口
+        if ((yy.version.majorVersion * 100 + yy.version.minorVersion) < 113) {
+            result = yy.finance.buy(dt.sn, dt.srvid, dt.money * 100, 10, dt.token, 1);
+        }
+        else {
+            result = yy.finance.buyByYuan(dt.sn, dt.srvid, dt.money, 10, dt.token, 1);
+        }
+
+        document.getElementById("txtBuyResponse").innerHTML += "调用客户端扣费接口:ret=" + result.ret + "<br/>";
+    }
+    //侦听支付事件
+    function onBuyResponse(eventData) {
+        document.getElementById("txtBuyResponse").innerHTML += "收到扣费结果事件:sn=" + eventData.sn + " ret=" + eventData.ret + "<br/>";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //----------------------------------赠送礼物--------------------------------
+    function onGiftClick() {
+        
+        var userInfo = yy.user.getCurrentUserInfo();
+        var result = yy.channel.getRootChannelId();
+        var giftId = parseInt(document.getElementById("txtGiftId").value);
+        var toUid = parseInt(document.getElementById("txtToUid").value);
+        var giftCount = parseInt(document.getElementById("txtGiftCount").value);
+
+        $.ajax({
+            type: "GET",
+            url: "http://111.178.146.46:5789/getGiftToken/",
+            data: { fromuid: userInfo.uid, chn: result.cid, touid: toUid, giftid: giftId, giftcount: giftCount },
+            jsonpCallback: "callback",
+            crossDomain: true,
+            dataType: "jsonp"
+        }).done(onRecvBuyGiftToken).error(onGiftError);
+        document.getElementById("txtBuyGiftsResponse").innerHTML = "向应用服务器发送赠送礼物请求...<br/>";
+
+    }
+    //收到应用服务器的支付信息
+    function onRecvBuyGiftToken(dt, txt, jqXHR) {
+        document.getElementById("txtSNGift").value = dt.sn;
+        document.getElementById("txtServerIdGift").value = dt.srvid;
+        document.getElementById("txtTokenGift").value = dt.token;
+
+        document.getElementById("txtToUidRecv").value = dt.touid;
+        document.getElementById("txtGiftIdRecv").value = dt.giftid;
+        document.getElementById("txtGiftCountRecv").value = dt.giftcount;
+
+
+        document.getElementById("txtBuyGiftsResponse").innerHTML += "收到应用服务器赠送礼物返回结果<br/>";
+
+        var result = yy.finance.buyGifts(dt.sn, dt.srvid, dt.touid, dt.giftid, dt.giftcount, 10, dt.token, 1);//测试
+        document.getElementById("txtBuyGiftsResponse").innerHTML += "调用客户端赠送礼物接口 ret=" + result.ret + "<br/>";
+
+
+    }
+    function onGiftError(dt, txt, jqXHR) {
+        document.getElementById("txtBuyGiftsResponse").innerHTML += "收到应用服务器赠送礼物错误信息:" + txt + "<br/>";
+        alert("GiftError:" + txt);
+    }
+    //侦听礼物事件
+    function onBuyGiftsResponse(eventData) {
+        document.getElementById("txtBuyGiftsResponse").innerHTML += "收到礼物赠送事件:sn=" + eventData.sn + " ret=" + eventData.ret+"<br/>";
+    }
+ </script>
+     <h3>Y币支付接口</h3>
+    我要买价值<input id="txtPrice" type="text" value="5.00"  style="width:50px" />Y币的道具(金额必须带2位小数)<input type="button"  value="购买" onclick="onBuyClick()"/><br />
+    <br />
+    支付详细信息：<s:Label x="3" y="60" width="80" fontFamily="宋体" text="我要购买价值" textAlign="center"
+			 verticalAlign="middle"/><br>
+流水号 sn=<input id="txtSNBuy" type="text" value="" disabled style="width:200px;background-color:#EEEEEE" /><br>
+应用服务器Id serverId=<input id="txtServerIdBuy" type="text" value="" disabled style="width:119px;background-color:#EEEEEE" /><br>
+扣费数额 money=<input id="txtMoney" type="text" value="" disabled style="width:119px;background-color:#EEEEEE" />Y币<br>
+token=<input id="txtTokenBuy" type="text" value="" disabled style="width:233px;background-color:#EEEEEE" /><br>
+    <br>
+<div id="txtBuyResponse">扣费结果:</div><br><br><br>
+
+    <h3>开放平台礼物赠送接口</h3>
+
+礼物接受者的 <input id="txtToUid" type="text" value="427976189" style="width:119px"  />用户名称点击右键会填入接受者uid<br />
+礼物Id&nbsp;&nbsp; <input id="txtGiftId" type="text" value="1001" style="width:119px"  /><br />
+礼物数量 <input id="txtGiftCount" type="text" value="2" style="width:119px"  />个<br />
+
+
+<input type="button" style="width:94px" value="赠送" onclick="onGiftClick()"/><br /><br /><br />
+
+    
+        礼物信息:<br />
+礼物接受者的 toUid=<input id="txtToUidRecv" type="text" value="" style="width:117px;background-color:#EEEEEE" disabled="disabled" /><br>
+流水号 sn=<input id="txtSNGift" type="text" value="" style="width:200px;background-color:#EEEEEE" disabled="disabled" /><br>
+应用服务器Id serverId=<input id="txtServerIdGift" type="text" value="" style="width:119px;background-color:#EEEEEE" disabled="disabled" /><br>
+礼物Id giftId=<input id="txtGiftIdRecv" type="text" value="" style="width:119px;background-color:#EEEEEE" disabled="disabled" /><br>
+礼物数量 giftCount=<input id="txtGiftCountRecv" type="text" value="" style="width:119px;background-color:#EEEEEE" disabled="disabled" /><br>
+token=<input id="txtTokenGift" type="text" value="" style="width:233px;background-color:#EEEEEE" disabled="disabled" /><br>
+    <br>
+<div id="txtBuyGiftsResponse">赠送结果:</div><br><br><br>
+
+<!--显示结果-->
+<br>
+<div id="txtLog"></div><br>
+
+    <textarea id="txtConsole" cols=78 rows=6></textarea><br>
+</body>
+</html>
