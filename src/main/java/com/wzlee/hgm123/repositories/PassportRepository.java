@@ -15,5 +15,6 @@ public interface PassportRepository extends CrudRepository<Passport, Serializabl
 	public List<Passport> findPassportByQqOpenid(String qqOpenid);
 	public List<Passport> findPassportByTwOpenid(String twOpenid);
 	public List<Passport> findPassportBySwOpenid(String swOpenid);
+	public List<Passport> findPassportByYkOpenid(String ykOpenid);
 	public Passport findPassportByLoginSequenceAndLoginTimestamp(String loginSequence,String loginTimestamp);
 }

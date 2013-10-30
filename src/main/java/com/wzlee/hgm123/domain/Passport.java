@@ -42,7 +42,10 @@ public class Passport implements Serializable {
 	private String twAvatar; //腾讯微博图像
 	private String swOpenid; //新浪微博PENID
 	private String swNick; //新浪微博昵称
-	private String swAvatar; //新浪微博昵称
+	private String swAvatar; //新浪微博图像
+	private String ykOpenid; //优酷视频PENID
+	private String ykNick; //优酷视频昵称
+	private String ykAvatar; //优酷视频图像
 	
 	@PersistenceConstructor
 	public Passport() {
@@ -257,22 +260,28 @@ public class Passport implements Serializable {
 		this.swAvatar = swAvatar;
 	}
 
-	@Override
-	public String toString() {
-		return "Passport [id=" + id + ", upassid=" + upassid + ", password="
-				+ password + ", nickname=" + nickname + ", qq=" + qq
-				+ ", email=" + email + ", registerdate=" + registerdate
-				+ ", activedate=" + activedate + ", lastlogindate="
-				+ lastlogindate + ", thislogindate=" + thislogindate
-				+ ", lastloginip=" + lastloginip + ", thisloginip="
-				+ thisloginip + ", online=" + online + ", groupname="
-				+ groupname + ", status=" + status + ", loginSequence="
-				+ loginSequence + ", loginTimestamp=" + loginTimestamp
-				+ ", qqOpenid=" + qqOpenid + ", qqNick=" + qqNick
-				+ ", qqAvatar=" + qqAvatar + ", twOpenid=" + twOpenid
-				+ ", twNick=" + twNick + ", twAvatar=" + twAvatar
-				+ ", swOpenid=" + swOpenid + ", swNick=" + swNick
-				+ ", swAvatar=" + swAvatar + "]";
+	public String getYkOpenid() {
+		return ykOpenid;
 	}
-	
+
+	public void setYkOpenid(String ykOpenid) {
+		this.ykOpenid = ykOpenid;
+	}
+
+	public String getYkNick() {
+		return ykNick;
+	}
+
+	public void setYkNick(String ykNick) {
+		this.ykNick = ykNick;
+	}
+
+	public String getYkAvatar() {
+		return ykAvatar;
+	}
+
+	public void setYkAvatar(String ykAvatar) {
+		this.ykAvatar = ykAvatar;
+	}
+
 }
